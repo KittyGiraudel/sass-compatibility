@@ -53,7 +53,7 @@
   demo: ""
   description: "The ability to use the `unique-id` function."
 
-- label: "fixed `if` function"
+- label: "Fixed `if` function"
   name: fixed_if_function
   support:
     ruby_sass_3_2: false
