@@ -1,10 +1,15 @@
 - name: ruby_sass_3_2
   label: Ruby Sass 3.2
+  link: http://sass-lang.com/documentation/file.SASS_CHANGELOG.html#320_10_august_2012
 - name: ruby_sass_3_3
   label: Ruby Sass 3.3
+  link: http://sass-lang.com/documentation/file.SASS_CHANGELOG.html#330_7_march_2014
 - name: ruby_sass_3_4
   label: Ruby Sass 3.4
+  link: http://sass-lang.com/documentation/file.SASS_CHANGELOG.html#340_18_august_2014
 - name: libsass_2
   label: LibSass 2
+  link: https://github.com/sass/libsass/releases/tag/v2.0
 - name: libsass_3
   label: LibSass 3
+  link: https://github.com/sass/libsass/releases/tag/3.0
