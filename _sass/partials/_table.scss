@@ -99,12 +99,13 @@
 }
 
 .feature-status--supported {
-    font-weight: 700;
-    color: mix($patina, black, 50%);
+    color: mix($patina, black, 70%);
+    fill: mix($patina, black, 70%);
     background-color: rgba($patina, .25);
 }
 
 .feature-status--unsupported {
-    color: mix($bouquet, black, 50%);
+    color: mix($bouquet, black, 70%);
+    fill: mix($bouquet, black, 70%);
     background-color: rgba($bouquet, .25);
 }

@@ -7,4 +7,16 @@
     transition: .15s ease-in;
     display: inline-block;
     margin: .5em;
+    fill: currentcolor;
+
+    &:visited {
+        fill: $color-text-link-visited;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+        color: $color-text-link-hover;
+        fill: $color-text-link-hover;
+    }
 }
