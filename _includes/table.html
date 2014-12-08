@@ -16,12 +16,12 @@
     <tbody>
 {% for feature in site.data.features %}
     <tr class="feature">
-        <th class="feature-name" data-label="Feature" scope="row">
+        <th class="feature-name" id="{{ feature.name }}" data-label="Feature" scope="row">
             {{ feature.label|markdownify }}
         </th>
 
         {% for engine in site.data.engines %}
-        <td headers="{{ engine.name }}" data-label="{{ engine.label }}" class="feature-status  feature-status--{% if feature.support[engine.name] == true %}supported{% else %}unsupported{% endif %}">
+        <td headers="{{ feature.name }} {{ engine.name }}" data-label="{{ engine.label }}" class="feature-status  feature-status--{% if feature.support[engine.name] == true %}supported{% else %}unsupported{% endif %}">
             {% if feature.support[engine.name] == true %}
                 <svg viewBox="0 0 100 100" class="icon  icon-checkmark">
                     <use xlink:href="#icon-checkmark"></use>

@@ -17,10 +17,6 @@
         position: sticky;
         top: 0;
 
-        th {
-            border-bottom: 1em solid white;
-        }
-
         a {
             color: inherit;
             text-decoration: none;
@@ -37,9 +33,7 @@
     thead th {
         padding-top: 1em;
         padding-bottom: 1em;
-    }
-
-    th {
+        border-bottom: 1em solid white;
         background-color: #EFEFEF;
     }
 
@@ -60,6 +54,10 @@
             text-align: right;
         }
 
+        th, td {
+            margin-bottom: .25em;
+        }
+
         td::before {
             content: attr(data-label);
             float: left;
@@ -73,6 +71,7 @@
 .feature-name {
     text-align: left;
     font-weight: normal;
+    background-color: #EFEFEF;
 
     @media (max-width: 767px) {
         text-align: center;
