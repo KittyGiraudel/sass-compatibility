@@ -58,7 +58,7 @@
   demo: ""
   description: "The `if` function that doesn't evaluate all arguments."
 
-- label: "negative indexes"
+- label: "Negative indexes"
   support:
     ruby_sass_3_2: false
     ruby_sass_3_3: true
