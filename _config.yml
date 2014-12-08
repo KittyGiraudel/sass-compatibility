@@ -1,10 +1,10 @@
 # Site settings
-title: Sass Compatibility Table
+title: Sass Compatibility
 email: ''
 description: > # this means to ignore newlines until "baseurl:"
-  Sass Compatibility Table aims at finding and reporting Sass differences between different engines, especially Ruby Sass and LibSass.
-baseurl: "/sass-compatibility" # the subpath of your site, e.g. /blog/
-url: "http://hugogiraudel.github.com" # the base hostname & protocol for your site
+  Sass Compatibility aims at finding and reporting Sass differences between different engines, especially Ruby Sass and LibSass.
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://sass-compatibility.github.io" # the base hostname & protocol for your site
 twitter_username: HugoGiraudel
 github_username:  HugoGiraudel
 
