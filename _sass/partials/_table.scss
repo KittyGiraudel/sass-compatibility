@@ -6,6 +6,7 @@
 
     td, th {
         padding: .5em;
+        transition: .15s ease-out;
     }
 
     thead {
@@ -67,7 +68,6 @@
 }
 
 .feature {
-
 }
 
 .feature-name {
@@ -79,12 +79,18 @@
         font-size: 1.2em;
         font-weight: 700;
     }
+
+    .feature:hover &,
+    .feature:active & {
+        background-color: #ddd;
+    }
 }
 
 .feature-description {
     font-size: .9em;
     text-align: left;
     background-color: #EFEFEF;
+    transition: .15s ease-out;
 
     td {
         border-bottom: 1em solid white;
@@ -93,6 +99,11 @@
             text-align: center;
         }
     }
+
+    .feature:hover + &,
+    .feature:active + & {
+        background-color: #ddd;
+    }
 }
 
 .feature-status {
@@ -100,12 +111,22 @@
 
 .feature-status--supported {
     color: mix($patina, black, 70%);
-    fill: mix($patina, black, 70%);
+    fill: currentcolor;
     background-color: rgba($patina, .25);
+
+    .feature:hover &,
+    .feature:active & {
+        background-color: rgba($patina, .4);
+    }
 }
 
 .feature-status--unsupported {
     color: mix($bouquet, black, 70%);
-    fill: mix($bouquet, black, 70%);
+    fill: currentcolor;
     background-color: rgba($bouquet, .25);
+
+    .feature:hover &,
+    .feature:active & {
+        background-color: rgba($bouquet, .4);
+    }
 }
