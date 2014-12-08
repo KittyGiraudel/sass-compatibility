@@ -6,6 +6,11 @@
 
 .section:nth-child(2) {
     border-bottom: $venus .25em solid;
+    padding: 1.5em 0;
+
+    .btn {
+        font-size: 1.2em;
+    }
 }
 
 .title {
