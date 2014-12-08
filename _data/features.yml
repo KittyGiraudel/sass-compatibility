@@ -5,7 +5,7 @@
     ruby_sass_3_3: true
     ruby_sass_3_4: true
     libsass_2: false
-    libsass_3: false
+    libsass_3: true
   demo: ""
   description: "The ability to use the `call` function."
 
