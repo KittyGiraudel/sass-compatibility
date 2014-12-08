@@ -1,0 +1,45 @@
+<table class="features">
+    <caption>Compatibility table between Sass different engines.</caption>
+    <thead>
+        <tr>
+            <th scope="col">Feature</th>
+
+            {% for engine in site.data.engines %}
+                <th id="{{ engine.name }}" scope="col">
+                    <a href="{{ engine.link }}" target="_blank">
+                    {{ engine.label }}
+                    </a>
+                </th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+{% for feature in site.data.features %}
+    <tr class="feature">
+        <th class="feature-name" id="{{ feature.name }}" data-label="Feature" scope="row">
+            {{ feature.label|markdownify }}
+        </th>
+
+        {% for engine in site.data.engines %}
+        <td headers="{{ feature.name }} {{ engine.name }}" data-label="{{ engine.label }}" class="feature-status  feature-status--{% if feature.support[engine.name] == true %}supported{% else %}unsupported{% endif %}">
+            {% if feature.support[engine.name] == true %}
+                <svg viewBox="0 0 100 100" class="icon  icon-checkmark">
+                    <use xlink:href="#icon-checkmark"></use>
+                </svg>
+            {% else %}
+                <svg viewBox="0 0 100 100" class="icon  icon-close">
+                    <use xlink:href="#icon-close"></use>
+                </svg>
+            {% endif %}
+        </td>
+        {% endfor %}
+    </tr>
+
+    <tr class="feature-description">
+        <td colspan="6">
+            {{ feature.description|markdownify }}
+        </td>
+    </tr>
+{% endfor %}
+    </tbody>
+</table>

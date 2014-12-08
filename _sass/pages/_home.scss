@@ -1,0 +1,24 @@
+.section:first-child {
+    color: $color-text-weak;
+    background: url(http://subtlepatterns.com/patterns/gplaypattern.png) $color-background;
+}
+
+.section:nth-child(2) {
+    padding: 1.5em 0;
+
+    .btn {
+        font-size: 1.2em;
+    }
+}
+
+.title {
+    font-size: 5em;
+    margin: 0;
+    line-height: 1.125em;
+
+    @media (max-width: 767px) {
+        span {
+            display: none;
+        }
+    }
+}

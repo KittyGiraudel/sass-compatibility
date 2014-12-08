@@ -1,0 +1,11 @@
+.footer {
+    background: $color-background-invert;
+    color: $color-text-invert;
+    text-align: center;
+    padding: .5em;
+
+    a {
+        text-decoration: none;
+        color: $color-text;
+    }
+}

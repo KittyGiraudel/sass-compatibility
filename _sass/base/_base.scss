@@ -1,0 +1,35 @@
+html {
+    font-size: 125%;
+}
+
+body {
+    font: 1em/1.35 $font-family-text;
+    color: $color-text;
+    border-top: .5em solid $venus;
+}
+
+code {
+    font-size: .9em;
+    color: $regent-grey;
+    font-family: $font-family-code;
+}
+
+a {
+    color: $color-text-link;
+
+    &:active,
+    &:focus,
+    &:hover {
+        color: $color-text-link-hover;
+    }
+
+    &:visited {
+        color: $color-text-link-visited;
+    }
+}
+
+table caption {
+    opacity: 0;
+    position: absolute;
+    clip: rect(0 0 0 0);
+}

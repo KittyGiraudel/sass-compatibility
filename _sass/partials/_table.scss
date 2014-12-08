@@ -1,0 +1,131 @@
+.features {
+    border-spacing: .25em;
+    border-collapse: initial;
+    width: 100%;
+    text-align: center;
+
+    td, th {
+        padding: .5em;
+        transition: .15s ease-out;
+    }
+
+    thead {
+        text-transform: uppercase;
+        font-size: .8em;
+        font-weight: 700;
+        -webkit-position: sticky;
+        position: sticky;
+        top: 0;
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            display: block;
+
+            &:hover,
+            &:focus,
+            &:active {
+                color: $color-text-link-hover;
+            }
+        }
+    }
+
+    thead th {
+        padding-top: 1em;
+        padding-bottom: 1em;
+        border-bottom: 1em solid white;
+        background-color: #EFEFEF;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    @media (max-width: 767px) {
+        thead {
+            display: none;
+        }
+
+        table, tr, td, th {
+            display: block;
+        }
+
+        td {
+            text-align: right;
+        }
+
+        th, td {
+            margin-bottom: .25em;
+        }
+
+        td::before {
+            content: attr(data-label);
+            float: left;
+        }
+    }
+}
+
+.feature {
+}
+
+.feature-name {
+    text-align: left;
+    font-weight: normal;
+    background-color: #EFEFEF;
+
+    @media (max-width: 767px) {
+        text-align: center;
+        font-size: 1.2em;
+        font-weight: 700;
+    }
+
+    .feature:hover &,
+    .feature:active & {
+        background-color: #ddd;
+    }
+}
+
+.feature-description {
+    font-size: .9em;
+    text-align: left;
+    background-color: #EFEFEF;
+    transition: .15s ease-out;
+
+    td {
+        border-bottom: 1em solid white;
+
+        @media (max-width: 767px) {
+            text-align: center;
+        }
+    }
+
+    .feature:hover + &,
+    .feature:active + & {
+        background-color: #ddd;
+    }
+}
+
+.feature-status {
+}
+
+.feature-status--supported {
+    color: mix($patina, black, 70%);
+    fill: currentcolor;
+    background-color: rgba($patina, .25);
+
+    .feature:hover &,
+    .feature:active & {
+        background-color: rgba($patina, .4);
+    }
+}
+
+.feature-status--unsupported {
+    color: mix($bouquet, black, 70%);
+    fill: currentcolor;
+    background-color: rgba($bouquet, .25);
+
+    .feature:hover &,
+    .feature:active & {
+        background-color: rgba($bouquet, .4);
+    }
+}
