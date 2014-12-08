@@ -18,9 +18,7 @@
 
     @media (max-width: 767px) {
         span {
-            position: absolute;
-            visibility: hidden;
-            opacity: 0;
+            display: none;
         }
     }
 }
