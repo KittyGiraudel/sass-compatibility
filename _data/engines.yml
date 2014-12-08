@@ -1,5 +1,10 @@
-- ruby_sass_3_2
-- ruby_sass_3_3
-- ruby_sass_3_4
-- libsass_2
-- libsass_3
+- name: ruby_sass_3_2
+  label: Ruby Sass 3.2
+- name: ruby_sass_3_3
+  label: Ruby Sass 3.3
+- name: ruby_sass_3_4
+  label: Ruby Sass 3.4
+- name: libsass_2
+  label: LibSass 2
+- name: libsass_3
+  label: LibSass 3
