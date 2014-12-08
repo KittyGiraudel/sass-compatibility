@@ -1,11 +1,9 @@
 .section:first-child {
     color: $color-text-weak;
     background: url(http://subtlepatterns.com/patterns/gplaypattern.png) $color-background;
-    border-bottom: $venus .5em solid;
 }
 
 .section:nth-child(2) {
-    border-bottom: $venus .25em solid;
     padding: 1.5em 0;
 
     .btn {

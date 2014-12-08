@@ -12,9 +12,24 @@
         text-transform: uppercase;
         font-size: .8em;
         font-weight: bold;
+        -webkit-position: sticky;
+        position: sticky;
+        top: 0;
 
         th {
             border-bottom: 1em solid white;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            display: block;
+
+            &:hover,
+            &:focus,
+            &:active {
+                color: $color-text-link-hover;
+            }
         }
     }
 
