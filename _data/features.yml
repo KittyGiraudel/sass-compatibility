@@ -1,0 +1,249 @@
+- label: "`call` function"
+  support:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass_2: false
+    libsass_3: false
+  demo: ""
+  description: "The ability to use the `call` function."
+
+- label: "`inspect` function"
+  support:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass_2: false
+    libsass_3: false
+  demo: ""
+  description: "The ability to use the `inspect` function."
+
+- label: "`set-nth` function"
+  support:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass_2: false
+    libsass_3: false
+  demo: ""
+  description: "The ability to use the `set-nth` function."
+
+- label: "`random` function"
+  support:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass_2: false
+    libsass_3: false
+  demo: ""
+  description: "The ability to use the `random` function."
+
+- label: "`unique-id` function"
+  support:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass_2: false
+    libsass_3: false
+  demo: ""
+  description: "The ability to use the `unique-id` function."
+
+- label: "fixed `if` function"
+  support:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass_2: false
+    libsass_3: true
+  demo: ""
+  description: "The `if` function that doesn't evaluate all arguments."
+
+- label: "negative indexes"
+  support:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass_2: false
+    libsass_3: true
+  demo: ""
+  description: "The ability to use negative indexes in all list functions."
+
+- label: "`&` SassScript"
+  support:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: false
+    ruby_sass_3_4: true
+    libsass_2: false
+    libsass_3: false
+  demo: ""
+  description: "The ability to use `&` in SassScript."
+
+- label: "String manipulation functions"
+  support:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass_2: false
+    libsass_3: true
+  demo: ""
+  description: "String manipulation functions such as `str-slice`."
+
+- label: "Selector manipulation functions"
+  support:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: false
+    ruby_sass_3_4: true
+    libsass_2: false
+    libsass_3: false
+  demo: ""
+  description: "Selector manipulation functions such as `selector-nest`."
+
+- label: "Feature detection functions"
+  support:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass_2: false
+    libsass_3: true
+  demo: ""
+  description: "Feature detection functions such as `feature-exists`."
+
+- label: "Maps data type"
+  support:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass_2: false
+    libsass_3: true
+  demo: ""
+  description: "The ability to use `map` Sass data type."
+
+- label: "Multi keys `map-remove`"
+  support:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: false
+    ruby_sass_3_4: true
+    libsass_2: false
+    libsass_3: false
+  demo: ""
+  description: "The ability to remove several keys at once with `map-remove`."
+
+- label: "Multi assign `@each`"
+  support:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass_2: false
+    libsass_3: true
+  demo: ""
+  description: "The ability to use the `@each $key, $value` syntax to iterate over maps."
+
+- label: "Downward `@for`"
+  support:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass_2: false
+    libsass_3: false
+  demo: ""
+  description: "The ability to have decrementing `@for` loops."
+
+- label: "`rebeccapurple` color"
+  support:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: false
+    ruby_sass_3_4: true
+    libsass_2: false
+    libsass_3: false
+  demo: ""
+  description: "The `rebeccapurple` CSS color."
+
+- label: "`transparent` color"
+  support:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass_2: false
+    libsass_3: false
+  demo: ""
+  description: "The `transparent` CSS color."
+
+- label: "`@supports` CSS feature"
+  support:
+    ruby_sass_3_2: true
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass_2: false
+    libsass_3: false
+  demo: ""
+  description: "The ability to use the CSS `@supports` feature."
+
+- label: "`@error` directive"
+  support:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: false
+    ruby_sass_3_4: true
+    libsass_2: false
+    libsass_3: false
+  demo: ""
+  description: "The ability to use the `@error` Sass directive."
+
+- label: "`@at-root` directive"
+  support:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass_2: false
+    libsass_3: false
+  demo: ""
+  description: "The ability to use the `@at-root` Sass directive."
+
+- label: "`not` operator"
+  support:
+    ruby_sass_3_2: true
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass_2: false
+    libsass_3: false
+  demo: ""
+  description: "The ability to use the `not` Sass operator."
+
+- label: "`@extend` directive"
+  support:
+    ruby_sass_3_2: true
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass_2: false
+    libsass_3: true
+  demo: ""
+  description: "The ability to use the `@extend` Sass directive."
+
+- label: "Nested interpolations"
+  support:
+    ruby_sass_3_2: true
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass_2: false
+    libsass_3: false
+  demo: ""
+  description: "The ability to nest interpolations."
+
+- label: "Variable scoping"
+  support:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: false
+    ruby_sass_3_4: true
+    libsass_2: false
+    libsass_3: false
+  demo: ""
+  description: "The new variable scoping."
+
+- label: "Angle conversion"
+  support:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: false
+    ruby_sass_3_4: true
+    libsass_2: false
+    libsass_3: true
+  demo: ""
+  description: "The ability to auto-convert angles from one unit to another."

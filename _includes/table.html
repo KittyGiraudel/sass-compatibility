@@ -1,0 +1,47 @@
+<table class="features">
+    <thead>
+        <tr>
+            <th>Feature</th>
+            <th>Ruby Sass 3.2</th>
+            <th>Ruby Sass 3.3</th>
+            <th>Ruby Sass 3.4</th>
+            <th>LibSass 2</th>
+            <th>LibSass 3</th>
+        </tr>
+    </thead>
+    <tbody>
+{% for feature in site.data.features %}
+    <tr class="feature">
+        <th class="feature-name" data-label="Feature">
+            {{ feature.label|markdownify }}
+        </th>
+
+        <td data-label="Ruby Sass 3.2" class="feature-status  feature-status--{% if feature.support.ruby_sass_3_2 == true %}supported{% else %}unsupported{% endif %}">
+            {% if feature.support.ruby_sass_3_2 == true %}yep{% else %}nope{% endif %}
+        </td>
+
+        <td data-label="Ruby Sass 3.3" class="feature-status  feature-status--{% if feature.support.ruby_sass_3_3 == true %}supported{% else %}unsupported{% endif %}">
+            {% if feature.support.ruby_sass_3_3 == true %}yep{% else %}nope{% endif %}
+        </td>
+
+        <td data-label="Ruby Sass 3.4" class="feature-status  feature-status--{% if feature.support.ruby_sass_3_4 == true %}supported{% else %}unsupported{% endif %}">
+            {% if feature.support.ruby_sass_3_4 == true %}yep{% else %}nope{% endif %}
+        </td>
+
+        <td data-label="LibSass 2" class="feature-status  feature-status--{% if feature.support.libsass_2 == true %}supported{% else %}unsupported{% endif %}">
+            {% if feature.support.libsass_2 == true %}yep{% else %}nope{% endif %}
+        </td>
+
+        <td data-label="LibSass 3" class="feature-status  feature-status--{% if feature.support.libsass_3 == true %}supported{% else %}unsupported{% endif %}">
+            {% if feature.support.libsass_3 == true %}yep{% else %}nope{% endif %}
+        </td>
+    </tr>
+
+    <tr class="feature-description">
+        <td colspan="6">
+            {{ feature.description|markdownify }}
+        </td>
+    </tr>
+{% endfor %}
+    </tbody>
+</table>
