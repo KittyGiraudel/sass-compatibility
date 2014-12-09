@@ -76,6 +76,19 @@
     The identifier returned is only guaranteed to be unique within the scope of a single Sass run.
   polyfill: false
 
+- label: "`list-separator` function"
+  name: list_separator_function
+  support:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass_2: false
+    libsass_3: true
+  description: |
+    The [`list-separator`](http://sass-lang.com/documentation/Sass/Script/Functions.html#list_separator-instance_method) function returns the separator of a list.
+    If the list doesn’t have a separator due to having fewer than two elements, returns `space`.
+  polyfill: false
+
 - label: "Fixed `if` function"
   name: fixed_if_function
   support:
