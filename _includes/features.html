@@ -19,10 +19,11 @@
 
     <h3 class="feature__heading">Support</h3>
     <table class="feature__support">
+        <caption>Support for {{ feature.label }}</caption>
         <thead>
             <tr>
                 {% for engine in site.data.engines %}
-                <th id="{{ engine.name }}" scope="col">
+                <th id="{{ engine.name }}">
                     <a href="{{ engine.link }}" target="_blank">
                     {{ engine.label }}
                     </a>
@@ -32,19 +33,21 @@
         </thead>
 
         <tbody>
-            {% for engine in site.data.engines %}
-            <td headers="{{ engine.name }}" data-label="{{ engine.label }}" class="feature-status  feature-status--{% if site.data.support[feature.name][engine.name] == true %}supported{% else %}unsupported{% endif %}">
-                {% if site.data.support[feature.name][engine.name] == true %}
-                    <svg viewBox="0 0 100 100" class="icon  icon-checkmark">
-                        <use xlink:href="#icon-checkmark"></use>
-                    </svg>
-                {% else %}
-                    <svg viewBox="0 0 100 100" class="icon  icon-close">
-                        <use xlink:href="#icon-close"></use>
-                    </svg>
-                {% endif %}
-            </td>
-            {% endfor %}
+            <tr>
+                {% for engine in site.data.engines %}
+                <td headers="{{ engine.name }}" data-label="{{ engine.label }}" class="feature-status  feature-status--{% if site.data.support[feature.name][engine.name] == true %}supported{% else %}unsupported{% endif %}">
+                    {% if site.data.support[feature.name][engine.name] == true %}
+                        <svg viewBox="0 0 100 100" class="icon  icon-checkmark">
+                            <use xlink:href="#icon-checkmark"></use>
+                        </svg>
+                    {% else %}
+                        <svg viewBox="0 0 100 100" class="icon  icon-close">
+                            <use xlink:href="#icon-close"></use>
+                        </svg>
+                    {% endif %}
+                </td>
+                {% endfor %}
+            </tr>
         </tbody>
     </table>
 
