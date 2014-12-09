@@ -170,12 +170,6 @@
     The ability to use the `not` Sass operator.
   polyfill: false
 
-- label: "`@extend` directive"
-  name: extend_directive
-  description: |
-    The [`@extend`](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#extend) directive tells Sass that one selector should inherit the styles of another selector.
-  polyfill: false
-
 - label: "Nested interpolations"
   name: nested_interpolations
   description: |

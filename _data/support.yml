@@ -124,12 +124,6 @@ not_operator:
     ruby_sass_3_4: true
     libsass: false
 
-extend_directive:
-    ruby_sass_3_2: true
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass: true
-
 nested_interpolations:
     ruby_sass_3_2: true
     ruby_sass_3_3: true
