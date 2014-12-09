@@ -9,13 +9,29 @@ UGLIFY = node_modules/uglifycss/uglifycss
 TESTS := $(shell find tests -mindepth 1 -maxdepth 1 -type d | sort)
 TESTS := $(addsuffix /support.yml,$(TESTS))
 
+#
+# Sass engines to test.
+#
+ENGINES = 3.2 3.3 3.4 lib
+
+#
+# Output files for each engine (pattern matching).
+#
+OUTPUTS = $(addprefix tests/%/output.,$(addsuffix .css,$(ENGINES)))
+
 all: _data/support.yml
 
 #
-# Remove cached `support.yml` for each test.
+# Remove cached intermediate files.
 #
 clean:
-	$(RM) $(TESTS)
+	find tests \
+		\( \
+			-name support.yml -o \
+			-name output.*.css -o \
+			-name expect.min.css \
+		\) \
+		-delete
 
 #
 # Run all tests and store results.
@@ -24,6 +40,8 @@ clean:
 #
 _data/support.yml: $(TESTS)
 	awk 'NR != 1 && FNR == 1 { print "" } 1' $^ > $@
+
+# Tests {{{
 
 #
 # Run tests for each supported Sass compiler.
@@ -46,16 +64,6 @@ test = \
 	utils/test libsass $(@D)/output.lib.css $< $(1) $(2) >> $@
 
 #
-# Sass engines to test.
-#
-ENGINES = 3.2 3.3 3.4 lib
-
-#
-# Output files for each engine (pattern matching).
-#
-OUTPUTS = $(addprefix tests/%/output.,$(addsuffix .css,$(ENGINES)))
-
-#
 # Test against an expected input (should equals).
 #
 tests/%/support.yml: tests/%/expect.min.css $(OUTPUTS)
@@ -67,6 +75,7 @@ tests/%/support.yml: tests/%/expect.min.css $(OUTPUTS)
 tests/%/support.yml: tests/%/unexpect.min.css $(OUTPUTS)
 	$(call test,false,true)
 
+# }}}
 
 # Compilation {{{
 # ===============
@@ -74,7 +83,7 @@ tests/%/support.yml: tests/%/unexpect.min.css $(OUTPUTS)
 #
 # Do not remove compilation output (intermediate) files after execution.
 #
-.PRECIOUS: $(addprefix tests/%/output.,$(addsuffix .css,$(ENGINES)))
+.PRECIOUS: $(OUTPUTS)
 
 tests/%/output.3.4.css: tests/%/input.scss
 	utils/sm 3.4 $< > $@
