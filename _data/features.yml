@@ -51,7 +51,19 @@
   description: |
     The [`list-separator`](http://sass-lang.com/documentation/Sass/Script/Functions.html#list_separator-instance_method) function returns the separator of a list.
     If the list doesn’t have a separator due to having fewer than two elements, returns `space`.
-  polyfill: false
+  polyfill: |
+    <pre class="language-scss"><code>@function _list-separator($list) {
+      @if function-exists("list-separator") == true {
+        @return list-separator($list);
+      }
+
+      $test-list: ();
+      @each $item in $list {
+        $test-list: append($test-list, $item, space);
+      }
+
+      @return if($test-list == $list, space, comma);
+    }</code></pre>
 
 - label: "Fixed `if` function"
   name: fixed_if_function
