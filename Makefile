@@ -6,7 +6,7 @@ UGLIFY = node_modules/uglifycss/uglifycss
 #
 # Find all tests (all directories one level under `tests`).
 #
-TESTS := $(shell find tests -mindepth 1 -maxdepth 1 -type d)
+TESTS := $(shell find tests -mindepth 1 -maxdepth 1 -type d | sort)
 TESTS := $(addsuffix /support.yml,$(TESTS))
 
 all: _data/support.yml
