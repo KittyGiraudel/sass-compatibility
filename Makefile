@@ -26,16 +26,11 @@ _data/support.yml: $(TESTS)
 	awk 'NR != 1 && FNR == 1 { print "" } 1' $^ > $@
 
 #
-# Macro to get a test input file from `support.yml` file.
-#
-INPUT = $(@D)/input.scss
-
-#
 # Run tests for each supported Sass compiler.
 #
 # The basename of the target directory will be used as YAML property,
-# than all tests will be executed by comparing `$(INPUT)` and the rule
-# input file (fixture).
+# than all tests will be executed by comparing the input and the
+# fixture (`$^` should contain the input file followed by the fixture).
 #
 # 1. True value.
 # 2. False value.
@@ -45,22 +40,22 @@ INPUT = $(@D)/input.scss
 #
 define test =
 basename $(@D) | sed 's/$$/:/' > $@
-utils/test ruby_sass_3_2 3.2 $(INPUT) $< $(1) $(2) >> $@
-utils/test ruby_sass_3_3 3.3 $(INPUT) $< $(1) $(2) >> $@
-utils/test ruby_sass_3_4 3.4 $(INPUT) $< $(1) $(2) >> $@
-utils/test libsass lib $(INPUT) $< $(1) $(2) >> $@
+utils/test ruby_sass_3_2 3.2 $^ $(1) $(2) >> $@
+utils/test ruby_sass_3_3 3.3 $^ $(1) $(2) >> $@
+utils/test ruby_sass_3_4 3.4 $^ $(1) $(2) >> $@
+utils/test libsass lib $^ $(1) $(2) >> $@
 endef
 
 #
 # Test against an expected input (should equals).
 #
-tests/%/support.yml: tests/%/expect.min.css
+tests/%/support.yml: tests/%/input.scss tests/%/expect.min.css
 	$(call test,true,false)
 
 #
 # Test against an unexpected input (should not equals).
 #
-tests/%/support.yml: tests/%/unexpect.min.css
+tests/%/support.yml: tests/%/input.scss tests/%/unexpect.min.css
 	$(call test,false,true)
 
 #
