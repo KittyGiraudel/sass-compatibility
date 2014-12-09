@@ -69,17 +69,35 @@
   name: fixed_if_function
   description: |
     The [`if`](http://sass-lang.com/documentation/Sass/Script/Functions.html#if-instance_method) function returns one of two values, depending on whether or not `$condition` is true.
-    Just like in @if, all values other than `false` and `null` are considered to be `true`.
+    Just like in `@if`, all values other than `false` and `null` are considered to be `true`.
+
     There has long been a bug with this function where all arguments where evaluated, no matter the result of the condition.
-  polyfill: Use a conditional statement (`@if` / `@else`).
+  polyfill: |
+    Use a conditional statement (`@if` / `@else`).
+
+    <pre class="language-scss"><code>// Instead of:
+    // $value: if(length($list) > 2, nth($list, 3), nth($list, 1));
+
+    $value: nth($list, 1);
+
+    @if length($list) > 2 {
+      $value: nth($list, 3);
+    }</code></pre>
 
 - label: "Negative indexes"
   name: negative_indexes
   description: |
-    The ability to use negative indexes in all list functions.
-    In unsupported engines, you cannot use negative indexes so you have to substract what you want from the length of the list.
-    For instance, `-2` would be `length($list) - 1`.
-  polyfill: false
+    All list functions support negative indexes in order to start from the last item in the list rather than the first.
+    For instance, `nth($list, -1)` returns the last item from `$list`.
+  polyfill: |
+    Substract indexes to the result of `length` function.
+
+    <pre class="language-scss"><code>// Instead of:
+    // $value: nth($list, -3);
+
+    $value: nth($list, length($list) - 2);
+    </code></pre>
+
 
 - label: "`&` SassScript"
   name: ampersand_sassscript
@@ -103,7 +121,8 @@
   name: feature_detection_functions
   description: |
     Feature detection functions include `feature-exists`, `variable-exists`, `global-variable-exists`, `function-exists` and `mixin-exists`.
-  polyfill: false
+  polyfill: |
+    Note that LibSass supports all functions but `feature-exists`.
 
 - label: "Map API"
   name: map_data_type
@@ -131,11 +150,19 @@
       @return $map;
     }</code></pre>
 
-- label: "Multi assign `@each`"
+- label: "Multi assignment `@each`"
   name: multi_assign_each
   description: |
-    The ability to use the `@each $key, $value` syntax to iterate over maps.
-  polyfill: false
+    It is possible to assign several variables at once in an `@each` loop, which turns out to be especially useful when iterating over maps.
+    For instance, `@each $key, $value in $map`. Learn more about [multi-assignment](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#each-multi-assign).
+  polyfill: |
+    Use a regular loop.
+
+    <pre class="language-scss"><code>@each $item in $map {
+      $key: nth($item, 1);
+      $value: nth($item, 2);
+      // Do something
+    }</code></pre>
 
 - label: "Downward `@for`"
   name: downward_for
@@ -152,13 +179,19 @@
   name: rebeccapurple_color
   description: |
     The `rebeccapurple` CSS color can safely be used, yet it cannot be manipulated as a color.
-  polyfill: "Use `#663399`."
+  polyfill: |
+    Use `#663399`. You could stuff it in a variable.
+
+    <pre class="language-scss"><code>$rebeccapurple: #663399;</code></pre>
 
 - label: "`transparent` color"
   name: transparent_color
   description: |
     The `transparent` CSS color can safely be used, yet it cannot be manipulated as a color.
-  polyfill: "Use `rgba(0, 0, 0, 0)`."
+  polyfill: |
+    Use `rgba(0, 0, 0, 0)`. You could stuff it in a variable.
+
+    <pre class="language-scss"><code>$transparent: rgba(0, 0, 0, 0);</code></pre>
 
 - label: "`@error` directive"
   name: error_directive
@@ -179,13 +212,21 @@
 - label: "`not` operator"
   name: not_operator
   description: |
-    The ability to use the `not` Sass operator.
-  polyfill: false
+    The `not` operator is meant to indicate the opposite of something.
+    Think of it as `!` in JavaScript or other languages.
+    For instance, `not true` is `false`.
+  polyfill: |
+    Depending on the context, you might be able to use `== false` or `== null` instead.
+
+    <pre class="language-scss"><code>// Instead of:
+    // @if not index($list, $value) { .. }
+
+    @if index($list, $value) == null { .. }</code></pre>
 
 - label: "Nested interpolations"
   name: nested_interpolations
   description: |
-    The ability to nest interpolations.
+    Interpolations (`#{..}`) can be nested.
   polyfill: |
     Not only nested interpolations are quite uncommon, but it also turns out to be easy to refactor the code so it doesn't happen.
 
@@ -229,5 +270,13 @@
     While nested media queries are valid CSS, they are quite uncommon.
     Also, some browsers (Internet Explorer and Opera) do not support nested media queries.
     Because of this, Sass is supposed to merge compatible nested media queries into a single one.
-  polyfill: Don't nest media queries and merge them manually.
+  polyfill: |
+    Don't nest media queries and merge them manually.
+
+    <pre class="language-scss"><code>// Instead of:
+    // @media (min-width: 600px) {
+    //   @media (max-width: 800px) { .. }
+    // }
+
+    @media (min-width: 600px) and (max-width: 800px) { .. }
 
