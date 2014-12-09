@@ -1,0 +1,7 @@
+@media (min-width: 400px) {
+  @media (max-width: 600px) {
+    .selector {
+      content: "media merge";
+    }
+  }
+}

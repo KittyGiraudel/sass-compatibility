@@ -379,3 +379,18 @@
       }
       @error "Cannot convert `#{unit($value)}` to `#{$unit}`.";
     }</code></pre>
+
+- label: "Media queries merge"
+  name: media_merge
+  support:
+    ruby_sass_3_2: true
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass_2: false
+    libsass_3: false
+  description: |
+    While nested media queries are valid CSS, they are quite uncommon.
+    Also, some browsers (Internet Explorer and Opera) do not support nested media queries.
+    Because of this, Sass is supposed to merge compatible nested media queries into a single one.
+  polyfill: Don't nest media queries and merge them manually.
+
