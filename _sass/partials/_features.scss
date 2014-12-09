@@ -8,9 +8,25 @@
     border-bottom: .25em solid $bouquet;
     padding-bottom: .25em;
     margin-bottom: 1rem;
+    position: relative;
 
     p {
         margin-bottom: 0;
+    }
+}
+
+.feature__anchor {
+    position: absolute;
+    left: -1em;
+    top: .23em;
+    text-decoration: none;
+    font-size: .8em;
+    opacity: .5;
+    transition: .15s;
+
+    &:hover,
+    &:active {
+        opacity: 1;
     }
 }
 

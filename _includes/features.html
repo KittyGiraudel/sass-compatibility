@@ -1,6 +1,6 @@
 {% for feature in site.data.features %}
 <section class="feature" id="{{ feature.name }}">
-    <h2 class="feature__name">{{ feature.label|markdownify }}</h2>
+    <h2 class="feature__name">{{ feature.label|markdownify }}  <a href="#{{ feature.name }}" class="feature__anchor">§</a></h2>
 
     <div class="feature__content">
     <div class="feature__description">
