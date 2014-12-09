@@ -23,6 +23,11 @@ code {
 
 a {
     color: $color-text-link;
+    transition: .15s;
+
+    &:visited {
+        color: $color-text-link-visited;
+    }
 
     &:active,
     &:focus,
@@ -30,8 +35,8 @@ a {
         color: $color-text-link-hover;
     }
 
-    &:visited {
-        color: $color-text-link-visited;
+    code {
+        color: currentcolor;
     }
 }
 

@@ -5,13 +5,18 @@
 
 .feature__name {
     text-transform: uppercase;
-    border-bottom: .25em solid $bouquet;
-    padding-bottom: .25em;
+    border-bottom: .2em solid $bouquet;
+    padding-bottom: .2em;
     margin-bottom: 1rem;
     position: relative;
+    font-size: 2em;
 
     p {
         margin-bottom: 0;
+    }
+
+    code {
+        font-size: 1em;
     }
 }
 
