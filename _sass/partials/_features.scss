@@ -26,11 +26,11 @@
     top: .23em;
     text-decoration: none;
     font-size: .8em;
-    opacity: .5;
+    opacity: 0;
     transition: .15s;
 
-    &:hover,
-    &:active {
+    .feature:hover &,
+    .feature:active & {
         opacity: 1;
     }
 }
