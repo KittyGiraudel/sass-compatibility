@@ -67,7 +67,7 @@ test = \
 # Test against an expected input (should equals).
 #
 tests/%/support.yml: tests/%/expect.min.css $(OUTPUTS)
-	$(call test,false,true)
+	$(call test,true,false)
 
 #
 # Test against an unexpected input (should not equals).
