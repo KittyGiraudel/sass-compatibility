@@ -1,11 +1,9 @@
 #!/bin/sh -e
 #
-# Used by the parent makefile. Test an input SCSS file against a
-# fixture CSS file, using given SassMeister endpoint for compilation,
-# and output results as YAML.
+# Used by the parent makefile. Compare two CSS files and output
+# result as YAML.
 #
 # 1. Name of the test in YAML output.
-# 2. SassMeister endpoint.
 # 3. Input SCSS file.
 # 4. Fixture CSS file.
 # 5. True value.
@@ -16,40 +14,15 @@
 #
 # Example:
 #
-#     tools/test ruby_sass_3_4 3.4 input.scss expected.css true false
-#     tools/test libsass lib input.scss unexpected.css false true
+#     tools/test ruby_sass_3_4 output.3.4.css expected.css true false
+#     tools/test libsass output.lib.css unexpected.css false true
 #
 
-#
-# Extract the `css` property of input JSON document.
-#
-extract() {
-    node -e '
-        console.log(
-            JSON.parse(
-                require("fs").readFileSync("/dev/stdin", "utf8")
-            )["css"]
-        )
-    '
-}
-
-#
-# Compile given SCSS file in given SassMeister endpoint and return
-# the CSS output.
-#
-# 1. SassMeister endpoint.
-# 2. Input SCSS file.
-#
-sm() {
-    endpoint=$1; shift
-    input=$1; shift
-
-    curl -s \
-        --data 'syntax=SCSS&output_style=compressed' \
-        --data-urlencode "input@$input" \
-        "http://sassmeister.com/app/$endpoint/compile" \
-        | extract
-}
+name=$1; shift
+input=$1; shift
+expected=$1; shift
+true=$1; shift
+false=$1; shift
 
 #
 # Compile given SCSS file at given endpoint and match it against
@@ -60,19 +33,11 @@ sm() {
 # 3. Fixture CSS file.
 #
 check() {
-    sm "$endpoint" "$input" \
-        | diff \
-            --ignore-space-change \
-            --ignore-blank-lines \
-            - "$expected" > /dev/null
+    diff \
+        --ignore-space-change \
+        --ignore-blank-lines \
+        "$input" "$expected" > /dev/null
 }
-
-name=$1; shift
-endpoint=$1; shift
-input=$1; shift
-expected=$1; shift
-true=$1; shift
-false=$1; shift
 
 printf "    %s: " "$name"
 check && echo "$true" || echo "$false"

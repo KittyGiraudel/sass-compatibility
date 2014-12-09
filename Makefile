@@ -40,25 +40,61 @@ _data/support.yml: $(TESTS)
 #
 test = \
 	basename $(@D) | sed 's/$$/:/' > $@; \
-	utils/test ruby_sass_3_2 3.2 $^ $(1) $(2) >> $@; \
-	utils/test ruby_sass_3_3 3.3 $^ $(1) $(2) >> $@; \
-	utils/test ruby_sass_3_4 3.4 $^ $(1) $(2) >> $@; \
-	utils/test libsass lib $^ $(1) $(2) >> $@
+	utils/test ruby_sass_3_2 $(@D)/output.3.2.css $< $(1) $(2) >> $@; \
+	utils/test ruby_sass_3_3 $(@D)/output.3.3.css $< $(1) $(2) >> $@; \
+	utils/test ruby_sass_3_4 $(@D)/output.3.4.css $< $(1) $(2) >> $@; \
+	utils/test libsass $(@D)/output.lib.css $< $(1) $(2) >> $@
+
+#
+# Sass engines to test.
+#
+ENGINES = 3.2 3.3 3.4 lib
+
+#
+# Output files for each engine (pattern matching).
+#
+OUTPUTS = $(addprefix tests/%/output.,$(addsuffix .css,$(ENGINES)))
 
 #
 # Test against an expected input (should equals).
 #
-tests/%/support.yml: tests/%/input.scss tests/%/expect.min.css
-	$(call test,true,false)
+tests/%/support.yml: tests/%/expect.min.css $(OUTPUTS)
+	$(call test,false,true)
 
 #
 # Test against an unexpected input (should not equals).
 #
-tests/%/support.yml: tests/%/input.scss tests/%/unexpect.min.css
+tests/%/support.yml: tests/%/unexpect.min.css $(OUTPUTS)
 	$(call test,false,true)
 
+
+# Compilation {{{
+# ===============
+
 #
-# Do not remove `tests/%.min.css` (intermediate) files after execution.
+# Do not remove compilation output (intermediate) files after execution.
+#
+.PRECIOUS: $(addprefix tests/%/output.,$(addsuffix .css,$(ENGINES)))
+
+tests/%/output.3.4.css: tests/%/input.scss
+	utils/sm 3.4 $< > $@
+
+tests/%/output.3.3.css: tests/%/input.scss
+	utils/sm 3.3 $< > $@
+
+tests/%/output.3.2.css: tests/%/input.scss
+	utils/sm 3.2 $< > $@
+
+tests/%/output.lib.css: tests/%/input.scss
+	utils/sm lib $< > $@
+
+# }}}
+
+# Minification {{{
+# ================
+
+#
+# Do not remove minified files after execution.
 #
 .PRECIOUS: tests/%.min.css
 
@@ -76,3 +112,5 @@ tests/%.min.css: tests/%.css | $(UGLIFY)
 #
 $(UGLIFY):
 	npm install uglifycss
+
+# }}}

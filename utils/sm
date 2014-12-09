@@ -1,0 +1,35 @@
+#!/bin/sh -e
+#
+# Used by the parent makefile. Compile given SCSS file in given
+# SassMeister endpoint and return the CSS output.
+#
+# 1. SassMeister endpoint.
+# 2. Input SCSS file.
+#
+# Example:
+#
+#     tools/sm 3.4 input.scss
+#     tools/sm lib input.scss
+#
+
+#
+# Extract the `css` property of input JSON document.
+#
+extract() {
+    node -e '
+        console.log(
+            JSON.parse(
+                require("fs").readFileSync("/dev/stdin", "utf8")
+            )["css"]
+        )
+    '
+}
+
+endpoint=$1; shift
+input=$1; shift
+
+curl -s \
+    --data 'syntax=SCSS&output_style=compressed' \
+    --data-urlencode "input@$input" \
+    "http://sassmeister.com/app/$endpoint/compile" \
+    | extract
