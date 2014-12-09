@@ -80,7 +80,7 @@ multi_keys_map_remove:
     ruby_sass_3_2: false
     ruby_sass_3_3: false
     ruby_sass_3_4: true
-    libsass: false
+    libsass: true
 
 multi_assign_each:
     ruby_sass_3_2: false
