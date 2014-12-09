@@ -1,0 +1,40 @@
+{% for feature in site.data.features %}
+<section class="feature" id="{{ feature.name }}">
+    <h2 class="feature__name">{{ feature.label|markdownify }}</h2>
+
+    <div class="feature__description">
+    {{ feature.description|markdownify }}
+    </div>
+
+    <table class="feature__support">
+        <thead>
+            <tr>
+                {% for engine in site.data.engines %}
+                <th id="{{ engine.name }}" scope="col">
+                    <a href="{{ engine.link }}" target="_blank">
+                    {{ engine.label }}
+                    </a>
+                </th>
+                {% endfor %}
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for engine in site.data.engines %}
+            <td headers="{{ engine.name }}" data-label="{{ engine.label }}" class="feature-status  feature-status--{% if feature.support[engine.name] == true %}supported{% else %}unsupported{% endif %}">
+                {% if feature.support[engine.name] == true %}
+                    <svg viewBox="0 0 100 100" class="icon  icon-checkmark">
+                        <use xlink:href="#icon-checkmark"></use>
+                    </svg>
+                {% else %}
+                    <svg viewBox="0 0 100 100" class="icon  icon-close">
+                        <use xlink:href="#icon-close"></use>
+                    </svg>
+                {% endif %}
+            </td>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</section>
+{% endfor %}
