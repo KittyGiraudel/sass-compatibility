@@ -33,8 +33,8 @@
 
         <tbody>
             {% for engine in site.data.engines %}
-            <td headers="{{ engine.name }}" data-label="{{ engine.label }}" class="feature-status  feature-status--{% if feature.support[engine.name] == true %}supported{% else %}unsupported{% endif %}">
-                {% if feature.support[engine.name] == true %}
+            <td headers="{{ engine.name }}" data-label="{{ engine.label }}" class="feature-status  feature-status--{% if site.data.support[feature.name][engine.name] == true %}supported{% else %}unsupported{% endif %}">
+                {% if site.data.support[feature.name][engine.name] == true %}
                     <svg viewBox="0 0 100 100" class="icon  icon-checkmark">
                         <use xlink:href="#icon-checkmark"></use>
                     </svg>

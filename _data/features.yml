@@ -1,11 +1,5 @@
 - label: "`call` function"
   name: call_function
-  support:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass_2: false
-    libsass_3: true
   description: |
     The `call` function makes it possible to call a function dynamically, by referencing its name.
   polyfill: |
@@ -16,12 +10,6 @@
 
 - label: "`inspect` function"
   name: inspect_function
-  support:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass_2: false
-    libsass_3: false
   description: |
     The [`inspect`](http://sass-lang.com/documentation/Sass/Script/Functions.html#inspect-instance_method) function returns a string containing the value as its Sass representation.
     It is especially useful when printing lists and maps as CSS values.
@@ -29,12 +17,6 @@
 
 - label: "`set-nth` function"
   name: set_nth_function
-  support:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass_2: false
-    libsass_3: true
   description: |
     The [`set-nth`](http://sass-lang.com/documentation/Sass/Script/Functions.html#set_nth-instance_method) function returns a new list, based on the list provided, but with the nth element changed to the value given.
   polyfill: |
@@ -51,12 +33,6 @@
 
 - label: "`random` function"
   name: random_function
-  support:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass_2: false
-    libsass_3: false
   description: |
     The [`random`](http://sass-lang.com/documentation/Sass/Script/Functions.html#random-instance_method) function returns a decimal between 0 and 1, inclusive.
     When given an argument, it returns a decimal between 0 and the given number.
@@ -64,12 +40,6 @@
 
 - label: "`unique-id` function"
   name: unique_id_function
-  support:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass_2: false
-    libsass_3: false
   description: |
     The [`unique-id`](http://sass-lang.com/documentation/Sass/Script/Functions.html#unique_id-instance_method) function returns a unique CSS identifier.
     The identifier is returned as an unquoted string.
@@ -78,12 +48,6 @@
 
 - label: "`list-separator` function"
   name: list_separator_function
-  support:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass_2: false
-    libsass_3: true
   description: |
     The [`list-separator`](http://sass-lang.com/documentation/Sass/Script/Functions.html#list_separator-instance_method) function returns the separator of a list.
     If the list doesn’t have a separator due to having fewer than two elements, returns `space`.
@@ -91,12 +55,6 @@
 
 - label: "Fixed `if` function"
   name: fixed_if_function
-  support:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass_2: false
-    libsass_3: true
   description: |
     The [`if`](http://sass-lang.com/documentation/Sass/Script/Functions.html#if-instance_method) function returns one of two values, depending on whether or not `$condition` is true.
     Just like in @if, all values other than `false` and `null` are considered to be `true`.
@@ -105,12 +63,6 @@
 
 - label: "Negative indexes"
   name: negative_indexes
-  support:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass_2: false
-    libsass_3: true
   description: |
     The ability to use negative indexes in all list functions.
     In unsupported engines, you cannot use negative indexes so you have to substract what you want from the length of the list.
@@ -119,60 +71,30 @@
 
 - label: "`&` SassScript"
   name: ampersand_sassscript
-  support:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: false
-    ruby_sass_3_4: true
-    libsass_2: false
-    libsass_3: false
   description: |
     The ability to use `&` in SassScript.
   polyfill: false
 
 - label: "String manipulation functions"
   name: string_manipulation_functions
-  support:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass_2: false
-    libsass_3: true
   description: |
     String manipulation functions include `str-length`, `str-insert`, `str-index`, `str-slice`, `to-upper-case` and `to-lower-case`.
   polyfill: false
 
 - label: "Selector manipulation functions"
   name: selector_manipulation_functions
-  support:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: false
-    ruby_sass_3_4: true
-    libsass_2: false
-    libsass_3: false
   description: |
     Selector manipulation functions include `selector-nest`, `selector-append`, `selector-extend`, `selector-replace`, `selector-unify`, `is-superselector`, `simple-selectors` and `selector-parse`.
   polyfill: false
 
 - label: "Feature detection functions"
   name: feature_detection_functions
-  support:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass_2: false
-    libsass_3: true
   description: |
     Feature detection functions include `feature-exists`, `variable-exists`, `global-variable-exists`, `function-exists` and `mixin-exists`.
   polyfill: false
 
 - label: "Map API"
   name: map_data_type
-  support:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass_2: false
-    libsass_3: true
   description: |
     The Map API includes the `map` Sass data type and functions `map-get`, `map-merge`, `map-remove`, `map-keys`, `map-values`, `map-has-key` and `keywords`.
   polyfill: |
@@ -187,12 +109,6 @@
 
 - label: "Multi keys `map-remove`"
   name: multi_keys_map_remove
-  support:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: false
-    ruby_sass_3_4: true
-    libsass_2: false
-    libsass_3: false
   description: |
     Some engines cannot remove multiple keys of a map at once with the [`map-remove`](http://sass-lang.com/documentation/Sass/Script/Functions.html#map_remove-instance_method) function.
   polyfill: |
@@ -205,24 +121,12 @@
 
 - label: "Multi assign `@each`"
   name: multi_assign_each
-  support:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass_2: false
-    libsass_3: true
   description: |
     The ability to use the `@each $key, $value` syntax to iterate over maps.
   polyfill: false
 
 - label: "Downward `@for`"
   name: downward_for
-  support:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass_2: false
-    libsass_3: false
   description: |
     For long, there was no way to have decrementing `@for` loops. They could only go upward. No error was thrown, but it simply did not iterate.
   polyfill: |
@@ -234,36 +138,18 @@
 
 - label: "`rebeccapurple` color"
   name: rebeccapurple_color
-  support:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: false
-    ruby_sass_3_4: true
-    libsass_2: false
-    libsass_3: false
   description: |
     The `rebeccapurple` CSS color can safely be used, yet it cannot be manipulated as a color.
   polyfill: "Use `#663399`."
 
 - label: "`transparent` color"
   name: transparent_color
-  support:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass_2: false
-    libsass_3: false
   description: |
     The `transparent` CSS color can safely be used, yet it cannot be manipulated as a color.
   polyfill: "Use `rgba(0, 0, 0, 0)`."
 
 - label: "`@supports` CSS feature"
   name: supports_feature
-  support:
-    ruby_sass_3_2: true
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass_2: false
-    libsass_3: true
   description: |
     The ability to use the CSS `@supports` feature.
     There is no known solution for this issue.
@@ -271,12 +157,6 @@
 
 - label: "`@error` directive"
   name: error_directive
-  support:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: false
-    ruby_sass_3_4: true
-    libsass_2: false
-    libsass_3: false
   description: |
     The [`@error`](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#_7) directive throws the value of a SassScript expression as a fatal error, including a nice stack trace. It’s useful for validating arguments to mixins and functions.
   polyfill: |
@@ -287,48 +167,24 @@
 
 - label: "`@at-root` directive"
   name: at_root_directive
-  support:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass_2: false
-    libsass_3: false
   description: |
     The [`@at-root`](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#at-root) directive causes one or more rules to be emitted at the root of the document, rather than being nested beneath their parent selectors.
   polyfill: false
 
 - label: "`not` operator"
   name: not_operator
-  support:
-    ruby_sass_3_2: true
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass_2: false
-    libsass_3: false
   description: |
     The ability to use the `not` Sass operator.
   polyfill: false
 
 - label: "`@extend` directive"
   name: extend_directive
-  support:
-    ruby_sass_3_2: true
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass_2: false
-    libsass_3: true
   description: |
     The [`@extend`](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#extend) directive tells Sass that one selector should inherit the styles of another selector.
   polyfill: false
 
 - label: "Nested interpolations"
   name: nested_interpolations
-  support:
-    ruby_sass_3_2: true
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass_2: false
-    libsass_3: false
   description: |
     The ability to nest interpolations.
   polyfill: |
@@ -336,12 +192,6 @@
 
 - label: "Variable scoping"
   name: variable_scoping
-  support:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: false
-    ruby_sass_3_4: true
-    libsass_2: false
-    libsass_3: false
   description: |
     Not all engines work with the same variable scoping mechanism.
     Actually, some don't have variable scoping at all, which means all variables live in the same global environment (and can overlap).
@@ -353,12 +203,6 @@
 
 - label: "Angle conversion"
   name: angle_conversion
-  support:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: false
-    ruby_sass_3_4: true
-    libsass_2: false
-    libsass_3: true
   description: |
     Angles can be emitted in four different units:
 
@@ -382,12 +226,6 @@
 
 - label: "Media queries merge"
   name: media_merge
-  support:
-    ruby_sass_3_2: true
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass_2: false
-    libsass_3: false
   description: |
     While nested media queries are valid CSS, they are quite uncommon.
     Also, some browsers (Internet Explorer and Opera) do not support nested media queries.
