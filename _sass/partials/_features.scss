@@ -84,20 +84,10 @@
     color: mix($patina, black, 70%);
     fill: currentcolor;
     background-color: rgba($patina, .25);
-
-    .feature:hover &,
-    .feature:active & {
-        background-color: rgba($patina, .4);
-    }
 }
 
 .feature-status--unsupported {
     color: mix($bouquet, black, 70%);
     fill: currentcolor;
     background-color: rgba($bouquet, .25);
-
-    .feature:hover &,
-    .feature:active & {
-        background-color: rgba($bouquet, .4);
-    }
 }
