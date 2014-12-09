@@ -2,10 +2,22 @@
 <section class="feature" id="{{ feature.name }}">
     <h2 class="feature__name">{{ feature.label|markdownify }}</h2>
 
+    <div class="feature__content">
     <div class="feature__description">
+        <h3 class="feature__heading">Description</h3>
     {{ feature.description|markdownify }}
     </div>
+    <div class="feature__polyfill">
+        <h3 class="feature__heading">Polyfill</h3>
+    {% if feature.polyfill %}
+        {{ feature.polyfill|markdownify }}
+    {% else %}
+        There is no known polyfill for this.
+    {% endif %}
+    </div>
+    </div>
 
+    <h3 class="feature__heading">Support</h3>
     <table class="feature__support">
         <thead>
             <tr>

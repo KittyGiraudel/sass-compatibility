@@ -6,8 +6,13 @@
     ruby_sass_3_4: true
     libsass_2: false
     libsass_3: true
-  demo: ""
-  description: "The ability to use the `call` function."
+  description: |
+    The `call` function makes it possible to call a function dynamically, by referencing its name.
+  polyfill: |
+    Unfortunately, the `call` function is not easily polyfilled.
+    You would have to create a function with a switch case for every existing function in the global scope;
+    Sass default functions such as `quote` or `invert`, and your own functions as well.
+    That's a pain and kind of defeats the initial purpose.
 
 - label: "`inspect` function"
   name: inspect_function
@@ -17,8 +22,10 @@
     ruby_sass_3_4: true
     libsass_2: false
     libsass_3: false
-  demo: ""
-  description: "The ability to use the `inspect` function."
+  description: |
+    The [`inspect`](http://sass-lang.com/documentation/Sass/Script/Functions.html#inspect-instance_method) function returns a string containing the value as its Sass representation.
+    It is especially useful when printing lists and maps as CSS values.
+  polyfill: false
 
 - label: "`set-nth` function"
   name: set_nth_function
@@ -28,8 +35,19 @@
     ruby_sass_3_4: true
     libsass_2: false
     libsass_3: true
-  demo: ""
-  description: "The ability to use the `set-nth` function."
+  description: |
+    The [`set-nth`](http://sass-lang.com/documentation/Sass/Script/Functions.html#set_nth-instance_method) function returns a new list, based on the list provided, but with the nth element changed to the value given.
+  polyfill: |
+    <pre class="language-scss"><code>@function update-nth($list, $n, $value) {
+      @if function-exists("set-nth") == true {
+        @return set-nth($list, $n, $value);
+      }
+      $new-list: ();
+      @for $i from 1 through length($list) {
+        $new-list: append($new-list, if($i == $n, $value, nth($list, $i)));
+      }
+      @return $new-list;
+    }</code></pre>
 
 - label: "`random` function"
   name: random_function
@@ -39,8 +57,10 @@
     ruby_sass_3_4: true
     libsass_2: false
     libsass_3: false
-  demo: ""
-  description: "The ability to use the `random` function."
+  description: |
+    The [`random`](http://sass-lang.com/documentation/Sass/Script/Functions.html#random-instance_method) function returns a decimal between 0 and 1, inclusive.
+    When given an argument, it returns a decimal between 0 and the given number.
+  polyfill: false
 
 - label: "`unique-id` function"
   name: unique_id_function
@@ -50,8 +70,11 @@
     ruby_sass_3_4: true
     libsass_2: false
     libsass_3: false
-  demo: ""
-  description: "The ability to use the `unique-id` function."
+  description: |
+    The [`unique-id`](http://sass-lang.com/documentation/Sass/Script/Functions.html#unique_id-instance_method) function returns a unique CSS identifier.
+    The identifier is returned as an unquoted string.
+    The identifier returned is only guaranteed to be unique within the scope of a single Sass run.
+  polyfill: false
 
 - label: "Fixed `if` function"
   name: fixed_if_function
@@ -61,8 +84,11 @@
     ruby_sass_3_4: true
     libsass_2: false
     libsass_3: true
-  demo: ""
-  description: "The `if` function that doesn't evaluate all arguments."
+  description: |
+    The [`if`](http://sass-lang.com/documentation/Sass/Script/Functions.html#if-instance_method) function returns one of two values, depending on whether or not `$condition` is true.
+    Just like in @if, all values other than `false` and `null` are considered to be `true`.
+    There has long been a bug with this function where all arguments where evaluated, no matter the result of the condition.
+  polyfill: Use a conditional statement (`@if` / `@else`).
 
 - label: "Negative indexes"
   name: negative_indexes
@@ -72,8 +98,11 @@
     ruby_sass_3_4: true
     libsass_2: false
     libsass_3: true
-  demo: ""
-  description: "The ability to use negative indexes in all list functions."
+  description: |
+    The ability to use negative indexes in all list functions.
+    In unsupported engines, you cannot use negative indexes so you have to substract what you want from the length of the list.
+    For instance, `-2` would be `length($list) - 1`.
+  polyfill: false
 
 - label: "`&` SassScript"
   name: ampersand_sassscript
@@ -83,8 +112,9 @@
     ruby_sass_3_4: true
     libsass_2: false
     libsass_3: false
-  demo: ""
-  description: "The ability to use `&` in SassScript."
+  description: |
+    The ability to use `&` in SassScript.
+  polyfill: false
 
 - label: "String manipulation functions"
   name: string_manipulation_functions
@@ -94,8 +124,9 @@
     ruby_sass_3_4: true
     libsass_2: false
     libsass_3: true
-  demo: ""
-  description: "String manipulation functions such as `str-slice`."
+  description: |
+    String manipulation functions include `str-length`, `str-insert`, `str-index`, `str-slice`, `to-upper-case` and `to-lower-case`.
+  polyfill: false
 
 - label: "Selector manipulation functions"
   name: selector_manipulation_functions
@@ -105,8 +136,9 @@
     ruby_sass_3_4: true
     libsass_2: false
     libsass_3: false
-  demo: ""
-  description: "Selector manipulation functions such as `selector-nest`."
+  description: |
+    Selector manipulation functions include `selector-nest`, `selector-append`, `selector-extend`, `selector-replace`, `selector-unify`, `is-superselector`, `simple-selectors` and `selector-parse`.
+  polyfill: false
 
 - label: "Feature detection functions"
   name: feature_detection_functions
@@ -116,10 +148,11 @@
     ruby_sass_3_4: true
     libsass_2: false
     libsass_3: true
-  demo: ""
-  description: "Feature detection functions such as `feature-exists`."
+  description: |
+    Feature detection functions include `feature-exists`, `variable-exists`, `global-variable-exists`, `function-exists` and `mixin-exists`.
+  polyfill: false
 
-- label: "Maps data type"
+- label: "Map API"
   name: map_data_type
   support:
     ruby_sass_3_2: false
@@ -127,8 +160,16 @@
     ruby_sass_3_4: true
     libsass_2: false
     libsass_3: true
-  demo: ""
-  description: "The ability to use `map` Sass data type."
+  description: |
+    The Map API includes the `map` Sass data type and functions `map-get`, `map-merge`, `map-remove`, `map-keys`, `map-values`, `map-has-key` and `keywords`.
+  polyfill: |
+    Maps can be faked with bi-dimensional lists such as:
+    <pre class="language-scss"><code>$map: (
+      a 1,
+      b 2,
+      c 3
+    );</code></pre>
+    Then, [Sass List-Maps](https://github.com/lunelson/sass-list-maps) from Lu Nelson can be used to polyfill the whole Map API.
 
 - label: "Multi keys `map-remove`"
   name: multi_keys_map_remove
@@ -138,8 +179,15 @@
     ruby_sass_3_4: true
     libsass_2: false
     libsass_3: false
-  demo: ""
-  description: "The ability to remove several keys at once with `map-remove`."
+  description: |
+    Some engines cannot remove multiple keys of a map at once with the [`map-remove`](http://sass-lang.com/documentation/Sass/Script/Functions.html#map_remove-instance_method) function.
+  polyfill: |
+    <pre class="language-scss"><code>@function map-multi-remove($map, $keys...) {
+      @each $key in $keys {
+        $map: map-remove($map, $key);
+      }
+      @return $map;
+    }</code></pre>
 
 - label: "Multi assign `@each`"
   name: multi_assign_each
@@ -149,8 +197,10 @@
     ruby_sass_3_4: true
     libsass_2: false
     libsass_3: true
-  demo: ""
-  description: "The ability to use the `@each $key, $value` syntax to iterate over maps."
+  description: |
+    The ability to use the `@each $key, $value` syntax to iterate over maps.
+    There is no polyfill for this.
+  polyfill: false
 
 - label: "Downward `@for`"
   name: downward_for
@@ -160,8 +210,14 @@
     ruby_sass_3_4: true
     libsass_2: false
     libsass_3: false
-  demo: ""
-  description: "The ability to have decrementing `@for` loops."
+  description: |
+    For long, there was no way to have decrementing `@for` loops. They could only go upward. No error was thrown, but it simply did not iterate.
+  polyfill: |
+    <pre class="language-scss"><code>@for $i from -10 through -1 {
+      $i: abs($i);
+      // Do something
+    }</code></pre>
+
 
 - label: "`rebeccapurple` color"
   name: rebeccapurple_color
@@ -171,8 +227,9 @@
     ruby_sass_3_4: true
     libsass_2: false
     libsass_3: false
-  demo: ""
-  description: "The `rebeccapurple` CSS color."
+  description: |
+    The `rebeccapurple` CSS color can safely be used, yet it cannot be manipulated as a color.
+  polyfill: "Use `#663399`."
 
 - label: "`transparent` color"
   name: transparent_color
@@ -182,8 +239,9 @@
     ruby_sass_3_4: true
     libsass_2: false
     libsass_3: false
-  demo: ""
-  description: "The `transparent` CSS color."
+  description: |
+    The `transparent` CSS color can safely be used, yet it cannot be manipulated as a color.
+  polyfill: "Use `rgba(0, 0, 0, 0)`."
 
 - label: "`@supports` CSS feature"
   name: supports_feature
@@ -193,8 +251,10 @@
     ruby_sass_3_4: true
     libsass_2: false
     libsass_3: true
-  demo: ""
-  description: "The ability to use the CSS `@supports` feature."
+  description: |
+    The ability to use the CSS `@supports` feature.
+    There is no known solution for this issue.
+  polyfill: false
 
 - label: "`@error` directive"
   name: error_directive
@@ -204,8 +264,13 @@
     ruby_sass_3_4: true
     libsass_2: false
     libsass_3: false
-  demo: ""
-  description: "The ability to use the `@error` Sass directive."
+  description: |
+    The [`@error`](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#_7) directive throws the value of a SassScript expression as a fatal error, including a nice stack trace. It’s useful for validating arguments to mixins and functions.
+  polyfill: |
+    <pre class="language-scss"><code>@if ($condition) {
+      @warn $error;
+      @return null;
+    }</code></pre>
 
 - label: "`@at-root` directive"
   name: at_root_directive
@@ -215,8 +280,9 @@
     ruby_sass_3_4: true
     libsass_2: false
     libsass_3: false
-  demo: ""
-  description: "The ability to use the `@at-root` Sass directive."
+  description: |
+    The [`@at-root`](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#at-root) directive causes one or more rules to be emitted at the root of the document, rather than being nested beneath their parent selectors.
+  polyfill: false
 
 - label: "`not` operator"
   name: not_operator
@@ -226,8 +292,9 @@
     ruby_sass_3_4: true
     libsass_2: false
     libsass_3: false
-  demo: ""
-  description: "The ability to use the `not` Sass operator."
+  description: |
+    The ability to use the `not` Sass operator.
+  polyfill: false
 
 - label: "`@extend` directive"
   name: extend_directive
@@ -237,8 +304,9 @@
     ruby_sass_3_4: true
     libsass_2: false
     libsass_3: true
-  demo: ""
-  description: "The ability to use the `@extend` Sass directive."
+  description: |
+    The [`@extend`](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#extend) directive tells Sass that one selector should inherit the styles of another selector.
+  polyfill: false
 
 - label: "Nested interpolations"
   name: nested_interpolations
@@ -248,8 +316,10 @@
     ruby_sass_3_4: true
     libsass_2: false
     libsass_3: false
-  demo: ""
-  description: "The ability to nest interpolations."
+  description: |
+    The ability to nest interpolations.
+  polyfill: |
+    Not only nested interpolations are quite uncommon, but it also turns out to be easy to refactor the code so it doesn't happen.
 
 - label: "Variable scoping"
   name: variable_scoping
@@ -259,8 +329,14 @@
     ruby_sass_3_4: true
     libsass_2: false
     libsass_3: false
-  demo: ""
-  description: "The new variable scoping."
+  description: |
+    Not all engines work with the same variable scoping mechanism.
+    Actually, some don't have variable scoping at all, which means all variables live in the same global environment (and can overlap).
+    Some engines do have the new variable scoping system, where a variable is restricted to its scope (function, mixin...) if it's not set with the `!global` flag.
+  polyfill: |
+    This can be **detected** with:
+
+    <pre class="language-scss"><code>feature-exists("global-variable-shadowing") == true</code></pre>
 
 - label: "Angle conversion"
   name: angle_conversion
@@ -270,5 +346,23 @@
     ruby_sass_3_4: true
     libsass_2: false
     libsass_3: true
-  demo: ""
-  description: "The ability to auto-convert angles from one unit to another."
+  description: |
+    Angles can be emitted in four different units:
+
+    * Degrees: `deg`
+    * Radians: `rad`
+    * Gradians: `grad`
+    * Turns: `turn`
+
+    Sass should be able to auto-convert angles from one unit to another.
+  polyfill: |
+    <pre class="language-scss"><code>@function convert-angle($value, $unit) {
+      $convertable-units: deg grad turn rad;
+      $conversion-factors: 1 10grad/9deg 1turn/360deg 3.1415926rad/180deg;
+      @if index($convertable-units, unit($value)) and index($convertable-units, $unit) {
+        @return $value
+                 / nth($conversion-factors, index($convertable-units, unit($value)))
+                 * nth($conversion-factors, index($convertable-units, $unit));
+      }
+      @error "Cannot convert `#{unit($value)}` to `#{$unit}`.";
+    }</code></pre>
