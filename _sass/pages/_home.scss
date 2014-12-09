@@ -17,8 +17,13 @@
     line-height: 1.125em;
 
     @media (max-width: 767px) {
-        span {
-            display: none;
-        }
+        font-size: 2.2em;
     }
+}
+
+.baseline {
+    font-size: 1.6em;
+    font-weight: 700;
+    color: $color-accent;
+    margin: 0 0 1rem;
 }
