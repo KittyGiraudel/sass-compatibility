@@ -8,11 +8,11 @@
     {{ feature.description|markdownify }}
     </div>
     <div class="feature__polyfill">
-        <h3 class="feature__heading">Polyfill</h3>
+        <h3 class="feature__heading">Work-around</h3>
     {% if feature.polyfill %}
         {{ feature.polyfill|markdownify }}
     {% else %}
-        There is no known polyfill for this.
+        There is no known polyfill or work-around for this.
     {% endif %}
     </div>
     </div>
