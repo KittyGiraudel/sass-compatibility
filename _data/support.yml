@@ -106,12 +106,6 @@ transparent_color:
     ruby_sass_3_4: true
     libsass: false
 
-supports_feature:
-    ruby_sass_3_2: true
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass: true
-
 error_directive:
     ruby_sass_3_2: false
     ruby_sass_3_3: false

@@ -148,13 +148,6 @@
     The `transparent` CSS color can safely be used, yet it cannot be manipulated as a color.
   polyfill: "Use `rgba(0, 0, 0, 0)`."
 
-- label: "`@supports` CSS feature"
-  name: supports_feature
-  description: |
-    The ability to use the CSS `@supports` feature.
-    There is no known solution for this issue.
-  polyfill: false
-
 - label: "`@error` directive"
   name: error_directive
   description: |
