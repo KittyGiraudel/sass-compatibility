@@ -164,6 +164,7 @@
     The Map API includes the `map` Sass data type and functions `map-get`, `map-merge`, `map-remove`, `map-keys`, `map-values`, `map-has-key` and `keywords`.
   polyfill: |
     Maps can be faked with bi-dimensional lists such as:
+
     <pre class="language-scss"><code>$map: (
       a 1,
       b 2,
@@ -199,7 +200,6 @@
     libsass_3: true
   description: |
     The ability to use the `@each $key, $value` syntax to iterate over maps.
-    There is no polyfill for this.
   polyfill: false
 
 - label: "Downward `@for`"
