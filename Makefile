@@ -38,13 +38,12 @@ _data/support.yml: $(TESTS)
 # The boolean values are configurable so you can just invert them to run
 # an "unexpect" test.
 #
-define test =
-basename $(@D) | sed 's/$$/:/' > $@
-utils/test ruby_sass_3_2 3.2 $^ $(1) $(2) >> $@
-utils/test ruby_sass_3_3 3.3 $^ $(1) $(2) >> $@
-utils/test ruby_sass_3_4 3.4 $^ $(1) $(2) >> $@
-utils/test libsass lib $^ $(1) $(2) >> $@
-endef
+test = \
+	basename $(@D) | sed 's/$$/:/' > $@; \
+	utils/test ruby_sass_3_2 3.2 $^ $(1) $(2) >> $@; \
+	utils/test ruby_sass_3_3 3.3 $^ $(1) $(2) >> $@; \
+	utils/test ruby_sass_3_4 3.4 $^ $(1) $(2) >> $@; \
+	utils/test libsass lib $^ $(1) $(2) >> $@
 
 #
 # Test against an expected input (should equals).
