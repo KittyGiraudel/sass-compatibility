@@ -1,0 +1,31 @@
+#{selector-nest(".selector", ".selector-nest")} {
+  content: selector-nest;
+}
+
+#{selector-append(".selector", ".selector-append")} {
+  content: selector-append;
+}
+
+#{selector-extend(".selector", ".selector", ".selector-extend")} {
+  content: selector-extend;
+}
+
+#{selector-replace(".selector", ".selector", ".selector-replace")} {
+  content: selector-replace;
+}
+
+#{selector-unify(".selector", ".selector-unify")} {
+  content: selector-unify;
+}
+
+.is-superselector {
+  content: is-superselector(".is-superselector", ".selector");
+}
+
+#{simple-selectors(".simple.selectors")} {
+  content: simple-selectors;
+}
+
+#{selector-parse(".selector-parse")} {
+  content: selector-parse;
+}

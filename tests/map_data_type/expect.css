@@ -1,0 +1,6 @@
+.selector {
+  content: 1;
+  content: "a", "b", "c";
+  content: 1, 2, 3;
+  content: true;
+}

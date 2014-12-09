@@ -1,0 +1,8 @@
+.selector {
+  content: to-upper-case("css");
+  content: to-lower-case("CSS");
+  content: str-index("css", "c");
+  content: str-length("css");
+  content: str-insert("css", "s", 1);
+  content: str-slice("css", 2);
+}

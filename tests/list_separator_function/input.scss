@@ -1,0 +1,4 @@
+.selector {
+  content: list-separator((a  b  c));
+  content: list-separator((a, b, c));
+}

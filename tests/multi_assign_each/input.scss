@@ -1,0 +1,5 @@
+.selector {
+  @each $key, $value in (a: b, c: d, e: f) {
+    #{$key}: $value;
+  }
+}

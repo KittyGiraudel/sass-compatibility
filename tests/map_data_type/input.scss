@@ -1,0 +1,12 @@
+.selector {
+  $map: (
+    "a": 1,
+    "b": 2,
+    "c": 3
+  );
+
+  content: map-get($map, "a");
+  content: map-keys($map);
+  content: map-values($map);
+  content: map-has-key($map, "b");
+}

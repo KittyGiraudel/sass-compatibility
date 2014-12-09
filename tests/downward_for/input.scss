@@ -1,0 +1,5 @@
+.selector {
+  @for $i from 3 through 1 {
+    content: $i;
+  }
+}

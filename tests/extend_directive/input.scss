@@ -1,0 +1,8 @@
+.selector {
+  content: "extended-selector";
+}
+
+.other-selector {
+  @extend .selector;
+  content: "other-selector";
+}

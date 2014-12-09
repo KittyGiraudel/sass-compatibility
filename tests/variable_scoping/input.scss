@@ -1,0 +1,10 @@
+$var: 1;
+
+@mixin test {
+  $var: 2;
+}
+
+.selector {
+  @include test;
+  content: $var;
+}

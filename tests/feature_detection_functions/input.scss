@@ -1,0 +1,11 @@
+@mixin dummy-mixin() {}
+@function dummy-function() {}
+$dummy-variable: "";
+
+.selector {
+  content: function-exists("dummy-function");
+  content: mixin-exists("dummy-mixin");
+  content: variable-exists("dummy-variable");
+  content: global-variable-exists("dummy-variable");
+  content: function-exists("feature-exists");
+}
