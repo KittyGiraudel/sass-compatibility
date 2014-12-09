@@ -1,2 +1,5 @@
 _site
 .sass-cache
+/node_modules
+/tests/**/*.min.css
+/tests/*/support.yml
