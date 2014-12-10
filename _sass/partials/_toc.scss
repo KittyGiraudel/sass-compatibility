@@ -39,21 +39,16 @@
     background: #EFEFEF;
     text-decoration: none;
     margin-bottom: .5em;
-    color: $color-text-link;
+    color: #444;
+
+    &:visited {
+        color: currentcolor;
+    }
 
     p {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
         margin: 0;
-    }
-
-    code {
-        color: $bouquet;
-    }
-
-    &:hover code,
-    &:active code {
-        color: currentcolor;
     }
 }
