@@ -1,0 +1,59 @@
+.toc {
+    overflow: hidden;
+    padding-left: 0;
+    list-style: none;
+    -webkit-column-gap: .5em;
+    -moz-column-gap: .5em;
+    column-gap: .5em;
+
+    @media (min-width: 600px) {
+        -webkit-columns: 2;
+        -moz-columns: 2;
+        columns: 2;
+
+    }
+
+    @media (min-width: 800px) {
+        -webkit-columns: 3;
+        -moz-columns: 3;
+        columns: 3;
+    }
+
+    @media (min-width: 1000px) {
+        -webkit-columns: 4;
+        -moz-columns: 4;
+        columns: 4;
+    }
+}
+
+.toc__item {
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    font-size: .9em;
+}
+
+.toc__link {
+    padding: .5em;
+    display: block;
+    background: #EFEFEF;
+    text-decoration: none;
+    margin-bottom: .5em;
+    color: $color-text-link;
+
+    p {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin: 0;
+    }
+
+    code {
+        color: $bouquet;
+    }
+
+    &:hover code,
+    &:active code {
+        color: currentcolor;
+    }
+}

@@ -1,0 +1,7 @@
+<ul class="toc">
+{% for feature in site.data.features %}
+    <li class="toc__item">
+        <a class="toc__link" href="#{{ feature.name }}">{{ feature.label|markdownify }}</a>
+    </li>
+{% endfor %}
+</ul>
