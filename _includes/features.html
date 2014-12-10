@@ -23,7 +23,7 @@
         <thead>
             <tr>
                 {% for engine in site.data.engines %}
-                <th id="{{ engine.name }}">
+                <th id="{{ feature.name }}-{{ engine.name }}">
                     <a href="{{ engine.link }}" target="_blank">
                     {{ engine.label }}
                     </a>
@@ -35,7 +35,7 @@
         <tbody>
             <tr>
                 {% for engine in site.data.engines %}
-                <td headers="{{ engine.name }}" data-label="{{ engine.label }}" class="feature-status  feature-status--{% if site.data.support[feature.name][engine.name] == true %}supported{% else %}unsupported{% endif %}">
+                <td headers="{{ feature.name }}-{{ engine.name }}" data-label="{{ engine.label }}" class="feature-status  feature-status--{% if site.data.support[feature.name][engine.name] == true %}supported{% else %}unsupported{% endif %}">
                     {% if site.data.issues[feature.name] and site.data.issues[feature.name][engine.name] %}
                         <a href="{{ site.data.issues[feature.name][engine.name] }}" target="_blank" title="Go check the issue">
                     {% endif %}
