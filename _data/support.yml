@@ -28,6 +28,12 @@ cross_media_extend:
     ruby_sass_3_4: false
     libsass: true
 
+deep_extend:
+    ruby_sass_3_2: true
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass: false
+
 downward_for:
     ruby_sass_3_2: false
     ruby_sass_3_3: true

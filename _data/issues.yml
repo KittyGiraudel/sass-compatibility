@@ -16,6 +16,9 @@ cross_media_extend:
     ruby_sass_3_4: https://github.com/sass/sass/issues/640
     libsass: https://github.com/sass/libsass/issues/712
 
+deep_extend:
+    libsass: https://github.com/sass/libsass/issues/592
+
 downward_for:
     ruby_sass_3_2: https://github.com/sass/sass/issues/691
     libsass: https://github.com/sass/libsass/issues/703

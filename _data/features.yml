@@ -70,6 +70,16 @@
 
 
 
+- label: "Deep `@extend`"
+  name: deep_extend
+  description: |
+    *Deep extend* names the situation where the `@extend` directive is being used from a compound selector, for instance `.a .b .c`.
+  polyfill: false
+
+
+
+
+
 - label: "Downward `@for`"
   name: downward_for
   description: |
