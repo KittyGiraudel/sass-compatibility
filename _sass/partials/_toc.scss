@@ -40,6 +40,14 @@
     text-decoration: none;
     margin-bottom: .5em;
     color: #444;
+    transition: 1s;
+
+    &:hover,
+    &:active {
+        transition: background-color .05s;
+        background: $wafer;
+        color: #444;
+    }
 
     &:visited {
         color: currentcolor;
