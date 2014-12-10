@@ -1,0 +1,87 @@
+angle_conversion:
+    ruby_sass_3_2: https://github.com/sass/sass/issues/1338
+    ruby_sass_3_3: https://github.com/sass/sass/issues/1338
+    libsass: https://github.com/sass/libsass/issues/666
+
+at_root_directive:
+    ruby_sass_3_2: https://github.com/sass/sass/issues/774
+    libsass: https://github.com/sass/libsass/issues/353
+
+call_function:
+    ruby_sass_3_2: https://github.com/sass/sass/issues/626
+
+cross_media_extend:
+    ruby_sass_3_2: https://github.com/sass/sass/issues/640
+    ruby_sass_3_3: https://github.com/sass/sass/issues/640
+    ruby_sass_3_4: https://github.com/sass/sass/issues/640
+    libsass: https://github.com/sass/libsass/issues/712
+
+downward_for:
+    ruby_sass_3_2: https://github.com/sass/sass/issues/691
+    libsass: https://github.com/sass/libsass/issues/703
+
+error_directive:
+    ruby_sass_3_2: https://github.com/sass/sass/issues/747
+    ruby_sass_3_3: https://github.com/sass/sass/issues/747
+    libsass: https://github.com/sass/libsass/issues/704
+
+feature_detection_functions:
+    libsass: https://github.com/sass/libsass/issues/702
+
+fixed_if_function:
+    ruby_sass_3_2: https://github.com/sass/sass/pull/836
+
+inspect_function:
+    ruby_sass_3_2: https://github.com/sass/sass/issues/953
+    libsass: https://github.com/sass/libsass/issues/701
+
+list_separator_function:
+    ruby_sass_3_2: https://github.com/sass/sass/pull/689
+
+map_data_type:
+    ruby_sass_3_2: https://github.com/sass/sass/issues/642
+
+media_merge:
+    libsass: https://github.com/sass/libsass/issues/185
+
+multi_assign_each:
+    ruby_sass_3_2: https://github.com/sass/sass/issues/1262
+
+multi_keys_map_remove:
+    ruby_sass_3_2: https://github.com/sass/sass/issues/1230
+    ruby_sass_3_3: https://github.com/sass/sass/issues/1230
+
+negative_indexes:
+    ruby_sass_3_2: https://github.com/sass/sass/pull/808
+
+nested_interpolations:
+    libsass: https://github.com/sass/libsass/issues/615
+
+not_operator:
+    libsass: https://github.com/sass/libsass/issues/368
+
+random_function:
+    ruby_sass_3_2: https://github.com/sass/sass/pull/968
+    libsass: https://github.com/sass/libsass/issues/657
+
+rebeccapurple_color:
+    ruby_sass_3_2: https://github.com/sass/sass/issues/1293
+    ruby_sass_3_3: https://github.com/sass/sass/issues/1293
+    libsass: https://github.com/sass/libsass/issues/699
+
+set_nth_function:
+    ruby_sass_3_2: https://github.com/sass/sass/issues/852
+
+string_manipulation_functions:
+    ruby_sass_3_2: https://github.com/sass/sass/pull/401
+
+transparent_color:
+    ruby_sass_3_2: https://github.com/sass/sass/issues/754
+    libsass: https://github.com/sass/libsass/issues/700
+
+unique_id_function:
+    ruby_sass_3_2: https://github.com/sass/sass/issues/771
+    libsass: https://github.com/sass/libsass/issues/636
+
+variable_scoping:
+    libsass: https://github.com/sass/libsass/issues/613

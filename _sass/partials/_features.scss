@@ -127,16 +127,30 @@
 }
 
 .feature-status {
+    a {
+        display: block;
+
+        &:active,
+        &:hover {
+            transform: scale(1.5);
+        }
+    }
 }
 
 .feature-status--supported {
-    color: mix($patina, black, 70%);
-    fill: currentcolor;
+    &, a {
+        color: mix($patina, black, 70%);
+        fill: currentcolor;
+    }
+
     background-color: rgba($patina, .25);
 }
 
 .feature-status--unsupported {
-    color: mix($bouquet, black, 70%);
-    fill: currentcolor;
+    &, a {
+        color: mix($bouquet, black, 70%);
+        fill: currentcolor;
+    }
+
     background-color: rgba($bouquet, .25);
 }

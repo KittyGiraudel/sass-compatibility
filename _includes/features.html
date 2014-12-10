@@ -36,6 +36,10 @@
             <tr>
                 {% for engine in site.data.engines %}
                 <td headers="{{ engine.name }}" data-label="{{ engine.label }}" class="feature-status  feature-status--{% if site.data.support[feature.name][engine.name] == true %}supported{% else %}unsupported{% endif %}">
+                    {% if site.data.issues[feature.name] and site.data.issues[feature.name][engine.name] %}
+                        <a href="{{ site.data.issues[feature.name][engine.name] }}" target="_blank">
+                    {% endif %}
+
                     {% if site.data.support[feature.name][engine.name] == true %}
                         <svg viewBox="0 0 100 100" class="icon  icon-checkmark">
                             <use xlink:href="#icon-checkmark"></use>
@@ -44,6 +48,10 @@
                         <svg viewBox="0 0 100 100" class="icon  icon-close">
                             <use xlink:href="#icon-close"></use>
                         </svg>
+                    {% endif %}
+
+                    {% if site.data.issues[feature.name] and site.data.issues[feature.name][engine.name] %}
+                        </a>
                     {% endif %}
                 </td>
                 {% endfor %}
