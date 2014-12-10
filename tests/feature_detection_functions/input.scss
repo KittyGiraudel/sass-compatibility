@@ -1,11 +1,223 @@
-@mixin dummy-mixin() {}
-@function dummy-function() {}
-$dummy-variable: "";
-
 .selector {
-  content: function-exists("dummy-function");
-  content: mixin-exists("dummy-mixin");
-  content: variable-exists("dummy-variable");
-  content: global-variable-exists("dummy-variable");
   content: function-exists("feature-exists");
+}
+
+@function exists($name) {
+  @return mixin-exists($name);
+}
+
+@function f() {
+  $foo: hi;
+  @return g();
+}
+
+@function g() {
+  @return mixin-exists(foo);
+}
+
+@function h() {
+  @return mixin-exists(lighten);
+}
+
+@mixin red-text { color: red; }
+@mixin blue-text { color: red; }
+@mixin green-text { color: red; }
+
+div {
+  foo: mixin-exists(red-text);
+  foo: mixin-exists("red-text");
+  foo: mixin-exists(blue-text);
+  foo: mixin-exists("blue-text");
+  foo: mixin-exists(green-text);
+  foo: mixin-exists("green-text");
+  foo: mixin-exists(nope);
+  foo: mixin-exists("nope");
+  foo: g();
+  foo: f();
+  foo: h();
+
+
+  span {
+    foo: mixin-exists(red-text);
+    foo: mixin-exists("red-text");
+    foo: mixin-exists(blue-text);
+    foo: mixin-exists("blue-text");
+    foo: mixin-exists(green-text);
+    foo: mixin-exists("green-text");
+    foo: mixin-exists(nope);
+    foo: mixin-exists("nope");
+    foo: g();
+    foo: f();
+    foo: h();
+    p {
+      foo: mixin-exists(red-text);
+      foo: mixin-exists("red-text");
+      foo: mixin-exists(blue-text);
+      foo: mixin-exists("blue-text");
+      foo: mixin-exists(green-text);
+      foo: mixin-exists("green-text");
+      foo: mixin-exists(nope);
+      foo: mixin-exists("nope");
+      foo: g();
+      foo: f();
+      foo: h();
+    }
+  }
+
+}
+
+@function exists($name) {
+  @return function-exists($name);
+}
+
+@function f() {
+  $foo: hi;
+  @return g();
+}
+
+@function g() {
+  @return function-exists(foo);
+}
+
+@function h() {
+  @return function-exists(lighten);
+}
+
+div {
+  foo: function-exists(lighten);
+  foo: function-exists("lighten");
+  foo: function-exists(exists);
+  foo: function-exists("exists");
+  foo: function-exists(f);
+  foo: function-exists("f");
+  foo: function-exists(g);
+  foo: function-exists("g");
+  foo: function-exists(nope);
+  foo: function-exists("nope");
+  foo: g();
+  foo: f();
+  foo: h();
+
+
+  span {
+    foo: function-exists(lighten);
+    foo: function-exists("lighten");
+    foo: function-exists(exists);
+    foo: function-exists("exists");
+    foo: function-exists(f);
+    foo: function-exists("f");
+    foo: function-exists(g);
+    foo: function-exists("g");
+    foo: function-exists(nope);
+    foo: function-exists("nope");
+    foo: g();
+    foo: f();
+    foo: h();
+    p {
+      foo: function-exists(lighten);
+      foo: function-exists("lighten");
+      foo: function-exists(exists);
+      foo: function-exists("exists");
+      foo: function-exists(f);
+      foo: function-exists("f");
+      foo: function-exists(g);
+      foo: function-exists("g");
+      foo: function-exists(nope);
+      foo: function-exists("nope");
+      foo: g();
+      foo: f();
+      foo: h();
+    }
+  }
+
+}
+
+@function exists($name) {
+  @return variable-exists($name);
+}
+
+@function f() {
+  $foo: hi;
+  @return g();
+}
+
+@function g() {
+  @return variable-exists(foo);
+}
+
+div {
+  foo: variable-exists(x);
+  foo: variable-exists("x");
+
+  span {
+    $x: false;
+
+    foo: variable-exists(x);
+    foo: variable-exists("x");
+    foo: variable-exists(y);
+    foo: variable-exists("y");
+    foo: exists(x);
+    foo: exists("x");
+
+    p {
+      foo: variable-exists(x);
+      foo: variable-exists("x");
+      foo: exists(x);
+      foo: exists("x");
+      foo: variable-exists(y);
+      foo: variable-exists("y");
+      foo: f();
+      $y: blah;
+    }
+  }
+
+}
+
+@function exists($name) {
+  @return global-variable-exists($name);
+}
+
+@function f() {
+  $foo: hi;
+  @return g();
+}
+
+@function g() {
+  @return global-variable-exists(foo);
+}
+
+$z: hi;
+
+div {
+  foo: global-variable-exists(x);
+  foo: global-variable-exists("x");
+  foo: global-variable-exists(z);
+  foo: global-variable-exists("z");
+
+  span {
+    $x: false;
+
+    foo: global-variable-exists(x);
+    foo: global-variable-exists("x");
+    foo: global-variable-exists(y);
+    foo: global-variable-exists("y");
+
+    foo: global-variable-exists(z);
+    foo: global-variable-exists("z");
+
+    p {
+      foo: global-variable-exists(x);
+      foo: global-variable-exists("x");
+      foo: exists(x);
+      foo: exists("x");
+      foo: global-variable-exists(z);
+      foo: global-variable-exists("z");
+      foo: global-variable-exists(y);
+      foo: global-variable-exists("y");
+      foo: f();
+      $y: blah;
+      //TODO: check for shadowing
+    }
+  }
+
 }
