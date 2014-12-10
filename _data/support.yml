@@ -8,7 +8,7 @@ inspect_function:
     ruby_sass_3_2: false
     ruby_sass_3_3: true
     ruby_sass_3_4: true
-    libsass: false
+    libsass: true
 
 set_nth_function:
     ruby_sass_3_2: false
@@ -20,7 +20,7 @@ random_function:
     ruby_sass_3_2: false
     ruby_sass_3_3: true
     ruby_sass_3_4: true
-    libsass: false
+    libsass: true
 
 unique_id_function:
     ruby_sass_3_2: false
@@ -92,7 +92,7 @@ downward_for:
     ruby_sass_3_2: false
     ruby_sass_3_3: true
     ruby_sass_3_4: true
-    libsass: false
+    libsass: true
 
 rebeccapurple_color:
     ruby_sass_3_2: false
@@ -122,7 +122,7 @@ not_operator:
     ruby_sass_3_2: true
     ruby_sass_3_3: true
     ruby_sass_3_4: true
-    libsass: false
+    libsass: true
 
 nested_interpolations:
     ruby_sass_3_2: true
