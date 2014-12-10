@@ -1,0 +1,49 @@
+ampersand_sassscript: false
+angle_conversion:
+  - libsass-closed-issues/issue_666/angle
+  - libsass-closed-issues/issue_666/length
+at_root_directive: libsass-todo-issues/issue_353
+call_function: basic/60_call
+cross_media_extend: false
+deep_extend:
+downward_for: libsass-closed-issues/issue_703
+error_directive: false
+feature_detection_functions:
+  - libsass-closed-issues/issue_702
+  - basic/55_variable_exists
+  - basic/56_global_variable_exists
+  - basic/57_function_exists
+  - basic/58_mixin_exists
+fixed_if_function:
+inspect_function: libsass-closed-issues/issue_701
+list_separator_function: libsass-closed-issues/issue_506
+map_data_type:
+  - maps/map-get
+  - maps/map-has-key
+  - maps/map-keys
+  - maps/map-merge
+  - maps/map-remove
+  - maps/map-values
+media_merge:
+multi_assign_each:
+multi_keys_map_remove:
+negative_indexes:
+nested_inteprolations:
+not_operator:
+  - libsass-todo-tests/basic/44_not_number_expression
+random_function:
+  - libsass-closed-issues/issue_657/limit
+  - libsass-closed-issues/issue_657/default
+rebeccapurple_color: libsass-closed-issues/issue_699
+reserved_function_names: false
+selector_manipulation_functions: false
+set_nth_function: libsass-closed-issues/issue_578
+string_manipulation_functions:
+  - basic/43_str_length
+  - basic/45_str_insert
+  - basic/46_str_index
+  - basic/47_str_slice
+  - basic/48_case_conversion
+transparent_color: libsass-closed-issues/issue_700
+unique_id_function: libsass-closed-issues/issue_636
+variable_scoping:

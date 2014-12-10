@@ -1,9 +1,0 @@
-.selector {
-  outer: selector;
-}
-
-@media print {
-  .other-selector {
-    @extend .selector;
-  }
-}
