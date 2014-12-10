@@ -1,7 +1,15 @@
+# Macros {{{
+# ==========
+
 #
-# Executable to minify CSS.
+# Sass executable.
 #
-UGLIFY = node_modules/uglifycss/uglifycss
+SASS = node_modules/node-sass/bin/node-sass
+
+#
+# Sass engines to test.
+#
+ENGINES = 3.2 3.3 3.4 lib
 
 #
 # Find all tests (all directories one level under `tests`).
@@ -10,38 +18,49 @@ TESTS := $(shell find tests -mindepth 1 -maxdepth 1 -type d | sort)
 TESTS := $(addsuffix /support.yml,$(TESTS))
 
 #
-# Sass engines to test.
-#
-ENGINES = 3.2 3.3 3.4 lib
-
-#
 # Output files for each engine (pattern matching).
 #
-OUTPUTS = $(addprefix tests/%/output.,$(addsuffix .css,$(ENGINES)))
+OUTPUTS := $(addprefix tests/%/output.,$(addsuffix .css,$(ENGINES)))
+
+#
+# Minified files.
+#
+MINIFIED := $(shell find tests -name 'expect.css' -o -name 'unexpect.css')
+MINIFIED := $(MINIFIED:.css=.min.css)
+
+# }}}
+
+# Main {{{
+# ========
 
 all: _data/support.yml
 
 #
 # Remove cached intermediate files.
 #
-clean:
-	find tests \
-		\( \
-			-name support.yml -o \
-			-name output.*.css -o \
-			-name expect.min.css \
-		\) \
-		-delete
+clean: clean-supports clean-outputs clean-minified
+
+clean-supports:
+	find tests -name 'support.yml' -delete
+
+clean-outputs:
+	find tests -name 'output.*.css' -delete
+
+clean-minified:
+	find tests -name '*.min.css' -delete
 
 #
-# Run all tests and store results.
+# Run all tests and store the results.
 #
 # The AWK trick is to add an empty line between each file.
 #
 _data/support.yml: $(TESTS)
 	awk 'NR != 1 && FNR == 1 { print "" } 1' $^ > $@
 
+# }}}
+
 # Tests {{{
+# =========
 
 #
 # Run tests for each supported Sass compiler.
@@ -102,6 +121,8 @@ tests/%/output.lib.css: tests/%/input.scss
 # Minification {{{
 # ================
 
+minify: $(MINIFIED)
+
 #
 # Do not remove minified files after execution.
 #
@@ -110,16 +131,16 @@ tests/%/output.lib.css: tests/%/input.scss
 #
 # How to create a `tests/%.min.css` from a `tests/%.css`.
 #
-# `$(UGLIFY)` should be built before, but it's not a real dependency
+# `$(SASS)` should be built before, but it's not a real dependency
 # (hence order-only prerequisite).
 #
-tests/%.min.css: tests/%.css | $(UGLIFY)
-	$(UGLIFY) $< > $@
+tests/%.min.css: tests/%.css | $(SASS)
+	$(SASS) --output-style compressed --precision 10 --stdout $< > $@
 
 #
-# Install CSS minifier.
+# Install Sass.
 #
-$(UGLIFY):
-	npm install uglifycss
+$(SASS):
+	npm install node-sass
 
 # }}}
