@@ -37,7 +37,7 @@
                 {% for engine in site.data.engines %}
                 <td headers="{{ engine.name }}" data-label="{{ engine.label }}" class="feature-status  feature-status--{% if site.data.support[feature.name][engine.name] == true %}supported{% else %}unsupported{% endif %}">
                     {% if site.data.issues[feature.name] and site.data.issues[feature.name][engine.name] %}
-                        <a href="{{ site.data.issues[feature.name][engine.name] }}" target="_blank">
+                        <a href="{{ site.data.issues[feature.name][engine.name] }}" target="_blank" title="Go check the issue">
                     {% endif %}
 
                     {% if site.data.support[feature.name][engine.name] == true %}
