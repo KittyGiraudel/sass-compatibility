@@ -1,5 +1,9 @@
-.selector {
-  a: b;
-  c: d;
-  e: f;
-}
+.ma-list {
+  alpha: one;
+  beta: two;
+  gamma: three; }
+
+.ma-map {
+  alpha: one;
+  beta: two;
+  gamma: three; }
