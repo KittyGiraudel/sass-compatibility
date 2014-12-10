@@ -1,6 +1,30 @@
-.selector {
-  content: 1;
-  content: "a", "b", "c";
-  content: 1, 2, 3;
-  content: true;
+div {
+  foo: 1;
+  foo: 2;
+}
+
+div {
+  foo: true;
+  foo: false;
+  foo: false;
+}
+
+div {
+  foo: foo, bar;
+}
+
+div {
+  foo-1: true;
+  foo-2: true;
+  foo-3: true;
+  foo-4: true;
+}
+
+div {
+  foo: true;
+}
+
+div {
+  foo: 1, 2;
+  foo: 1, 2, 2;
 }
