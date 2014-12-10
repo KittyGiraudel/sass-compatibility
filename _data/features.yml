@@ -1,245 +1,12 @@
-- label: "`call` function"
-  name: call_function
-  description: |
-    The `call` function makes it possible to call a function dynamically, by referencing its name.
-  polyfill: |
-    Unfortunately, the `call` function is not easily polyfilled.
-    You would have to create a function with a switch case for every existing function in the global scope;
-    Sass default functions such as `quote` or `invert`, and your own functions as well.
-    That's a pain and kind of defeats the initial purpose.
-
-- label: "`inspect` function"
-  name: inspect_function
-  description: |
-    The [`inspect`](http://sass-lang.com/documentation/Sass/Script/Functions.html#inspect-instance_method) function returns a string containing the value as its Sass representation.
-    It is especially useful when printing lists and maps as CSS values.
-  polyfill: false
-
-- label: "`set-nth` function"
-  name: set_nth_function
-  description: |
-    The [`set-nth`](http://sass-lang.com/documentation/Sass/Script/Functions.html#set_nth-instance_method) function returns a new list, based on the list provided, but with the nth element changed to the value given.
-  polyfill: |
-    <pre class="language-scss"><code>@function update-nth($list, $n, $value) {
-      @if function-exists("set-nth") == true {
-        @return set-nth($list, $n, $value);
-      }
-      $new-list: ();
-      @for $i from 1 through length($list) {
-        $new-list: append($new-list, if($i == $n, $value, nth($list, $i)));
-      }
-      @return $new-list;
-    }</code></pre>
-
-- label: "`random` function"
-  name: random_function
-  description: |
-    The [`random`](http://sass-lang.com/documentation/Sass/Script/Functions.html#random-instance_method) function returns a decimal between 0 and 1, inclusive.
-    When given an argument, it returns a decimal between 0 and the given number.
-  polyfill: false
-
-- label: "`unique-id` function"
-  name: unique_id_function
-  description: |
-    The [`unique-id`](http://sass-lang.com/documentation/Sass/Script/Functions.html#unique_id-instance_method) function returns a unique CSS identifier.
-    The identifier is returned as an unquoted string.
-    The identifier returned is only guaranteed to be unique within the scope of a single Sass run.
-  polyfill: false
-
-- label: "`list-separator` function"
-  name: list_separator_function
-  description: |
-    The [`list-separator`](http://sass-lang.com/documentation/Sass/Script/Functions.html#list_separator-instance_method) function returns the separator of a list.
-    If the list doesn’t have a separator due to having fewer than two elements, returns `space`.
-  polyfill: |
-    <pre class="language-scss"><code>@function _list-separator($list) {
-      @if function-exists("list-separator") == true {
-        @return list-separator($list);
-      }
-
-      $test-list: ();
-      @each $item in $list {
-        $test-list: append($test-list, $item, space);
-      }
-
-      @return if($test-list == $list, space, comma);
-    }</code></pre>
-
-- label: "Fixed `if` function"
-  name: fixed_if_function
-  description: |
-    The [`if`](http://sass-lang.com/documentation/Sass/Script/Functions.html#if-instance_method) function returns one of two values, depending on whether or not `$condition` is true.
-    Just like in `@if`, all values other than `false` and `null` are considered to be `true`.
-
-    There has long been a bug with this function where all arguments where evaluated, no matter the result of the condition.
-  polyfill: |
-    Use a conditional statement (`@if` / `@else`).
-
-    <pre class="language-scss"><code>// Instead of:
-    // $value: if(length($list) > 2, nth($list, 3), nth($list, 1));
-
-    $value: nth($list, 1);
-
-    @if length($list) > 2 {
-      $value: nth($list, 3);
-    }</code></pre>
-
-- label: "Negative indexes"
-  name: negative_indexes
-  description: |
-    All list functions support negative indexes in order to start from the last item in the list rather than the first.
-    For instance, `nth($list, -1)` returns the last item from `$list`.
-  polyfill: |
-    Substract indexes to the result of `length` function.
-
-    <pre class="language-scss"><code>// Instead of:
-    // $value: nth($list, -3);
-
-    $value: nth($list, length($list) - 2);
-    </code></pre>
-
-
 - label: "`&` SassScript"
   name: ampersand_sassscript
   description: |
     The ability to use `&` in SassScript.
   polyfill: false
 
-- label: "String manipulation functions"
-  name: string_manipulation_functions
-  description: |
-    String manipulation functions include `str-length`, `str-insert`, `str-index`, `str-slice`, `to-upper-case` and `to-lower-case`.
-  polyfill: false
-
-- label: "Selector manipulation functions"
-  name: selector_manipulation_functions
-  description: |
-    Selector manipulation functions include `selector-nest`, `selector-append`, `selector-extend`, `selector-replace`, `selector-unify`, `is-superselector`, `simple-selectors` and `selector-parse`.
-  polyfill: false
-
-- label: "Feature detection functions"
-  name: feature_detection_functions
-  description: |
-    Feature detection functions include `feature-exists`, `variable-exists`, `global-variable-exists`, `function-exists` and `mixin-exists`.
-  polyfill: |
-    Note that LibSass supports all functions but `feature-exists`.
-
-- label: "Map API"
-  name: map_data_type
-  description: |
-    The Map API includes the `map` Sass data type and functions `map-get`, `map-merge`, `map-remove`, `map-keys`, `map-values`, `map-has-key` and `keywords`.
-  polyfill: |
-    Maps can be faked with bi-dimensional lists such as:
-
-    <pre class="language-scss"><code>$map: (
-      a 1,
-      b 2,
-      c 3
-    );</code></pre>
-    Then, [Sass List-Maps](https://github.com/lunelson/sass-list-maps) from Lu Nelson can be used to polyfill the whole Map API.
-
-- label: "Multi keys `map-remove`"
-  name: multi_keys_map_remove
-  description: |
-    Some engines cannot remove multiple keys of a map at once with the [`map-remove`](http://sass-lang.com/documentation/Sass/Script/Functions.html#map_remove-instance_method) function.
-  polyfill: |
-    <pre class="language-scss"><code>@function map-multi-remove($map, $keys...) {
-      @each $key in $keys {
-        $map: map-remove($map, $key);
-      }
-      @return $map;
-    }</code></pre>
-
-- label: "Multi assignment `@each`"
-  name: multi_assign_each
-  description: |
-    It is possible to assign several variables at once in an `@each` loop, which turns out to be especially useful when iterating over maps.
-    For instance, `@each $key, $value in $map`. Learn more about [multi-assignment](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#each-multi-assign).
-  polyfill: |
-    Use a regular loop.
-
-    <pre class="language-scss"><code>@each $item in $map {
-      $key: nth($item, 1);
-      $value: nth($item, 2);
-      // Do something
-    }</code></pre>
-
-- label: "Downward `@for`"
-  name: downward_for
-  description: |
-    For long, there was no way to have decrementing `@for` loops. They could only go upward. No error was thrown, but it simply did not iterate.
-  polyfill: |
-    <pre class="language-scss"><code>@for $i from -10 through -1 {
-      $i: abs($i);
-      // Do something
-    }</code></pre>
 
 
-- label: "`rebeccapurple` color"
-  name: rebeccapurple_color
-  description: |
-    The `rebeccapurple` CSS color can safely be used, yet it cannot be manipulated as a color.
-  polyfill: |
-    Use `#663399`. You could stuff it in a variable.
 
-    <pre class="language-scss"><code>$rebeccapurple: #663399;</code></pre>
-
-- label: "`transparent` color"
-  name: transparent_color
-  description: |
-    The `transparent` CSS color can safely be used, yet it cannot be manipulated as a color.
-  polyfill: |
-    Use `rgba(0, 0, 0, 0)`. You could stuff it in a variable.
-
-    <pre class="language-scss"><code>$transparent: rgba(0, 0, 0, 0);</code></pre>
-
-- label: "`@error` directive"
-  name: error_directive
-  description: |
-    The [`@error`](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#_7) directive throws the value of a SassScript expression as a fatal error, including a nice stack trace. It’s useful for validating arguments to mixins and functions.
-  polyfill: |
-    <pre class="language-scss"><code>@if ($condition) {
-      @warn $error;
-      @return null;
-    }</code></pre>
-
-- label: "`@at-root` directive"
-  name: at_root_directive
-  description: |
-    The [`@at-root`](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#at-root) directive causes one or more rules to be emitted at the root of the document, rather than being nested beneath their parent selectors.
-  polyfill: false
-
-- label: "`not` operator"
-  name: not_operator
-  description: |
-    The `not` operator is meant to indicate the opposite of something.
-    Think of it as `!` in JavaScript or other languages.
-    For instance, `not true` is `false`.
-  polyfill: |
-    Depending on the context, you might be able to use `== false` or `== null` instead.
-
-    <pre class="language-scss"><code>// Instead of:
-    // @if not index($list, $value) { .. }
-
-    @if index($list, $value) == null { .. }</code></pre>
-
-- label: "Nested interpolations"
-  name: nested_interpolations
-  description: |
-    Interpolations (`#{..}`) can be nested.
-  polyfill: |
-    Not only nested interpolations are quite uncommon, but it also turns out to be easy to refactor the code so it doesn't happen.
-
-- label: "Variable scoping"
-  name: variable_scoping
-  description: |
-    Not all engines work with the same variable scoping mechanism.
-    Actually, some don't have variable scoping at all, which means all variables live in the same global environment (and can overlap).
-    Some engines do have the new variable scoping system, where a variable is restricted to its scope (function, mixin...) if it's not set with the `!global` flag.
-  polyfill: |
-    This can be **detected** with:
-
-    <pre class="language-scss"><code>feature-exists("global-variable-shadowing") == true</code></pre>
 
 - label: "Angle conversion"
   name: angle_conversion
@@ -264,6 +31,148 @@
       @error "Cannot convert `#{unit($value)}` to `#{$unit}`.";
     }</code></pre>
 
+
+
+
+
+- label: "`@at-root` directive"
+  name: at_root_directive
+  description: |
+    The [`@at-root`](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#at-root) directive causes one or more rules to be emitted at the root of the document, rather than being nested beneath their parent selectors.
+  polyfill: false
+
+
+
+
+
+- label: "`call` function"
+  name: call_function
+  description: |
+    The `call` function makes it possible to call a function dynamically, by referencing its name.
+  polyfill: |
+    Unfortunately, the `call` function is not easily polyfilled.
+    You would have to create a function with a switch case for every existing function in the global scope;
+    Sass default functions such as `quote` or `invert`, and your own functions as well.
+    That's a pain and kind of defeats the initial purpose.
+
+
+
+
+
+- label: "Downward `@for`"
+  name: downward_for
+  description: |
+    For long, there was no way to have decrementing `@for` loops. They could only go upward. No error was thrown, but it simply did not iterate.
+  polyfill: |
+    <pre class="language-scss"><code>@for $i from -10 through -1 {
+      $i: abs($i);
+      // Do something
+    }</code></pre>
+
+
+
+
+
+- label: "`@error` directive"
+  name: error_directive
+  description: |
+    The [`@error`](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#_7) directive throws the value of a SassScript expression as a fatal error, including a nice stack trace. It’s useful for validating arguments to mixins and functions.
+  polyfill: |
+    <pre class="language-scss"><code>@if ($condition) {
+      @warn $error;
+      @return null;
+    }</code></pre>
+
+
+
+
+
+- label: "Feature detection functions"
+  name: feature_detection_functions
+  description: |
+    Feature detection functions include `feature-exists`, `variable-exists`, `global-variable-exists`, `function-exists` and `mixin-exists`.
+  polyfill: |
+    Note that LibSass supports all functions but `feature-exists`.
+
+
+
+
+
+- label: "Fixed `if` function"
+  name: fixed_if_function
+  description: |
+    The [`if`](http://sass-lang.com/documentation/Sass/Script/Functions.html#if-instance_method) function returns one of two values, depending on whether or not `$condition` is true.
+    Just like in `@if`, all values other than `false` and `null` are considered to be `true`.
+
+    There has long been a bug with this function where all arguments where evaluated, no matter the result of the condition.
+  polyfill: |
+    Use a conditional statement (`@if` / `@else`).
+
+    <pre class="language-scss"><code>// Instead of:
+    // $value: if(length($list) > 2, nth($list, 3), nth($list, 1));
+
+    $value: nth($list, 1);
+
+    @if length($list) > 2 {
+      $value: nth($list, 3);
+    }</code></pre>
+
+
+
+
+
+- label: "`inspect` function"
+  name: inspect_function
+  description: |
+    The [`inspect`](http://sass-lang.com/documentation/Sass/Script/Functions.html#inspect-instance_method) function returns a string containing the value as its Sass representation.
+    It is especially useful when printing lists and maps as CSS values.
+  polyfill: false
+
+
+
+
+
+- label: "`list-separator` function"
+  name: list_separator_function
+  description: |
+    The [`list-separator`](http://sass-lang.com/documentation/Sass/Script/Functions.html#list_separator-instance_method) function returns the separator of a list.
+    If the list doesn’t have a separator due to having fewer than two elements, returns `space`.
+  polyfill: |
+    <pre class="language-scss"><code>@function _list-separator($list) {
+      @if function-exists("list-separator") == true {
+        @return list-separator($list);
+      }
+
+      $test-list: ();
+      @each $item in $list {
+        $test-list: append($test-list, $item, space);
+      }
+
+      @return if($test-list == $list, space, comma);
+    }</code></pre>
+
+
+
+
+
+- label: "Map API"
+  name: map_data_type
+  description: |
+    The Map API includes the `map` Sass data type and functions `map-get`, `map-merge`, `map-remove`, `map-keys`, `map-values`, `map-has-key` and `keywords`.
+  polyfill: |
+    Maps can be faked with bi-dimensional lists such as:
+
+    <pre class="language-scss"><code>$map: (
+      a 1,
+      b 2,
+      c 3
+    );</code></pre>
+    Then, [Sass List-Maps](https://github.com/lunelson/sass-list-maps) from Lu Nelson can be used to polyfill the whole Map API.
+
+
+
+
+
 - label: "Media queries merge"
   name: media_merge
   description: |
@@ -280,3 +189,183 @@
 
     @media (min-width: 600px) and (max-width: 800px) { .. }
 
+
+
+
+
+- label: "Multi assignment `@each`"
+  name: multi_assign_each
+  description: |
+    It is possible to assign several variables at once in an `@each` loop, which turns out to be especially useful when iterating over maps.
+    For instance, `@each $key, $value in $map`. Learn more about [multi-assignment](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#each-multi-assign).
+  polyfill: |
+    Use a regular loop.
+
+    <pre class="language-scss"><code>@each $item in $map {
+      $key: nth($item, 1);
+      $value: nth($item, 2);
+      // Do something
+    }</code></pre>
+
+
+
+
+
+- label: "Multi keys `map-remove`"
+  name: multi_keys_map_remove
+  description: |
+    Some engines cannot remove multiple keys of a map at once with the [`map-remove`](http://sass-lang.com/documentation/Sass/Script/Functions.html#map_remove-instance_method) function.
+  polyfill: |
+    <pre class="language-scss"><code>@function map-multi-remove($map, $keys...) {
+      @each $key in $keys {
+        $map: map-remove($map, $key);
+      }
+      @return $map;
+    }</code></pre>
+
+
+
+
+
+- label: "Negative indexes"
+  name: negative_indexes
+  description: |
+    All list functions support negative indexes in order to start from the last item in the list rather than the first.
+    For instance, `nth($list, -1)` returns the last item from `$list`.
+  polyfill: |
+    Substract indexes to the result of `length` function.
+
+    <pre class="language-scss"><code>// Instead of:
+    // $value: nth($list, -3);
+
+    $value: nth($list, length($list) - 2);
+    </code></pre>
+
+
+
+
+
+- label: "Nested interpolations"
+  name: nested_interpolations
+  description: |
+    Interpolations (`#{..}`) can be nested.
+  polyfill: |
+    Not only nested interpolations are quite uncommon, but it also turns out to be easy to refactor the code so it doesn't happen.
+
+- label: "Variable scoping"
+  name: variable_scoping
+  description: |
+    Not all engines work with the same variable scoping mechanism.
+    Actually, some don't have variable scoping at all, which means all variables live in the same global environment (and can overlap).
+    Some engines do have the new variable scoping system, where a variable is restricted to its scope (function, mixin...) if it's not set with the `!global` flag.
+  polyfill: |
+    This can be **detected** with:
+
+    <pre class="language-scss"><code>feature-exists("global-variable-shadowing") == true</code></pre>
+
+
+
+
+
+- label: "`not` operator"
+  name: not_operator
+  description: |
+    The `not` operator is meant to indicate the opposite of something.
+    Think of it as `!` in JavaScript or other languages.
+    For instance, `not true` is `false`.
+  polyfill: |
+    Depending on the context, you might be able to use `== false` or `== null` instead.
+
+    <pre class="language-scss"><code>// Instead of:
+    // @if not index($list, $value) { .. }
+
+    @if index($list, $value) == null { .. }</code></pre>
+
+
+
+
+
+- label: "`random` function"
+  name: random_function
+  description: |
+    The [`random`](http://sass-lang.com/documentation/Sass/Script/Functions.html#random-instance_method) function returns a decimal between 0 and 1, inclusive.
+    When given an argument, it returns a decimal between 0 and the given number.
+  polyfill: false
+
+
+
+
+
+- label: "`rebeccapurple` color"
+  name: rebeccapurple_color
+  description: |
+    The `rebeccapurple` CSS color can safely be used, yet it cannot be manipulated as a color.
+  polyfill: |
+    Use `#663399`. You could stuff it in a variable.
+
+    <pre class="language-scss"><code>$rebeccapurple: #663399;</code></pre>
+
+
+
+
+
+- label: "Selector manipulation functions"
+  name: selector_manipulation_functions
+  description: |
+    Selector manipulation functions include `selector-nest`, `selector-append`, `selector-extend`, `selector-replace`, `selector-unify`, `is-superselector`, `simple-selectors` and `selector-parse`.
+  polyfill: false
+
+
+
+
+
+- label: "`set-nth` function"
+  name: set_nth_function
+  description: |
+    The [`set-nth`](http://sass-lang.com/documentation/Sass/Script/Functions.html#set_nth-instance_method) function returns a new list, based on the list provided, but with the nth element changed to the value given.
+  polyfill: |
+    <pre class="language-scss"><code>@function update-nth($list, $n, $value) {
+      @if function-exists("set-nth") == true {
+        @return set-nth($list, $n, $value);
+      }
+      $new-list: ();
+      @for $i from 1 through length($list) {
+        $new-list: append($new-list, if($i == $n, $value, nth($list, $i)));
+      }
+      @return $new-list;
+    }</code></pre>
+
+
+
+
+
+- label: "String manipulation functions"
+  name: string_manipulation_functions
+  description: |
+    String manipulation functions include `str-length`, `str-insert`, `str-index`, `str-slice`, `to-upper-case` and `to-lower-case`.
+  polyfill: false
+
+
+
+
+
+- label: "`transparent` color"
+  name: transparent_color
+  description: |
+    The `transparent` CSS color can safely be used, yet it cannot be manipulated as a color.
+  polyfill: |
+    Use `rgba(0, 0, 0, 0)`. You could stuff it in a variable.
+
+    <pre class="language-scss"><code>$transparent: rgba(0, 0, 0, 0);</code></pre>
+
+
+
+
+
+- label: "`unique-id` function"
+  name: unique_id_function
+  description: |
+    The [`unique-id`](http://sass-lang.com/documentation/Sass/Script/Functions.html#unique_id-instance_method) function returns a unique CSS identifier.
+    The identifier is returned as an unquoted string.
+    The identifier returned is only guaranteed to be unique within the scope of a single Sass run.
+  polyfill: false
