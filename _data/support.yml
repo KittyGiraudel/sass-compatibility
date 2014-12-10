@@ -22,6 +22,12 @@ call_function:
     ruby_sass_3_4: true
     libsass: true
 
+cross_media_extend:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: false
+    ruby_sass_3_4: false
+    libsass: true
+
 downward_for:
     ruby_sass_3_2: false
     ruby_sass_3_3: true

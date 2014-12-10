@@ -1,0 +1,4 @@
+.selector,
+.other-selector {
+    outer:selector;
+}

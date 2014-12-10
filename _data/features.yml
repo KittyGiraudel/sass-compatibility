@@ -59,6 +59,17 @@
 
 
 
+- label: "Cross-media `@extend`"
+  name: cross_media_extend
+  description: |
+    One of the major downsides of the `@extend` directive from Sass is that it cannot be used to extend an outer-selector from within a `@media` context.
+  polyfill: |
+    Use a mixin instead.
+
+
+
+
+
 - label: "Downward `@for`"
   name: downward_for
   description: |
