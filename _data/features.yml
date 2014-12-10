@@ -320,6 +320,17 @@
 
 
 
+- label: "Reserved function names"
+  name: reserved_function_names
+  description: |
+    Sass is supposed to throw an error if one tries to create and call functions named `or`, `not` or `and`.
+  polyfill: |
+    Name your functions differently.
+
+
+
+
+
 - label: "Selector manipulation functions"
   name: selector_manipulation_functions
   description: |

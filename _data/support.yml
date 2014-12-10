@@ -118,6 +118,12 @@ rebeccapurple_color:
     ruby_sass_3_4: true
     libsass: false
 
+reserved_function_names:
+    ruby_sass_3_2: true
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass: false
+
 selector_manipulation_functions:
     ruby_sass_3_2: false
     ruby_sass_3_3: false
