@@ -1,112 +1,10 @@
-call_function:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass: true
-
-inspect_function:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass: false
-
-set_nth_function:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass: true
-
-random_function:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass: false
-
-unique_id_function:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass: false
-
-list_separator_function:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass: true
-
-fixed_if_function:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass: true
-
-negative_indexes:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass: true
-
 ampersand_sassscript:
     ruby_sass_3_2: false
     ruby_sass_3_3: false
     ruby_sass_3_4: true
     libsass: false
 
-string_manipulation_functions:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass: true
-
-selector_manipulation_functions:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: false
-    ruby_sass_3_4: true
-    libsass: false
-
-feature_detection_functions:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass: true
-
-map_data_type:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass: true
-
-multi_keys_map_remove:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: false
-    ruby_sass_3_4: true
-    libsass: true
-
-multi_assign_each:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass: true
-
-downward_for:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass: false
-
-rebeccapurple_color:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: false
-    ruby_sass_3_4: true
-    libsass: false
-
-transparent_color:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass: false
-
-error_directive:
+angle_conversion:
     ruby_sass_3_2: false
     ruby_sass_3_3: false
     ruby_sass_3_4: true
@@ -118,11 +16,77 @@ at_root_directive:
     ruby_sass_3_4: true
     libsass: false
 
-not_operator:
+call_function:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass: true
+
+downward_for:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass: false
+
+error_directive:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: false
+    ruby_sass_3_4: true
+    libsass: false
+
+feature_detection_functions:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass: false
+
+fixed_if_function:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass: true
+
+inspect_function:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass: false
+
+list_separator_function:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass: true
+
+map_data_type:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass: true
+
+media_merge:
     ruby_sass_3_2: true
     ruby_sass_3_3: true
     ruby_sass_3_4: true
     libsass: false
+
+multi_assign_each:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass: true
+
+multi_keys_map_remove:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: false
+    ruby_sass_3_4: true
+    libsass: true
+
+negative_indexes:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass: true
 
 nested_interpolations:
     ruby_sass_3_2: true
@@ -130,20 +94,56 @@ nested_interpolations:
     ruby_sass_3_4: true
     libsass: false
 
-variable_scoping:
+not_operator:
+    ruby_sass_3_2: true
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass: false
+
+random_function:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass: false
+
+rebeccapurple_color:
     ruby_sass_3_2: false
     ruby_sass_3_3: false
     ruby_sass_3_4: true
     libsass: false
 
-angle_conversion:
+selector_manipulation_functions:
     ruby_sass_3_2: false
     ruby_sass_3_3: false
     ruby_sass_3_4: true
+    libsass: false
+
+set_nth_function:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
     libsass: true
 
-media_merge:
-    ruby_sass_3_2: true
+string_manipulation_functions:
+    ruby_sass_3_2: false
     ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass: true
+
+transparent_color:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass: false
+
+unique_id_function:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: true
+    ruby_sass_3_4: true
+    libsass: false
+
+variable_scoping:
+    ruby_sass_3_2: false
+    ruby_sass_3_3: false
     ruby_sass_3_4: true
     libsass: false
