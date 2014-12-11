@@ -107,6 +107,7 @@ SUPPORTS = SPEC.to_a.map { |t| t.spec.support }
 task :default => [:test]
 
 task :clean do
+  Dir.glob('spec/**/expected_output_clean.css').each { |f| File.delete(f) }
   Dir.glob('spec/**/output.*.css').each { |f| File.delete(f) }
   Dir.glob('spec/**/support.yml').each { |f| File.delete(f) }
 end
