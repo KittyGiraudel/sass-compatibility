@@ -274,17 +274,6 @@
   polyfill: |
     Not only nested interpolations are quite uncommon, but it also turns out to be easy to refactor the code so it doesn't happen.
 
-- label: "Variable scoping"
-  name: variable_scoping
-  description: |
-    Not all engines work with the same variable scoping mechanism.
-    Actually, some don't have variable scoping at all, which means all variables live in the same global environment (and can overlap).
-    Some engines do have the new variable scoping system, where a variable is restricted to its scope (function, mixin...) if it's not set with the `!global` flag.
-  polyfill: |
-    This can be **detected** with:
-
-    <pre class="language-scss"><code>feature-exists("global-variable-shadowing") == true</code></pre>
-
 
 
 
@@ -402,3 +391,18 @@
     The identifier is returned as an unquoted string.
     The identifier returned is only guaranteed to be unique within the scope of a single Sass run.
   polyfill: false
+
+
+
+
+
+- label: "Variable scoping"
+  name: variable_scoping
+  description: |
+    Not all engines work with the same variable scoping mechanism.
+    Actually, some don't have variable scoping at all, which means all variables live in the same global environment (and can overlap).
+    Some engines do have the new variable scoping system, where a variable is restricted to its scope (function, mixin...) if it's not set with the `!global` flag.
+  polyfill: |
+    This can be **detected** with:
+
+    <pre class="language-scss"><code>feature-exists("global-variable-shadowing") == true</code></pre>
