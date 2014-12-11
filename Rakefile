@@ -73,7 +73,8 @@ class String
   end
 
   def clean
-    gsub(/\s+/, ' ')
+    lines.reject { |l| l[/^@charset/] }.join
+      .gsub(/\s+/, ' ')
       .gsub(/ *\{/, " {\n")
       .gsub(/([;,]) */, "\\1\n")
       .gsub(/ *\} */, " }\n")
