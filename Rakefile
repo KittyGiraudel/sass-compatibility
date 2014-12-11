@@ -49,7 +49,7 @@ class SM
       :input => File.read(file),
     }
 
-    return '' if response.headers['content-type'] !~ /\/json$/
+    return '' if response.headers['content-type'] !~ /\/json(;|$)/
 
     JSON.parse(response.body)['css']
   end
