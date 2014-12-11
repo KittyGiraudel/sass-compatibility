@@ -49,7 +49,7 @@ class SM
       :input => File.read(file),
     }
 
-    return nil if response.headers['content-type'] !~ /\/json$/
+    return '' if response.headers['content-type'] !~ /\/json$/
 
     JSON.parse(response.body)['css']
   end
@@ -70,6 +70,14 @@ class String
 
   def indent(n)
     gsub(/^/, ' ' * n)
+  end
+
+  def clean
+    gsub(/\s+/, ' ')
+      .gsub(/ *\{/, " {\n")
+      .gsub(/([;,]) */, "\\1\n")
+      .gsub(/ *\} */, " }\n")
+      .strip
   end
 end
 
@@ -98,6 +106,11 @@ SUPPORTS = SPEC.to_a.map { |t| t.spec.support }
 
 task :default => [:test]
 
+task :clean do
+  Dir.glob('spec/**/output.*.css').each { |f| File.delete(f) }
+  Dir.glob('spec/**/support.yml').each { |f| File.delete(f) }
+end
+
 task :test => ['spec', SUPPORT]
 
 file SUPPORT => SUPPORTS do |t|
@@ -119,14 +132,14 @@ file SUPPORT => SUPPORTS do |t|
   end
 end
 
-EXPECTED = proc { |t| "#{File.dirname(t)}/expected_output.css" }
+EXPECTED = proc { |t| "#{File.dirname(t)}/expected_output_clean.css" }
 
 OUTPUTS = ENGINES.map do |engine, endpoint|
   proc { |t| "#{File.dirname(t)}/output.#{endpoint}.css" }
 end
 
 rule %r{^spec/.+/support.yml$} => [EXPECTED, *OUTPUTS] do |t|
-  expected = File.read(t.source)
+  expected = File.read(t.source).clean
 
   support = t.sources.drop(1).map do |source|
     name = ENGINES.key(source.endpoint).to_s
@@ -141,8 +154,14 @@ end
 
   rule %r{^spec/.+/output\..+\.css$} => [input] do |t|
     puts "Compiling #{t.source} for #{t.endpoint}"
-    File.write(t.name, SM[t.endpoint].compile(t.source))
+    File.write(t.name, SM[t.endpoint].compile(t.source).clean)
   end
+end
+
+rule %r{^spec/.+/expected_output_clean.css$} => [
+  proc { |t| t.sub(/_clean\.css$/, '.css') }
+] do |t|
+  File.write(t.name, File.read(t.source).clean)
 end
 
 directory 'spec' do |t|
