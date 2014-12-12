@@ -14,7 +14,7 @@ at_root_directive:
     ruby_sass_3_2: false
     ruby_sass_3_3: true
     ruby_sass_3_4: true
-    libsass: false
+    libsass: true
 
 call_function:
     ruby_sass_3_2: false
@@ -32,7 +32,7 @@ deep_extend:
     ruby_sass_3_2: true
     ruby_sass_3_3: true
     ruby_sass_3_4: true
-    libsass: false
+    libsass: true
 
 downward_for:
     ruby_sass_3_2: false
@@ -116,7 +116,7 @@ random_function:
     ruby_sass_3_2: false
     ruby_sass_3_3: true
     ruby_sass_3_4: true
-    libsass: false
+    libsass: true
 
 rebeccapurple_color:
     ruby_sass_3_2: false
