@@ -122,10 +122,14 @@ file SUPPORT => SUPPORTS do |t|
 
       tests.each do |test|
         YAML::load_file(test.spec.support).each do |engine, support|
-          feature[engine] ||= { 'support' => true, 'tests' => {} }
-          feature[engine]['support'] &&= support
+          feature[engine] ||= { 'support' => [], 'tests' => {} }
+          feature[engine]['support'] << support
           feature[engine]['tests'][test] = support
         end
+      end
+
+      feature.each do |_, engine|
+        engine['support'] = engine['support'].all? || (engine['support'].include?(true) ? nil : false)
       end
 
       file.write({ name => feature }.to_partial_yaml)
