@@ -83,29 +83,57 @@ class SM
   end
 end
 
+#
+# Global progress indicator.
+#
+class Progress
+
+  #
+  # Actual count of compiled files.
+  #
+  @@actual = 0
+
+  #
+  # The count of files to update.
+  #
+  def self.count
+    @@cached_count ||= Rake::Task[SUPPORT].prerequisites
+      .flat_map { |p| Rake::Task[p].prerequisites.drop 1 }
+      .map { |p| Rake::Task[p] }
+      .find_all(&:needed?)
+      .count
+  end
+
+  #
+  # Increment the compiled files count.
+  #
+  def self.inc
+    @@actual += 1
+  end
+
+  def self.inc_s
+    self.inc
+    self.to_s
+  end
+
+  #
+  # Text progress.
+  #
+  def self.to_s
+    "(#{@@actual}/#{self.count})"
+  end
+end
+
 # }}}
 
 # Syntaxic sugar {{{
 # ==================
 
-# Endpoint access {{{
-# -------------------
-
 class String
+
   def endpoint
     match(/\.(.+)\.css$/).captures.first
   end
-end
-
-class Rake::FileTask
-  def endpoint
-    name.endpoint
-  end
-end
-
-# }}}
-
-class String
 
   def spec
     "spec/spec/#{self}"
@@ -168,6 +196,8 @@ SUPPORT = '_data/support.yml'
 #
 SUPPORTS = SPEC.to_a.map { |t| t.spec.support }
 
+MUTEX = Mutex.new
+
 task :default => [:test]
 
 #
@@ -188,81 +218,90 @@ task :test => ['spec', SUPPORT]
 # From each individual test support file, build the aggregated YAML
 # file.
 #
-file SUPPORT => SUPPORTS do |t|
-  File.open(t.name, 'w') do |file|
-    SPEC.each do |name, tests|
-      feature = {}
+multitask SUPPORT => SUPPORTS do |t|
+  file = File.open(t.name, 'w')
 
-      #
-      # Aggregate tests.
-      #
-      tests.each do |test|
-        YAML::load_file(test.spec.support).each do |engine, support|
-          feature[engine] ||= { 'support' => [], 'tests' => {} }
-          feature[engine]['support'] << support
-          feature[engine]['tests'][test] = support
-        end
+  SPEC.each do |name, tests|
+    feature = {}
+
+    #
+    # Aggregate tests.
+    #
+    tests.each do |test|
+      YAML::load_file(test.spec.support).each do |engine, support|
+        feature[engine] ||= { 'support' => [], 'tests' => {} }
+        feature[engine]['support'] << support
+        feature[engine]['tests'][test] = support
       end
+    end
+
+    #
+    # Determine `true` (all good), `false` (all fail) or `nil` (mixed)
+    # support status.
+    #
+    feature.each do |_, engine|
+      engine['support'] = engine['support'].all? || (engine['support'].include?(true) ? nil : false)
+    end
+
+    file << { name => feature }.to_partial_yaml
+    file << "\n"
+  end
+end
+
+SPEC.to_a.each do |test|
+
+  #
+  # Expected output (normalized).
+  #
+  expected = "#{test.spec}/expected_output_clean.css"
+
+  #
+  # Outputs for each engine.
+  #
+  outputs = ENGINES.map { |engine, endpoint| "#{test.spec}/output.#{endpoint}.css" }
+
+  #
+  # Build test support file from expected file and outputs.
+  #
+  file test.spec.support => [expected, *outputs] do |t|
+    expected_output = File.read expected
+
+    support = outputs.map do |source|
+      name = ENGINES.key(source.endpoint).to_s
+      [name, File.read(source) == expected_output]
+    end
+
+    File.write t.name, Hash[support].to_partial_yaml
+  end
+
+  #
+  # Compile output for different engines, from an input CSS file.
+  #
+  ENGINES.each do |engine, endpoint|
+    file "#{test.spec}/output.#{endpoint}.css" do |t|
 
       #
-      # Determine `true` (all good), `false` (all fail) or `nil` (mixed)
-      # support status.
+      # Find the input file.
       #
-      feature.each do |_, engine|
-        engine['support'] = engine['support'].all? || (engine['support'].include?(true) ? nil : false)
-      end
+      input = ['', '.disabled']
+        .map { |s| "#{test.spec}/input#{s}.scss" }
+        .find { |f| File.exist? f }
 
-      file.write({ name => feature }.to_partial_yaml)
-      file.write("\n")
+
+      MUTEX.synchronize {
+        puts "#{Progress.inc_s} Compiling #{input} for #{endpoint}"
+      }
+
+      File.write t.name, SM[endpoint].compile(input).clean
     end
   end
-end
 
-#
-# Expected output (normalized).
-#
-EXPECTED = proc { |t| "#{File.dirname(t)}/expected_output_clean.css" }
-
-#
-# Outputs for each engine.
-#
-OUTPUTS = ENGINES.map do |engine, endpoint|
-  proc { |t| "#{File.dirname(t)}/output.#{endpoint}.css" }
-end
-
-#
-# Build individual support file from outputs and expected file.
-#
-rule %r{^spec/.+/support.yml$} => [EXPECTED, *OUTPUTS] do |t|
-  expected = File.read(t.source).clean
-
-  support = t.sources.drop(1).map do |source|
-    name = ENGINES.key(source.endpoint).to_s
-    [name, File.read(source) == expected]
+  #
+  # Clean version of the expectation file.
+  #
+  file "#{test.spec}/expected_output_clean.css" => ["#{test.spec}/expected_output.css"] do |t|
+    File.write t.name, File.read(t.prerequisites.first).clean
   end
-
-  File.write(t.name, Hash[support].to_partial_yaml)
-end
-
-#
-# Compile output for different engines, from an input CSS file.
-#
-['', '.disabled'].each do |suffix|
-  input = proc { |t| "#{File.dirname(t)}/input#{suffix}.scss" }
-
-  rule %r{^spec/.+/output\..+\.css$} => [input] do |t|
-    puts "Compiling #{t.source} for #{t.endpoint}"
-    File.write(t.name, SM[t.endpoint].compile(t.source).clean)
-  end
-end
-
-#
-# Clean version of the expectation file.
-#
-rule %r{^spec/.+/expected_output_clean.css$} => [
-  proc { |t| t.sub(/_clean\.css$/, '.css') }
-] do |t|
-  File.write(t.name, File.read(t.source).clean)
 end
 
 #
