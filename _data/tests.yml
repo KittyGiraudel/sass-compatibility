@@ -1,13 +1,19 @@
-ampersand_sassscript: false
+ampersand_sassscript:
+  - tests/ampersand_sassscript
 angle_conversion:
   - spec/libsass-closed-issues/issue_666/angle
-  - spec/libsass-closed-issues/issue_666/length
-at_root_directive: spec/libsass-todo-issues/issue_353
-call_function: spec/basic/60_call
-cross_media_extend: false
-deep_extend: spec/libsass-todo-issues/issue_592
-downward_for: spec/libsass-closed-issues/issue_703
-error_directive: false
+at_root_directive:
+  - spec/libsass-todo-issues/issue_353
+call_function:
+  - spec/basic/60_call
+cross_media_extend:
+  - tests/cross_media_extend
+deep_extend:
+  - spec/libsass-todo-issues/issue_592
+downward_for:
+  - spec/libsass-closed-issues/issue_703
+error_directive:
+  - tests/error_directive
 feature_detection_functions:
   - spec/libsass-closed-issues/issue_702
   - spec/basic/55_variable_exists
@@ -15,8 +21,11 @@ feature_detection_functions:
   - spec/basic/57_function_exists
   - spec/basic/58_mixin_exists
 fixed_if_function:
-inspect_function: spec/libsass-closed-issues/issue_701
-list_separator_function: spec/libsass-closed-issues/issue_506
+  - spec/libsass-closed-issues/issue_338
+inspect_function:
+  - spec/libsass-closed-issues/issue_701
+list_separator_function:
+  - spec/libsass-closed-issues/issue_506
 map_data_type:
   - spec/maps/map-get
   - spec/maps/map-has-key
@@ -25,25 +34,41 @@ map_data_type:
   - spec/maps/map-remove
   - spec/maps/map-values
 media_merge:
+  - tests/media_merge
 multi_assign_each:
+  - spec/libsass-closed-issues/issue_492
 multi_keys_map_remove:
+  - spec/libsass-closed-issues/issue_510
 negative_indexes:
+  - spec/libsass-closed-issues/issue_224
 nested_inteprolations:
+  - spec/libsass-todo-issues/issue_615
 not_operator:
   - spec/libsass-todo-tests/basic/44_not_number_expression
+#  - spec/libsass-todo-issues/issue_680
 random_function:
   - spec/libsass-closed-issues/issue_657/limit
   - spec/libsass-closed-issues/issue_657/default
-rebeccapurple_color: spec/libsass-closed-issues/issue_699
-reserved_function_names: false
-selector_manipulation_functions: false
-set_nth_function: spec/libsass-closed-issues/issue_578
+rebeccapurple_color:
+  - spec/libsass-closed-issues/issue_699
+reserved_function_names:
+  - tests/reserved_function_names/not
+  - tests/reserved_function_names/and
+  - tests/reserved_function_names/or
+#  - spec/libsass-todo-issues/issue_713
+selector_manipulation_functions:
+  - tests/selector_manipulation_functions
+set_nth_function:
+  - spec/libsass-closed-issues/issue_578
 string_manipulation_functions:
   - spec/basic/43_str_length
   - spec/basic/45_str_insert
   - spec/basic/46_str_index
   - spec/basic/47_str_slice
   - spec/basic/48_case_conversion
-transparent_color: spec/libsass-closed-issues/issue_700
-unique_id_function: spec/libsass-closed-issues/issue_636
+transparent_color:
+  - spec/libsass-closed-issues/issue_700
+unique_id_function:
+  - spec/libsass-closed-issues/issue_636
 variable_scoping:
+  - tests/variable_scoping
