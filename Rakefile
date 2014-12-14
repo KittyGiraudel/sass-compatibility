@@ -130,17 +130,12 @@ end
 # ==================
 
 class String
-
   def endpoint
     match(/\.(.+)\.css$/).captures.first
   end
 
-  def spec
-    "spec/spec/#{self}"
-  end
-
-  def support
-    "#{self}/support.yml"
+  def spec?
+    start_with?('spec/')
   end
 
   def indent(n)
@@ -184,7 +179,7 @@ ENGINES = {
 #
 # Specification file.
 #
-SPEC = Spec.new('tests.yml')
+SPEC = Spec.new('_data/tests.yml')
 
 #
 # Destination file (containing support results).
@@ -194,7 +189,7 @@ SUPPORT = '_data/support.yml'
 #
 # Individual support file for each test.
 #
-SUPPORTS = SPEC.to_a.map { |t| t.spec.support }
+SUPPORTS = SPEC.to_a.map { |t| "#{t}/support.yml" }
 
 MUTEX = Mutex.new
 
@@ -204,15 +199,17 @@ task :default => [:test]
 # Delete intermediate files.
 #
 task :clean do
-  Dir.glob('spec/**/expected_output_clean.css').each { |f| File.delete(f) }
-  Dir.glob('spec/**/output.*.css').each { |f| File.delete(f) }
-  Dir.glob('spec/**/support.yml').each { |f| File.delete(f) }
+  SPEC.to_a.each do |t|
+    ['expected_output_clean.css', 'output.*.css', 'support.yml'].each do |g|
+      Dir.glob("#{t}/#{g}").each { |f| File.delete f }
+    end
+  end
 end
 
 #
 # Clone sass-spec, then build support file.
 #
-task :test => ['spec', SUPPORT]
+task :test => [SUPPORT]
 
 #
 # From each individual test support file, build the aggregated YAML
@@ -228,7 +225,7 @@ multitask SUPPORT => SUPPORTS do |t|
     # Aggregate tests.
     #
     tests.each do |test|
-      YAML::load_file(test.spec.support).each do |engine, support|
+      YAML::load_file("#{test}/support.yml").each do |engine, support|
         feature[engine] ||= { 'support' => [], 'tests' => {} }
         feature[engine]['support'] << support
         feature[engine]['tests'][test] = support
@@ -251,19 +248,24 @@ end
 SPEC.to_a.each do |test|
 
   #
+  # Ensure sass-spec prerequisite if the test needs it.
+  #
+  Rake::Task['test'].prerequisites.unshift 'spec' if test.spec?
+
+  #
   # Expected output (normalized).
   #
-  expected = "#{test.spec}/expected_output_clean.css"
+  expected = "#{test}/expected_output_clean.css"
 
   #
   # Outputs for each engine.
   #
-  outputs = ENGINES.map { |engine, endpoint| "#{test.spec}/output.#{endpoint}.css" }
+  outputs = ENGINES.map { |engine, endpoint| "#{test}/output.#{endpoint}.css" }
 
   #
   # Build test support file from expected file and outputs.
   #
-  file test.spec.support => [expected, *outputs] do |t|
+  file "#{test}/support.yml" => [expected, *outputs] do |t|
     expected_output = File.read expected
 
     support = outputs.map do |source|
@@ -278,19 +280,19 @@ SPEC.to_a.each do |test|
   # Compile output for different engines, from an input CSS file.
   #
   ENGINES.each do |engine, endpoint|
-    file "#{test.spec}/output.#{endpoint}.css" do |t|
+    file "#{test}/output.#{endpoint}.css" do |t|
 
       #
       # Find the input file.
       #
       input = ['', '.disabled']
-        .map { |s| "#{test.spec}/input#{s}.scss" }
+        .map { |s| "#{test}/input#{s}.scss" }
         .find { |f| File.exist? f }
 
 
-      MUTEX.synchronize {
+      MUTEX.synchronize do
         puts "#{Progress.inc_s} Compiling #{input} for #{endpoint}"
-      }
+      end
 
       File.write t.name, SM[endpoint].compile(input).clean
     end
@@ -299,7 +301,7 @@ SPEC.to_a.each do |test|
   #
   # Clean version of the expectation file.
   #
-  file "#{test.spec}/expected_output_clean.css" => ["#{test.spec}/expected_output.css"] do |t|
+  file "#{test}/expected_output_clean.css" => ["#{test}/expected_output.css"] do |t|
     File.write t.name, File.read(t.prerequisites.first).clean
   end
 end
@@ -308,5 +310,6 @@ end
 # Clone sass-spec repository.
 #
 directory 'spec' do |t|
-  `git clone --depth 1 https://github.com/sass/sass-spec.git #{t}`
+  `git clone --depth 1 https://github.com/sass/sass-spec.git`
+  `ln -s sass-spec/spec .`
 end
