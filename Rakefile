@@ -307,9 +307,15 @@ SPEC.to_a.each do |test|
 end
 
 #
+# Link `spec` directory.
+#
+directory 'spec' do
+  `ln -s sass-spec/spec .`
+end
+
+#
 # Clone sass-spec repository.
 #
-directory 'spec' do |t|
+directory 'sass-spec' do
   `git clone --depth 1 https://github.com/sass/sass-spec.git`
-  `ln -s sass-spec/spec .`
 end
