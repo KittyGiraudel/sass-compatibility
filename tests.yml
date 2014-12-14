@@ -35,7 +35,7 @@ random_function:
   - libsass-closed-issues/issue_657/limit
   - libsass-closed-issues/issue_657/default
 rebeccapurple_color: libsass-closed-issues/issue_699
-reserved_function_names: false
+reserved_function_names: libsass-todo-issues/issue_713
 selector_manipulation_functions: false
 set_nth_function: libsass-closed-issues/issue_578
 string_manipulation_functions:
