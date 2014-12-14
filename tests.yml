@@ -5,7 +5,7 @@ angle_conversion:
 at_root_directive: libsass-todo-issues/issue_353
 call_function: basic/60_call
 cross_media_extend: false
-deep_extend:
+deep_extend: libsass-todo-issues/issue_592
 downward_for: libsass-closed-issues/issue_703
 error_directive: false
 feature_detection_functions:
