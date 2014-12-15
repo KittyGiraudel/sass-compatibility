@@ -340,7 +340,7 @@ negative_indexes:
     tests:
       spec/libsass-closed-issues/issue_224: true
 
-nested_inteprolations:
+nested_interpolations:
   ruby_sass_3_2:
     support: true
     tests:
