@@ -25,16 +25,7 @@ class Spec
     @spec ||= YAML.load_file(@file)
 
     @spec.each do |name, spec|
-      case spec
-      when Enumerable
-        yield name, spec
-      when String
-        yield name, [spec]
-      when false, nil
-        nil
-      else
-        raise "Unexpected value for test: #{name}"
-      end
+      yield name, spec
     end
   end
 
