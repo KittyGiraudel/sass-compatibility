@@ -1,0 +1,20 @@
+ruby_sass_3_2:
+  passed: 4
+  mixed: 0
+  failed: 24
+  percentage: 14.29
+ruby_sass_3_3:
+  passed: 20
+  mixed: 0
+  failed: 8
+  percentage: 71.43
+ruby_sass_3_4:
+  passed: 27
+  mixed: 0
+  failed: 1
+  percentage: 96.43
+libsass:
+  passed: 9
+  mixed: 2
+  failed: 17
+  percentage: 35.71

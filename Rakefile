@@ -173,18 +173,21 @@ ENGINES = {
 SPEC = Spec.new('_data/tests.yml')
 
 #
-# Destination file (containing support results).
+# Stats file (containing engine stats).
+#
+STATS = '_data/stats.yml'
+
+#
+# Support file (containing support results).
 #
 SUPPORT = '_data/support.yml'
 
 #
-# Individual support file for each test.
+# Mutex to synchronize before printing during parallel tasks.
 #
-SUPPORTS = SPEC.to_a.map { |t| "#{t}/support.yml" }
-
 MUTEX = Mutex.new
 
-task :default => [:test]
+task :default => [STATS]
 
 #
 # Delete intermediate files.
@@ -198,41 +201,66 @@ task :clean do
 end
 
 #
-# Clone sass-spec, then build support file.
+# Compute the engine stats.
 #
-task :test => [SUPPORT]
+file STATS => [SUPPORT] do |t|
+  stats = {}
+  keys = { true => 'passed', nil => 'mixed', false => 'failed' }
+
+  #
+  # Aggregate results for each engine.
+  #
+  YAML::load_file(SUPPORT).each do |feature, engines|
+    engines.each do |engine, result|
+      stats[engine] ||= { 'passed' => 0, 'mixed' => 0, 'failed' => 0 }
+      stats[engine][keys[result['support']]] += 1
+    end
+  end
+
+  stats.each do |engine, result|
+
+    #
+    # Passed results and half a point for mixed ones.
+    #
+    passed = result['passed'] + (result['mixed'] / 2)
+
+    result['percentage'] = (passed.to_f / SPEC.count * 100).round 2
+  end
+
+  File.write t.name, stats.to_partial_yaml
+end
 
 #
 # From each individual test support file, build the aggregated YAML
 # file.
 #
-multitask SUPPORT => SUPPORTS do |t|
-  file = File.open(t.name, 'w')
+multitask SUPPORT => SPEC.to_a.map { |t| "#{t}/support.yml" } do |t|
+  File.open(t.name, 'w') do |file|
+    SPEC.each do |name, tests|
+      feature = {}
 
-  SPEC.each do |name, tests|
-    feature = {}
-
-    #
-    # Aggregate tests.
-    #
-    tests.each do |test|
-      YAML::load_file("#{test}/support.yml").each do |engine, support|
-        feature[engine] ||= { 'support' => [], 'tests' => {} }
-        feature[engine]['support'] << support
-        feature[engine]['tests'][test] = support
+      #
+      # Aggregate tests.
+      #
+      tests.each do |test|
+        YAML::load_file("#{test}/support.yml").each do |engine, support|
+          feature[engine] ||= { 'support' => [], 'tests' => {} }
+          feature[engine]['support'] << support
+          feature[engine]['tests'][test] = support
+        end
       end
-    end
 
-    #
-    # Determine `true` (all good), `false` (all fail) or `nil` (mixed)
-    # support status.
-    #
-    feature.each do |_, engine|
-      engine['support'] = engine['support'].all? || (engine['support'].include?(true) ? nil : false)
-    end
+      #
+      # Determine `true` (all good), `false` (all fail) or `nil` (mixed)
+      # support status.
+      #
+      feature.each do |_, engine|
+        engine['support'] = engine['support'].all? || (engine['support'].include?(true) ? nil : false)
+      end
 
-    file << { name => feature }.to_partial_yaml
-    file << "\n"
+      file << { name => feature }.to_partial_yaml
+      file << "\n"
+    end
   end
 end
 
@@ -241,7 +269,7 @@ SPEC.to_a.each do |test|
   #
   # Ensure sass-spec prerequisite if the test needs it.
   #
-  Rake::Task['test'].prerequisites.unshift 'spec' if test.spec?
+  Rake::Task[SUPPORT].prerequisites.unshift 'spec' if test.spec?
 
   #
   # Expected output (normalized).
