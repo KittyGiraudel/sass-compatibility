@@ -41,7 +41,7 @@ multi_keys_map_remove:
   - spec/libsass-closed-issues/issue_510
 negative_indexes:
   - spec/libsass-closed-issues/issue_224
-nested_inteprolations:
+nested_interpolations:
   - spec/libsass-todo-issues/issue_615
 not_operator:
   - spec/libsass-todo-tests/basic/44_not_number_expression
