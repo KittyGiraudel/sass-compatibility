@@ -170,9 +170,9 @@ end
 # Supported engines.
 #
 ENGINES = {
-  :ruby_sass_3_2 => '3.2',
-  :ruby_sass_3_3 => '3.3',
-  :ruby_sass_3_4 => '3.4',
+  :ruby_sass_3_2 => '3_2',
+  :ruby_sass_3_3 => '3_3',
+  :ruby_sass_3_4 => '3_4',
   :libsass => 'lib',
 }
 
