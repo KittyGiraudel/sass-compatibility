@@ -4,3 +4,5 @@ _site
 /spec
 /sass-spec
 /vendor
+npm-debug.log
+.DS_Store
