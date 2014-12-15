@@ -1,4 +1,0 @@
-.selector {
-  $list: "a" "b";
-  content: if(length($list) > 2, nth($list, 3), "okay");
-}

@@ -66,6 +66,11 @@
 .feature__heading {
     margin-top: 0;
     margin-bottom: .5rem;
+    float: left;
+
+    + * {
+        clear: left;
+    }
 }
 
 .feature__support {
@@ -153,4 +158,43 @@
     }
 
     background-color: rgba($bouquet, .25);
+}
+
+.feature-status--partially-supported {
+    &, a {
+        color: mix($wafer, black, 60%);
+        fill: currentcolor;
+    }
+
+    background-color: mix($wafer, yellow, 90%);
+}
+
+.feature__support .detail {
+    display: none;
+    opacity: .7;
+}
+
+.toggle-support-details__checkbox {
+    clear: none;
+}
+
+.toggle-support-details__checkbox:checked ~ .feature__support .detail {
+    display: table-row;
+}
+
+.toggle-support-details__label::before {
+    content: "Show ";
+
+    .toggle-support-details__checkbox:checked + & {
+        content: "Hide ";
+    }
+}
+
+.toggle-support-details__label {
+    cursor: pointer;
+    float: left;
+    color: $bouquet;
+    font-size: .7em;
+    text-transform: uppercase;
+    margin: .65em 0 0 1em;
 }

@@ -1,0 +1,123 @@
+ampersand_sassscript:
+  - tests/ampersand_sassscript
+# Switch to sass-spec's test once it exists
+
+angle_conversion:
+  - spec/libsass-closed-issues/issue_666/angle
+
+at_root_directive:
+  - tests/at_root_directive/ampersand
+  - tests/at_root_directive/basic
+  - tests/at_root_directive/nested
+  - tests/at_root_directive/extend
+  - tests/at_root_directive/keyframes
+  - tests/at_root_directive/media
+# Switch to those tests once they are merged in sass-spec
+# - tests/libsass/at-root/ampersand
+# - tests/libsass/at-root/basic
+# - tests/libsass/at-root/nested
+# - tests/libsass/at-root/extend
+# - tests/libsass/at-root/keyframes
+# - tests/libsass/at-root/media
+
+call_function:
+  - spec/basic/60_call
+
+cross_media_extend:
+  - tests/cross_media_extend
+# Switch to sass-spec's test once it exists
+
+deep_extend:
+  - spec/libsass-todo-issues/issue_592
+
+downward_for:
+  - spec/libsass-closed-issues/issue_703
+
+error_directive:
+  - tests/error_directive
+# Switch to sass-spec's test once it exists
+
+feature_detection_functions:
+  - spec/libsass-closed-issues/issue_702
+  - spec/basic/55_variable_exists
+  - spec/basic/56_global_variable_exists
+  - spec/basic/57_function_exists
+  - spec/basic/58_mixin_exists
+
+fixed_if_function:
+  - spec/libsass-closed-issues/issue_338
+
+inspect_function:
+  - spec/libsass-closed-issues/issue_701
+
+list_separator_function:
+  - spec/libsass-closed-issues/issue_506
+
+map_data_type:
+  - spec/maps/map-get
+  - spec/maps/map-has-key
+  - spec/maps/map-keys
+  - spec/maps/map-merge
+  - spec/maps/map-remove
+  - spec/maps/map-values
+
+media_merge:
+  - spec/libsass-todo-issues/issue_185
+
+multi_assign_each:
+  - spec/libsass-closed-issues/issue_492
+
+multi_keys_map_remove:
+  - spec/libsass-closed-issues/issue_510
+
+negative_indexes:
+  - spec/libsass-closed-issues/issue_224
+
+nested_interpolations:
+  - spec/libsass-todo-issues/issue_615
+
+not_operator:
+  - spec/libsass-todo-tests/basic/44_not_number_expression
+# Add this test once it is merged in sass-spec
+#  - spec/libsass-todo-issues/issue_680
+
+random_function:
+  - spec/libsass-closed-issues/issue_657/limit
+  - spec/libsass-closed-issues/issue_657/default
+
+rebeccapurple_color:
+  - spec/libsass-closed-issues/issue_699
+
+reserved_function_names:
+  - tests/reserved_function_names/not
+  - tests/reserved_function_names/and
+  - tests/reserved_function_names/or
+# Switch to those tests once they are merged in sass-spec
+#  - spec/libsass-todo-issues/issue_713/and
+#  - spec/libsass-todo-issues/issue_713/or
+#  - spec/libsass-todo-issues/issue_713/not
+
+selector_manipulation_functions:
+  - tests/selector_manipulation_functions
+# Switch to sass-spec's test once it exists
+
+set_nth_function:
+  - spec/libsass-closed-issues/issue_578
+
+string_manipulation_functions:
+  - spec/basic/43_str_length
+  - spec/basic/45_str_insert
+  - spec/basic/46_str_index
+  - spec/basic/47_str_slice
+  - spec/basic/48_case_conversion
+
+transparent_color:
+  - spec/libsass-closed-issues/issue_700
+
+unique_id_function:
+  - spec/libsass-closed-issues/issue_636
+
+variable_scoping:
+  - tests/variable_scoping
+# Switch to this test once it is merged in sass-spec
+# - spec/libsass-todo-issues/issue_613

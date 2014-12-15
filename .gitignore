@@ -1,6 +1,8 @@
 _site
 .sass-cache
 /node_modules
-/tests/*/*.min.css
-/tests/*/output.*.css
-/tests/*/support.yml
+/spec
+/sass-spec
+/vendor
+npm-debug.log
+.DS_Store

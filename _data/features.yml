@@ -1,7 +1,7 @@
 - label: "`&` SassScript"
   name: ampersand_sassscript
   description: |
-    The ability to use `&`, the reference to the current selector, in SassScript. 
+    The ability to use `&`, the reference to the current selector, in SassScript.
     This basically means that `&` can be manipulated, inspected and updated manually.
   polyfill: false
 
