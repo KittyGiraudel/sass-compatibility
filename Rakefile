@@ -309,7 +309,7 @@ end
 #
 # Link `spec` directory.
 #
-directory 'spec' do
+directory 'spec' => 'sass-spec' do
   `ln -s sass-spec/spec .`
 end
 
