@@ -5,6 +5,7 @@ angle_conversion:
 
 at_root_directive:
     ruby_sass_3_2: https://github.com/sass/sass/issues/774
+    ruby_sass_3_3: https://github.com/sass/sass-spec/pull/59#issuecomment-66930658
     libsass: https://github.com/sass/libsass/issues/353
 
 call_function:
@@ -80,6 +81,7 @@ set_nth_function:
 
 string_manipulation_functions:
     ruby_sass_3_2: https://github.com/sass/sass/pull/401
+    libsass: https://github.com/sass/libsass/issues/381#issuecomment-66935725
 
 transparent_color:
     ruby_sass_3_2: https://github.com/sass/sass/issues/754
