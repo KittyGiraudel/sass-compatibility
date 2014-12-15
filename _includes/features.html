@@ -12,16 +12,20 @@
     {% if feature.polyfill %}
         {{ feature.polyfill|markdownify }}
     {% else %}
-        There is no known polyfill or work-around for this.
+        <p>There is no known polyfill or work-around for this.</p>
     {% endif %}
     </div>
     </div>
 
-    <h3 class="feature__heading">Support</h3>
+    <h3 class="feature__heading">Tests and support</h3>
+    <input type="checkbox" id="toggle-support-details--{{ feature.name }}" class="toggle-support-details__checkbox  visually-hidden">
+    <label for="toggle-support-details--{{ feature.name }}" class="toggle-support-details__label">details</label>
+
     <table class="feature__support">
-        <caption>Support for {{ feature.label }}</caption>
+        <caption>Feature "{{ feature.label }}" support</caption>
         <thead>
             <tr>
+                <th><span class="visually-hidden">Test</span></th>
                 {% for engine in site.data.engines %}
                 <th id="{{ feature.name }}-{{ engine.name }}">
                     <a href="{{ engine.link }}" target="_blank">
@@ -31,23 +35,50 @@
                 {% endfor %}
             </tr>
         </thead>
-
         <tbody>
-            <tr>
+            {% for test in site.data.tests[feature.name] %}
+            <tr class="detail">
+                <th>
+                    {% assign base_url = "https://github.com/sass/sass-compatibility/tree/master/" %}
+                    {% if test | split: "/" | first == "spec" %}
+                        {% assign base_url = "https://github.com/sass/sass-spec/tree/master/" %}
+                    {% endif %}
+
+                    <a title="{{ test }}" class="ellipsis" href="{{ test | prepend: base_url }}" target="_blank">{{ test }}</a>
+                </th>
+
                 {% for engine in site.data.engines %}
-                <td headers="{{ feature.name }}-{{ engine.name }}" data-label="{{ engine.label }}" class="feature-status  feature-status--{% if site.data.support[feature.name][engine.name] == true %}supported{% else %}unsupported{% endif %}">
+                {% assign test_support = site.data.support[feature.name][engine.name].tests[test] %}
+                <td headers="{{ feature.name }}-{{ engine.name }}" data-label="{{ engine.label }}" class="feature-status  feature-status--{% if test_support == true %}supported{% elsif test_support == false %}unsupported{% else %}partially-supported{% endif %}">
+
+                    {% if test_support == true %}
+                        {% include icons/okay.html %}
+                    {% elsif test_support == false %}
+                        {% include icons/fail.html %}
+                    {% else %}
+                        {% include icons/mixed.html %}
+                    {% endif %}
+
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+
+            <tr>
+                <th>Support</th>
+                {% for engine in site.data.engines %}
+                {% assign support = site.data.support[feature.name][engine.name].support %}
+                <td headers="{{ feature.name }}-{{ engine.name }}" data-label="{{ engine.label }}" class="feature-status  feature-status--{% if support == true %}supported{% elsif support == false %}unsupported{% else %}partially-supported{% endif %}">
                     {% if site.data.issues[feature.name] and site.data.issues[feature.name][engine.name] %}
                         <a href="{{ site.data.issues[feature.name][engine.name] }}" target="_blank" title="Go check the issue">
                     {% endif %}
 
-                    {% if site.data.support[feature.name][engine.name] == true %}
-                        <svg viewBox="0 0 100 100" class="icon  icon-checkmark">
-                            <use xlink:href="#icon-checkmark"></use>
-                        </svg>
+                    {% if support == true %}
+                        {% include icons/okay.html %}
+                    {% elsif support == false %}
+                        {% include icons/fail.html %}
                     {% else %}
-                        <svg viewBox="0 0 100 100" class="icon  icon-close">
-                            <use xlink:href="#icon-close"></use>
-                        </svg>
+                        {% include icons/mixed.html %}
                     {% endif %}
 
                     {% if site.data.issues[feature.name] and site.data.issues[feature.name][engine.name] %}
