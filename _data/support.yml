@@ -292,19 +292,19 @@ media_merge:
   ruby_sass_3_2:
     support: true
     tests:
-      tests/media_merge: true
+      spec/libsass-todo-issues/issue_185: true
   ruby_sass_3_3:
     support: true
     tests:
-      tests/media_merge: true
+      spec/libsass-todo-issues/issue_185: true
   ruby_sass_3_4:
     support: true
     tests:
-      tests/media_merge: true
+      spec/libsass-todo-issues/issue_185: true
   libsass:
     support: false
     tests:
-      tests/media_merge: false
+      spec/libsass-todo-issues/issue_185: false
 
 multi_assign_each:
   ruby_sass_3_2:
