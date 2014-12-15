@@ -90,5 +90,6 @@ lightweight.
 * [Aaron Leung](https://twitter.com/akhleung) and [Hampton Catlin](https://twitter.com/hcatlin) for LibSass;
 * [SassMeister](https://twitter.com/sassmeisterapp) for lending their backend to run tests;
 * [Valérian Galliat](https://twitter.com/valeriangalliat) for the test runner;
+* [Michael Mifsud](https://twitter.com/xzyfer) for his help;
 * [Team Sass Design](https://twitter.com/teamsassdesign) for their great style guide;
 * [SubtlePatterns](http://subtlepatterns.com/) for the pattern in use on the site.
