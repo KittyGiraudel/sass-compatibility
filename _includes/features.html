@@ -5,30 +5,33 @@
     <div class="feature__content">
     <div class="feature__description">
         <h3 class="feature__heading">Description</h3>
-    {{ feature.description|markdownify }}
+        {{ feature.description|markdownify }}
     </div>
     <div class="feature__polyfill">
         <h3 class="feature__heading">Work-around</h3>
-    {% if feature.polyfill %}
+        {% if feature.polyfill %}
         {{ feature.polyfill|markdownify }}
-    {% else %}
+        {% else %}
         <p>There is no known polyfill or work-around for this.</p>
-    {% endif %}
+        {% endif %}
     </div>
     </div>
 
     <h3 class="feature__heading">Tests and support</h3>
+
+    <!-- Toggle tests display -->
     <input type="checkbox" id="toggle-support-details--{{ feature.name }}" class="toggle-support-details__checkbox  visually-hidden">
-    <label for="toggle-support-details--{{ feature.name }}" class="toggle-support-details__label">details</label>
+    <label role="button" aria-pressed for="toggle-support-details--{{ feature.name }}" class="toggle-support-details__label">details</label>
 
     <table class="feature__support">
         <caption>Feature "{{ feature.label }}" support</caption>
         <thead>
             <tr>
-                <th><span class="visually-hidden">Test</span></th>
+                <th scope="col"><span class="visually-hidden">Test</span></th>
+
                 {% for engine in site.data.engines %}
                 <th id="{{ feature.name }}-{{ engine.name }}">
-                    <a href="{{ engine.link }}" target="_blank">
+                    <a href="{{ engine.link }}" target="_blank" title="About {{ engine.label }}">
                     {{ engine.label }}
                     </a>
                 </th>
@@ -38,18 +41,18 @@
         <tbody>
             {% for test in site.data.tests[feature.name] %}
             <tr class="detail">
-                <th>
+                <th scope="row">
                     {% assign base_url = "https://github.com/sass/sass-compatibility/tree/master/" %}
                     {% if test | split: "/" | first == "spec" %}
                         {% assign base_url = "https://github.com/sass/sass-spec/tree/master/" %}
                     {% endif %}
 
-                    <a title="{{ test }}" class="ellipsis" href="{{ test | prepend: base_url }}" target="_blank">{{ test }}</a>
+                    <a title="About test {{ test }}" class="ellipsis" href="{{ test | prepend: base_url }}" target="_blank">{{ test }}</a>
                 </th>
 
                 {% for engine in site.data.engines %}
                 {% assign test_support = site.data.support[feature.name][engine.name].tests[test] %}
-                <td headers="{{ feature.name }}-{{ engine.name }}" data-label="{{ engine.label }}" class="feature-status  feature-status--{% if test_support == true %}supported{% elsif test_support == false %}unsupported{% else %}partially-supported{% endif %}">
+                <td headers="{{ feature.name }}-{{ engine.name }}" data-label="{{ engine.label }}" class="feature-status  feature-status--{% if test_support == true %}supported{% elsif test_support == false %}unsupported{% else %}partially-supported{% endif %}" title="{% if test_support == true %}Test has passed{% else %}Test has failed{% endif %}">
 
                     {% if test_support == true %}
                         {% include icons/okay.html %}
@@ -65,12 +68,13 @@
             {% endfor %}
 
             <tr>
-                <th>Support</th>
+                <th scope="row">Support</th>
+
                 {% for engine in site.data.engines %}
                 {% assign support = site.data.support[feature.name][engine.name].support %}
-                <td headers="{{ feature.name }}-{{ engine.name }}" data-label="{{ engine.label }}" class="feature-status  feature-status--{% if support == true %}supported{% elsif support == false %}unsupported{% else %}partially-supported{% endif %}">
+                <td headers="{{ feature.name }}-{{ engine.name }}" data-label="{{ engine.label }}" class="feature-status  feature-status--{% if support == true %}supported{% elsif support == false %}unsupported{% else %}partially-supported{% endif %}" title="{% if support == true %}Feature is supported{% elsif support == false %}Feature is not supported{% else %}Feature is partially supported{% endif %}">
                     {% if site.data.issues[feature.name] and site.data.issues[feature.name][engine.name] %}
-                        <a href="{{ site.data.issues[feature.name][engine.name] }}" target="_blank" title="Go check the issue">
+                        <a href="{{ site.data.issues[feature.name][engine.name] }}" target="_blank" title="About issue {{ site.data.issues[feature.name][engine.name] }}">
                     {% endif %}
 
                     {% if support == true %}
