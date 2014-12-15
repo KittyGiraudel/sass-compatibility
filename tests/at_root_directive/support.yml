@@ -1,5 +1,0 @@
-at_root_directive:
-    ruby_sass_3_2: false
-    ruby_sass_3_3: true
-    ruby_sass_3_4: true
-    libsass: false

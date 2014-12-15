@@ -3,7 +3,12 @@ ampersand_sassscript:
 angle_conversion:
   - spec/libsass-closed-issues/issue_666/angle
 at_root_directive:
-  - spec/libsass-todo-issues/issue_353
+  - tests/at_root_directive/ampersand
+  - tests/at_root_directive/basic
+  - tests/at_root_directive/nested
+  - tests/at_root_directive/extend
+  - tests/at_root_directive/keyframes
+  - tests/at_root_directive/media
 call_function:
   - spec/basic/60_call
 cross_media_extend:

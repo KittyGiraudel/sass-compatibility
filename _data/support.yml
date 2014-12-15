@@ -38,19 +38,39 @@ at_root_directive:
   ruby_sass_3_2:
     support: false
     tests:
-      spec/libsass-todo-issues/issue_353: false
+      tests/at_root_directive/ampersand: false
+      tests/at_root_directive/basic: false
+      tests/at_root_directive/nested: false
+      tests/at_root_directive/extend: false
+      tests/at_root_directive/keyframes: false
+      tests/at_root_directive/media: false
   ruby_sass_3_3:
-    support: false
+    support: true
     tests:
-      spec/libsass-todo-issues/issue_353: false
+      tests/at_root_directive/ampersand: true
+      tests/at_root_directive/basic: true
+      tests/at_root_directive/nested: true
+      tests/at_root_directive/extend: true
+      tests/at_root_directive/keyframes: true
+      tests/at_root_directive/media: true
   ruby_sass_3_4:
     support: true
     tests:
-      spec/libsass-todo-issues/issue_353: true
+      tests/at_root_directive/ampersand: true
+      tests/at_root_directive/basic: true
+      tests/at_root_directive/nested: true
+      tests/at_root_directive/extend: true
+      tests/at_root_directive/keyframes: true
+      tests/at_root_directive/media: true
   libsass:
     support: false
     tests:
-      spec/libsass-todo-issues/issue_353: false
+      tests/at_root_directive/ampersand: false
+      tests/at_root_directive/basic: false
+      tests/at_root_directive/nested: false
+      tests/at_root_directive/extend: false
+      tests/at_root_directive/keyframes: false
+      tests/at_root_directive/media: false
 
 call_function:
   ruby_sass_3_2:

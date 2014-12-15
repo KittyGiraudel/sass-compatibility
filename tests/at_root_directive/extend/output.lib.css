@@ -1,0 +1,14 @@
+foo {
+ @at-root {
+ bar {
+ color: red;
+ }
+ }
+ }
+foo baz {
+ @at-root {
+ baz {
+ color: blue;
+ }
+ }
+ }
