@@ -1,8 +1,12 @@
 _site
 .sass-cache
 /node_modules
-expected_output_clean.css
-output.*.css
+/tests/**/*/expected_output_clean.css
+/tests/**/expected_output_clean.css
+/tests/**/*/output.*.css
+/tests/**/output.*.css
+/tests/**/*/support.yml
+/tests/**/support.yml
 /spec
 /sass-spec
 /vendor
