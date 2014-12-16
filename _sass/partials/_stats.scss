@@ -1,0 +1,16 @@
+.support-value {
+  padding: 0 !important;
+
+  strong {
+    padding: .5em;
+    display: block;
+  }
+}
+
+@each $engine, $support in $stats {
+  .support-value--#{$engine} strong {
+    $args: transparent (100% - $support), mix($wafer, white, 70%) (100% - $support);
+    background: -webkit-linear-gradient(top, $args);
+    background: linear-gradient(to bottom, $args);
+  }
+}

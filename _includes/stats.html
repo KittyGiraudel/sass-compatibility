@@ -32,7 +32,7 @@
         <tr>
             <th scope="row">Percentage</th>
             {% for engine in site.data.stats %}
-                <td><strong>{{ engine[1].percentage }}%</strong></td>
+                <td class="support-value  support-value--{{ engine[0] }}"><strong>{{ engine[1].percentage }}%</strong></td>
             {% endfor %}
         </tr>
     </tbody>
