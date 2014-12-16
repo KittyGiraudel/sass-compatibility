@@ -1,4 +1,4 @@
 .selector,
 .other-selector {
-    outer:selector;
+    content: selector;
 }
