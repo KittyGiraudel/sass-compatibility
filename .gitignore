@@ -1,6 +1,8 @@
 _site
 .sass-cache
 /node_modules
+expected_output_clean.css
+output.*.css
 /spec
 /sass-spec
 /vendor
