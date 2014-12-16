@@ -361,6 +361,21 @@
 
 
 
+- label: "Spaces around minus symbol"
+  name: spaces_minus
+  description: |
+    Spaces around the minus symbol should not be mandatory if the value before the `-` sign is a function call.
+  polyfill: |
+    Wrap the minus symbol with spaces to prevent any issue and easy readibility.
+
+    <pre class="language-scss"><code>.foo {
+      content: getter() - 1;
+    }</code></pre>
+
+
+
+
+
 - label: "String manipulation functions"
   name: string_manipulation_functions
   description: |
