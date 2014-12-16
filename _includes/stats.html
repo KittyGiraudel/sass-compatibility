@@ -1,0 +1,39 @@
+<h2 class="heading" id="stats">Tests statistics <a href="#stats" class="heading__anchor">§</a></h2>
+
+<p><strong>Caution!</strong> Those stats are computed based on <a href="https://github.com/sass-compatibility/sass-compatibility.github.io/blob/master/_data/tests.yml" target="_blank">the few tests</a> we run here on Sass-Compatibility. They do not reflect the current status of support for each engine. Please do not communicate those stats to compare different engines, it would be unfair.</p>
+
+<table class="feature__support">
+    <thead>
+        <tr>
+            <th><span class="visually-hidden">Section</span></th>
+            {% for engine in site.data.engines %}
+                <th id="support-{{ engine[0] }}">
+                    <a href="{{ engine[1].link }}" target="_blank" title="About {{ engine[1].label }}">
+                    {{ engine[1].label }}
+                    </a>
+                </th>
+            {% endfor %}
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <th scope="row">Passed</th>
+            {% for engine in site.data.stats %}
+                <td class="feature-status--supported">{{ engine[1].passed }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <th scope="row">Failed</th>
+            {% for engine in site.data.stats %}
+                <td class="feature-status--unsupported">{{ engine[1].failed }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <th scope="row">Percentage</th>
+            {% for engine in site.data.stats %}
+                <td><strong>{{ engine[1].percentage }}%</strong></td>
+            {% endfor %}
+        </tr>
+    </tbody>
+</table>

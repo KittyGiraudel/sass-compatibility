@@ -8,10 +8,15 @@
 .section {
     width: 100%;
     padding: 3em 0;
-    text-align: center;
     border-bottom: $iron .5em solid;
 
     &:last-child {
         border-bottom: 0;
     }
+}
+
+.section--header,
+.section--toc,
+.section--introduction {
+    text-align: center;
 }
