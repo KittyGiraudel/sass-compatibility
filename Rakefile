@@ -68,9 +68,25 @@ class SM
       :input => File.read(file),
     }
 
-    return '' if response.headers['content-type'] !~ /\/json(;|$)/
+    type = response.headers['content-type']
+
+    if type !~ /\/json(;|$)/
+      raise Error.new "Unexpected #{type} response from SassMeister", response
+    end
 
     JSON.parse(response.body)['css']
+  end
+
+  #
+  # SassMeister API error, with full response for debug.
+  #
+  class Error < StandardError
+    attr_reader :response
+
+    def initialize(msg, response)
+      super(msg)
+      @response = response
+    end
   end
 end
 
@@ -168,6 +184,16 @@ ENGINES = {
 }
 
 #
+# Mapping with SassMeister endpoints.
+#
+SM_ENGINES = {
+  '3_2' => '3.2',
+  '3_3' => '3.3',
+  '3_4' => '3.4',
+  'lib' => 'lib',
+}
+
+#
 # Specification file.
 #
 SPEC = Spec.new('_data/tests.yml')
@@ -205,26 +231,23 @@ end
 #
 file STATS => [SUPPORT] do |t|
   stats = {}
-  keys = { true => 'passed', nil => 'mixed', false => 'failed' }
+  keys = { true => 'passed', false => 'failed' }
 
   #
   # Aggregate results for each engine.
   #
   YAML::load_file(SUPPORT).each do |feature, engines|
     engines.each do |engine, result|
-      stats[engine] ||= { 'passed' => 0, 'mixed' => 0, 'failed' => 0 }
-      stats[engine][keys[result['support']]] += 1
+      stats[engine] ||= { 'passed' => 0, 'failed' => 0 }
+
+      result['tests'].each do |test, passed|
+        stats[engine][keys[passed]] += 1
+      end
     end
   end
 
   stats.each do |engine, result|
-
-    #
-    # Passed results and half a point for mixed ones.
-    #
-    passed = result['passed'] + (result['mixed'] / 2)
-
-    result['percentage'] = (passed.to_f / SPEC.count * 100).round 2
+    result['percentage'] = (result['passed'].to_f / SPEC.to_a.count * 100).round 2
   end
 
   File.write t.name, stats.to_partial_yaml
@@ -298,8 +321,8 @@ SPEC.to_a.each do |test|
   #
   # Compile output for different engines, from an input CSS file.
   #
-  ENGINES.each do |engine, endpoint|
-    file "#{test}/output.#{endpoint}.css" do |t|
+  SM_ENGINES.each do |engine, endpoint|
+    file "#{test}/output.#{engine}.css" do |t|
 
       #
       # Find the input file.
@@ -310,10 +333,18 @@ SPEC.to_a.each do |test|
 
 
       MUTEX.synchronize do
-        puts "#{Progress.inc_s} Compiling #{input} for #{endpoint}"
+        puts "#{Progress.inc_s} Compiling #{input} for #{engine}"
       end
 
-      File.write t.name, SM[endpoint].compile(input).clean
+      begin
+        File.write t.name, SM[endpoint].compile(input).clean
+      rescue SM::Error => e
+        MUTEX.synchronize do
+          STDERR.puts "  #{e} with #{input} for #{engine}"
+        end
+
+        File.write t.name, e.response.body
+      end
     end
   end
 
