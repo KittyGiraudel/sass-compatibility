@@ -1,6 +1,6 @@
 {% for feature in site.data.features %}
 <section class="feature" id="{{ feature.name }}">
-    <h2 class="feature__name">{{ feature.label|markdownify }}  <a href="#{{ feature.name }}" class="feature__anchor">§</a></h2>
+    <h2 class="feature__name  heading">{{ feature.label|markdownify }}  <a href="#{{ feature.name }}" class="heading__anchor">§</a></h2>
 
     <div class="feature__content">
     <div class="feature__description">
@@ -30,9 +30,9 @@
                 <th scope="col"><span class="visually-hidden">Test</span></th>
 
                 {% for engine in site.data.engines %}
-                <th id="{{ feature.name }}-{{ engine.name }}">
-                    <a href="{{ engine.link }}" target="_blank" title="About {{ engine.label }}">
-                    {{ engine.label }}
+                <th id="{{ feature.name }}-{{ engine[0] }}">
+                    <a href="{{ engine[1].link }}" target="_blank" title="About {{ engine[1].label }}">
+                    {{ engine[1].label }}
                     </a>
                 </th>
                 {% endfor %}
@@ -51,8 +51,10 @@
                 </th>
 
                 {% for engine in site.data.engines %}
-                {% assign test_support = site.data.support[feature.name][engine.name].tests[test] %}
-                <td headers="{{ feature.name }}-{{ engine.name }}" data-label="{{ engine.label }}" class="feature-status  feature-status--{% if test_support == true %}supported{% elsif test_support == false %}unsupported{% else %}partially-supported{% endif %}" title="{% if test_support == true %}Test has passed{% else %}Test has failed{% endif %}">
+                {% assign engine_name = engine[0] %}
+                {% assign test_support = site.data.support[feature.name][engine_name].tests[test] %}
+
+                <td headers="{{ feature.name }}-{{ engine_name }}" data-label="{{ engine[1].label }}" class="feature-status  feature-status--{% if test_support == true %}supported{% elsif test_support == false %}unsupported{% else %}partially-supported{% endif %}" title="{% if test_support == true %}Test has passed{% else %}Test has failed{% endif %}">
 
                     {% if test_support == true %}
                         {% include icons/okay.html %}
@@ -71,10 +73,13 @@
                 <th scope="row">Support</th>
 
                 {% for engine in site.data.engines %}
-                {% assign support = site.data.support[feature.name][engine.name].support %}
-                <td headers="{{ feature.name }}-{{ engine.name }}" data-label="{{ engine.label }}" class="feature-status  feature-status--{% if support == true %}supported{% elsif support == false %}unsupported{% else %}partially-supported{% endif %}" title="{% if support == true %}Feature is supported{% elsif support == false %}Feature is not supported{% else %}Feature is partially supported{% endif %}">
-                    {% if site.data.issues[feature.name] and site.data.issues[feature.name][engine.name] %}
-                        <a href="{{ site.data.issues[feature.name][engine.name] }}" target="_blank" title="About issue {{ site.data.issues[feature.name][engine.name] }}">
+
+                {% assign engine_name = engine[0] %}
+                {% assign support = site.data.support[feature.name][engine_name].support %}
+
+                <td headers="{{ feature.name }}-{{ engine_name }}" data-label="{{ engine[1].label }}" class="feature-status  feature-status--{% if support == true %}supported{% elsif support == false %}unsupported{% else %}partially-supported{% endif %}" title="{% if support == true %}Feature is supported{% elsif support == false %}Feature is not supported{% else %}Feature is partially supported{% endif %}">
+                    {% if site.data.issues[feature.name] and site.data.issues[feature.name][engine_name] %}
+                        <a href="{{ site.data.issues[feature.name][engine_name] }}" target="_blank" title="About issue {{ site.data.issues[feature.name][engine_name] }}">
                     {% endif %}
 
                     {% if support == true %}
@@ -85,7 +90,7 @@
                         {% include icons/mixed.html %}
                     {% endif %}
 
-                    {% if site.data.issues[feature.name] and site.data.issues[feature.name][engine.name] %}
+                    {% if site.data.issues[feature.name] and site.data.issues[feature.name][engine_name] %}
                         </a>
                     {% endif %}
                 </td>
