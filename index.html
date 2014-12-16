@@ -2,38 +2,32 @@
 layout: default
 ---
 
-<header class="section">
+<section class="section  section--header">
   <div class="container">
-    <h1 class="title">{{ site.title }}</h1>
-  </div>
-</header>
-
-<section class="section">
-  <div class="container">
-    <p class="baseline">{{ site.description }}</p>
-
-    <a target="_blank" href="http://twitter.com/share?text=Sass+Compatibility%2C+reporting+incompatibilities+between+different+Sass+engines+by+%40{{ site.twitter_username }}+%E2%80%93&url=http://sass-compatibility.github.io" class="btn">
-      {% include icons/twitter.html %}
-      Tweet it
-    </a>
-
-    <a target="_blank" href="https://github.com/sass-compatibility/sass-compatibility.github.io" class="btn">
-      {% include icons/github.html %}
-      Contribute
-    </a>
+    {% include header.html %}
   </div>
 </section>
 
-<section class="section">
+<section class="section  section--introduction">
+  <div class="container">
+    {% include intro.html %}
+  </div>
+</section>
+
+<section class="section  section--toc">
   <div class="container">
     {% include toc.html %}
   </div>
 </section>
 
-<section class="section">
+<section class="section  section--features">
   <div class="container">
     {% include features.html %}
   </div>
 </section>
 
-
+<section class="section  section--stats">
+  <div class="container">
+    {% include stats.html %}
+  </div>
+</section>

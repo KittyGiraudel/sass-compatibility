@@ -14,3 +14,36 @@
     padding: 0;
     border: 0;
 }
+
+.heading {
+    text-transform: uppercase;
+    border-bottom: .2em solid $bouquet;
+    padding-bottom: .2em;
+    margin-bottom: 1rem;
+    position: relative;
+    font-size: 2em;
+    text-align: left;
+
+    p {
+        margin-bottom: 0;
+    }
+
+    code {
+        font-size: 1em;
+    }
+}
+
+.heading__anchor {
+    position: absolute;
+    left: -1em;
+    top: .23em;
+    text-decoration: none;
+    font-size: .8em;
+    opacity: 0;
+    transition: .15s;
+
+    .heading:hover &,
+    .heading:active & {
+        opacity: 1;
+    }
+}

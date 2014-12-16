@@ -25,16 +25,7 @@ class Spec
     @spec ||= YAML.load_file(@file)
 
     @spec.each do |name, spec|
-      case spec
-      when Enumerable
-        yield name, spec
-      when String
-        yield name, [spec]
-      when false, nil
-        nil
-      else
-        raise "Unexpected value for test: #{name}"
-      end
+      yield name, spec
     end
   end
 
@@ -77,9 +68,25 @@ class SM
       :input => File.read(file),
     }
 
-    return '' if response.headers['content-type'] !~ /\/json(;|$)/
+    type = response.headers['content-type']
+
+    if type !~ /\/json(;|$)/
+      raise Error.new "Unexpected #{type} response from SassMeister", response
+    end
 
     JSON.parse(response.body)['css']
+  end
+
+  #
+  # SassMeister API error, with full response for debug.
+  #
+  class Error < StandardError
+    attr_reader :response
+
+    def initialize(msg, response)
+      super(msg)
+      @response = response
+    end
   end
 end
 
@@ -170,10 +177,20 @@ end
 # Supported engines.
 #
 ENGINES = {
-  :ruby_sass_3_2 => '3.2',
-  :ruby_sass_3_3 => '3.3',
-  :ruby_sass_3_4 => '3.4',
+  :ruby_sass_3_2 => '3_2',
+  :ruby_sass_3_3 => '3_3',
+  :ruby_sass_3_4 => '3_4',
   :libsass => 'lib',
+}
+
+#
+# Mapping with SassMeister endpoints.
+#
+SM_ENGINES = {
+  '3_2' => '3.2',
+  '3_3' => '3.3',
+  '3_4' => '3.4',
+  'lib' => 'lib',
 }
 
 #
@@ -182,18 +199,21 @@ ENGINES = {
 SPEC = Spec.new('_data/tests.yml')
 
 #
-# Destination file (containing support results).
+# Stats file (containing engine stats).
+#
+STATS = '_data/stats.yml'
+
+#
+# Support file (containing support results).
 #
 SUPPORT = '_data/support.yml'
 
 #
-# Individual support file for each test.
+# Mutex to synchronize before printing during parallel tasks.
 #
-SUPPORTS = SPEC.to_a.map { |t| "#{t}/support.yml" }
-
 MUTEX = Mutex.new
 
-task :default => [:test]
+task :default => [STATS]
 
 #
 # Delete intermediate files.
@@ -207,41 +227,63 @@ task :clean do
 end
 
 #
-# Clone sass-spec, then build support file.
+# Compute the engine stats.
 #
-task :test => [SUPPORT]
+file STATS => [SUPPORT] do |t|
+  stats = {}
+  keys = { true => 'passed', false => 'failed' }
+
+  #
+  # Aggregate results for each engine.
+  #
+  YAML::load_file(SUPPORT).each do |feature, engines|
+    engines.each do |engine, result|
+      stats[engine] ||= { 'passed' => 0, 'failed' => 0 }
+
+      result['tests'].each do |test, passed|
+        stats[engine][keys[passed]] += 1
+      end
+    end
+  end
+
+  stats.each do |engine, result|
+    result['percentage'] = (result['passed'].to_f / SPEC.to_a.count * 100).round 2
+  end
+
+  File.write t.name, stats.to_partial_yaml
+end
 
 #
 # From each individual test support file, build the aggregated YAML
 # file.
 #
-multitask SUPPORT => SUPPORTS do |t|
-  file = File.open(t.name, 'w')
+multitask SUPPORT => SPEC.to_a.map { |t| "#{t}/support.yml" } do |t|
+  File.open(t.name, 'w') do |file|
+    SPEC.each do |name, tests|
+      feature = {}
 
-  SPEC.each do |name, tests|
-    feature = {}
-
-    #
-    # Aggregate tests.
-    #
-    tests.each do |test|
-      YAML::load_file("#{test}/support.yml").each do |engine, support|
-        feature[engine] ||= { 'support' => [], 'tests' => {} }
-        feature[engine]['support'] << support
-        feature[engine]['tests'][test] = support
+      #
+      # Aggregate tests.
+      #
+      tests.each do |test|
+        YAML::load_file("#{test}/support.yml").each do |engine, support|
+          feature[engine] ||= { 'support' => [], 'tests' => {} }
+          feature[engine]['support'] << support
+          feature[engine]['tests'][test] = support
+        end
       end
-    end
 
-    #
-    # Determine `true` (all good), `false` (all fail) or `nil` (mixed)
-    # support status.
-    #
-    feature.each do |_, engine|
-      engine['support'] = engine['support'].all? || (engine['support'].include?(true) ? nil : false)
-    end
+      #
+      # Determine `true` (all good), `false` (all fail) or `nil` (mixed)
+      # support status.
+      #
+      feature.each do |_, engine|
+        engine['support'] = engine['support'].all? || (engine['support'].include?(true) ? nil : false)
+      end
 
-    file << { name => feature }.to_partial_yaml
-    file << "\n"
+      file << { name => feature }.to_partial_yaml
+      file << "\n"
+    end
   end
 end
 
@@ -250,7 +292,7 @@ SPEC.to_a.each do |test|
   #
   # Ensure sass-spec prerequisite if the test needs it.
   #
-  Rake::Task['test'].prerequisites.unshift 'spec' if test.spec?
+  Rake::Task[SUPPORT].prerequisites.unshift 'spec' if test.spec?
 
   #
   # Expected output (normalized).
@@ -279,8 +321,8 @@ SPEC.to_a.each do |test|
   #
   # Compile output for different engines, from an input CSS file.
   #
-  ENGINES.each do |engine, endpoint|
-    file "#{test}/output.#{endpoint}.css" do |t|
+  SM_ENGINES.each do |engine, endpoint|
+    file "#{test}/output.#{engine}.css" do |t|
 
       #
       # Find the input file.
@@ -291,10 +333,18 @@ SPEC.to_a.each do |test|
 
 
       MUTEX.synchronize do
-        puts "#{Progress.inc_s} Compiling #{input} for #{endpoint}"
+        puts "#{Progress.inc_s} Compiling #{input} for #{engine}"
       end
 
-      File.write t.name, SM[endpoint].compile(input).clean
+      begin
+        File.write t.name, SM[endpoint].compile(input).clean
+      rescue SM::Error => e
+        MUTEX.synchronize do
+          STDERR.puts "  #{e} with #{input} for #{engine}"
+        end
+
+        File.write t.name, e.response.body
+      end
     end
   end
 

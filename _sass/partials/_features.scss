@@ -3,37 +3,7 @@
     text-align: left;
 }
 
-.feature__name {
-    text-transform: uppercase;
-    border-bottom: .2em solid $bouquet;
-    padding-bottom: .2em;
-    margin-bottom: 1rem;
-    position: relative;
-    font-size: 2em;
-
-    p {
-        margin-bottom: 0;
-    }
-
-    code {
-        font-size: 1em;
-    }
-}
-
-.feature__anchor {
-    position: absolute;
-    left: -1em;
-    top: .23em;
-    text-decoration: none;
-    font-size: .8em;
-    opacity: 0;
-    transition: .15s;
-
-    .feature:hover &,
-    .feature:active & {
-        opacity: 1;
-    }
-}
+.feature__name {}
 
 .feature__content {
     overflow: hidden;
