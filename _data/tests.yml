@@ -104,6 +104,11 @@ selector_manipulation_functions:
 set_nth_function:
   - spec/libsass-closed-issues/issue_578
 
+spaces_minus:
+  - tests/spaces_minus
+# Switch to this test once it is merged in sass-spec
+# - spec/libsass/spaces_minus
+
 string_manipulation_functions:
   - spec/basic/43_str_length
   - spec/basic/45_str_insert

@@ -498,6 +498,24 @@ set_nth_function:
     tests:
       spec/libsass-closed-issues/issue_578: true
 
+spaces_minus:
+  ruby_sass_3_2:
+    support: false
+    tests:
+      tests/spaces_minus: false
+  ruby_sass_3_3:
+    support: true
+    tests:
+      tests/spaces_minus: true
+  ruby_sass_3_4:
+    support: true
+    tests:
+      tests/spaces_minus: true
+  libsass:
+    support: false
+    tests:
+      tests/spaces_minus: false
+
 string_manipulation_functions:
   ruby_sass_3_2:
     support: false
