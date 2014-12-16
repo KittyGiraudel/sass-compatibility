@@ -104,9 +104,9 @@ cross_media_extend:
     tests:
       tests/cross_media_extend: false
   libsass:
-    support: true
+    support: false
     tests:
-      tests/cross_media_extend: true
+      tests/cross_media_extend: false
 
 deep_extend:
   ruby_sass_3_2:
