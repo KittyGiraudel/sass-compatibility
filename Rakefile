@@ -206,7 +206,7 @@ STATS = '_data/stats.yml'
 #
 # SCSS version of the engine stats.
 #
-STATS_SCSS = '_sass/utils/stats.scss'
+STATS_SCSS = '_sass/utils/_stats.scss'
 
 #
 # Support file (containing support results).
