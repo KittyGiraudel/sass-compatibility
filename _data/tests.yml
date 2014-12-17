@@ -106,8 +106,7 @@ set_nth_function:
 
 spaces_minus:
   - tests/spaces_minus
-# Switch to this test once it is merged in sass-spec
-# - spec/libsass/spaces_minus
+# - spec/libsass/spaces-minus
 
 string_manipulation_functions:
   - spec/basic/43_str_length
@@ -123,6 +122,4 @@ unique_id_function:
   - spec/libsass-closed-issues/issue_636
 
 variable_scoping:
-  - tests/variable_scoping
-# Switch to this test once it is merged in sass-spec
-# - spec/libsass-todo-issues/issue_613
+  - spec/libsass-todo-issues/issue_613
