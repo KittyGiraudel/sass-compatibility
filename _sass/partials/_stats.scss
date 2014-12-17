@@ -9,14 +9,15 @@
 
 @each $engine, $support in $stats {
   .support-value--#{$engine} strong {
-    $args: mix($wafer, white, 70%) ($support * 1%), transparent ($support * 1%);
-    background: -webkit-linear-gradient(left, $args);
-    background: linear-gradient(to right, $args);
+    $color: mix($wafer, white, 50%);
+    $support: percentage($support / 100);
+
+    background: -webkit-linear-gradient(left, $color $support, transparent $support);
+    background:     linear-gradient(to right, $color $support, transparent $support);
 
     @media (min-width: 768px) {
-        $args: transparent (100% - $support), mix($wafer, white, 70%) (100% - $support);
-        background: -webkit-linear-gradient(top, $args);
-        background: linear-gradient(to bottom, $args);
+        background: -webkit-linear-gradient(top, transparent (100% - $support), $color (100% - $support));
+        background:   linear-gradient(to bottom, transparent (100% - $support), $color (100% - $support));
     }
   }
 }
