@@ -204,6 +204,11 @@ SPEC = Spec.new('_data/tests.yml')
 STATS = '_data/stats.yml'
 
 #
+# SCSS version of the engine stats.
+#
+STATS_SCSS = '_sass/utils/_stats.scss'
+
+#
 # Support file (containing support results).
 #
 SUPPORT = '_data/support.yml'
@@ -213,7 +218,7 @@ SUPPORT = '_data/support.yml'
 #
 MUTEX = Mutex.new
 
-task :default => [STATS]
+task :default => [STATS_SCSS]
 
 #
 # Delete intermediate files.
@@ -223,6 +228,21 @@ task :clean do
     ['expected_output_clean.css', 'output.*.css', 'support.yml'].each do |g|
       Dir.glob("#{t}/#{g}").each { |f| File.delete f }
     end
+  end
+end
+
+#
+# SCSS version of the stats file.
+#
+file STATS_SCSS => [STATS] do |t|
+  File.open(t.name, 'w') do |file|
+    file.puts '$stats: ('
+
+    YAML::load_file(STATS).each do |engine, result|
+      file.puts "  '#{engine}': #{result['percentage'].round},"
+    end
+
+    file.puts ');'
   end
 end
 
