@@ -8,9 +8,6 @@ require 'yaml'
 #
 # Specification YAML file wrapper.
 #
-# Handle different types of input (signle test, array of tests, falsy
-# tests) and yield uniform specification tests.
-#
 class Spec
   include Enumerable
 
@@ -19,18 +16,15 @@ class Spec
   end
 
   #
-  # Yeald the feature name and an array of tests for each feature.
+  # Yeald the feature name and an array of tests for each feature
+  # (conforming to the specification file format).
   #
   def each
     @spec ||= YAML.load_file(@file)
-
-    @spec.each do |name, spec|
-      yield name, spec
-    end
   end
 
   #
-  # Get a flat array of tests, unaware of the feature name.
+  # Get a flat array of tests, unaware of the feature names.
   #
   def to_a
     flat_map { |name, tests| tests }
@@ -102,6 +96,9 @@ class Progress
 
   #
   # The count of files to update.
+  #
+  # Get all the output tasks from the main task prerequisites, and only
+  # keep needed ones to get the final count.
   #
   def self.count
     @@cached_count ||= Rake::Task[SUPPORT].prerequisites
