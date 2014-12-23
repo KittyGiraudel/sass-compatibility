@@ -6,32 +6,6 @@ require 'yaml'
 # ===========
 
 #
-# Specification YAML file wrapper.
-#
-class Spec
-  include Enumerable
-
-  def initialize(file)
-    @file = file
-  end
-
-  #
-  # Yeald the feature name and an array of tests for each feature
-  # (conforming to the specification file format).
-  #
-  def each
-    @spec ||= YAML.load_file(@file)
-  end
-
-  #
-  # Get a flat array of tests, unaware of the feature names.
-  #
-  def to_a
-    flat_map { |name, tests| tests }
-  end
-end
-
-#
 # SassMeister API wrapper.
 #
 # Access an endpoint singleton with `SM[endpoint]`, for example
@@ -193,7 +167,12 @@ SM_ENGINES = {
 #
 # Specification file.
 #
-SPEC = Spec.new('_data/tests.yml')
+SPEC = YAML.load_file('_data/tests.yml')
+
+#
+# Flat array of tests, unaware of the feature names.
+#
+TESTS = SPEC.flat_map { |name, tests| tests }
 
 #
 # Stats file (containing engine stats).
@@ -221,7 +200,7 @@ task :default => [STATS_SCSS]
 # Delete intermediate files.
 #
 task :clean do
-  SPEC.to_a.each do |t|
+  TESTS.each do |t|
     ['expected_output_clean.css', 'output.*.css', 'support.yml'].each do |g|
       Dir.glob("#{t}/#{g}").each { |f| File.delete f }
     end
@@ -264,7 +243,7 @@ file STATS => [SUPPORT] do |t|
   end
 
   stats.each do |engine, result|
-    result['percentage'] = (result['passed'].to_f / SPEC.to_a.count * 100).round 2
+    result['percentage'] = (result['passed'].to_f / TESTS.count * 100).round 2
   end
 
   File.write t.name, stats.to_partial_yaml
@@ -274,7 +253,7 @@ end
 # From each individual test support file, build the aggregated YAML
 # file.
 #
-multitask SUPPORT => SPEC.to_a.map { |t| "#{t}/support.yml" } do |t|
+multitask SUPPORT => TESTS.map { |t| "#{t}/support.yml" } do |t|
   File.open(t.name, 'w') do |file|
     SPEC.each do |name, tests|
       feature = {}
@@ -304,7 +283,7 @@ multitask SUPPORT => SPEC.to_a.map { |t| "#{t}/support.yml" } do |t|
   end
 end
 
-SPEC.to_a.each do |test|
+TESTS.each do |test|
 
   #
   # Ensure sass-spec prerequisite if the test needs it.
