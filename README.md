@@ -27,6 +27,9 @@ The Rakefile will:
   for this test).
 * Aggregate the test data for every feature described in
   `_data/tests.yml`, in `_data/support.yml`.
+* Compute support stats in `_data/stats.yml`.
+* Create a (summarized) SCSS version of the stats in
+  `_sass/utils/_stats.scss`.
 
 ## I/O YAML structure
 
