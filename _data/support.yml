@@ -590,17 +590,17 @@ variable_scoping:
   ruby_sass_3_2:
     support: false
     tests:
-      tests/variable_scoping: false
+      spec/libsass-todo-issues/issue_613: false
   ruby_sass_3_3:
     support: false
     tests:
-      tests/variable_scoping: false
+      spec/libsass-todo-issues/issue_613: false
   ruby_sass_3_4:
     support: true
     tests:
-      tests/variable_scoping: true
+      spec/libsass-todo-issues/issue_613: true
   libsass:
     support: false
     tests:
-      tests/variable_scoping: false
+      spec/libsass-todo-issues/issue_613: false
 
