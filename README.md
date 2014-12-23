@@ -43,8 +43,6 @@ angle_conversion:
   - spec/libsass-clised-issues/issue_666/length
 ```
 
-Features with falsy values are ignored.
-
 A test, according to sass-spec, is a directory with `input.scss` and
 `expected_output.css` files.
 
