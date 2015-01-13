@@ -63,7 +63,8 @@
 - label: "Cross-media `@extend`"
   name: cross_media_extend
   description: |
-    One of the major downsides of the `@extend` directive from Sass is that it cannot be used to extend an outer-selector from within a `@media` context. Note that while LibSass claims to support it, its interpretation is actually wrong. Thus, using this feature should be avoided altogether.
+    One of the major downsides of the `@extend` directive from Sass is that it cannot be used to extend an outer-selector from within a `@media` context. 
+    Note that while LibSass claims to support it, its interpretation is actually wrong. Thus, using this feature should be avoided altogether.
   polyfill: |
     Use a mixin instead.
 
