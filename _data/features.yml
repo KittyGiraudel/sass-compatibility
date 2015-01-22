@@ -60,11 +60,10 @@
 
 
 
-- label: "Cross-media `@extend`"
+- label: "Forbid cross-media `@extend`"
   name: cross_media_extend
   description: |
-    One of the major downsides of the `@extend` directive from Sass is that it cannot be used to extend an outer-selector from within a `@media` context. 
-    Note that while LibSass claims to support it, its interpretation is actually wrong. Thus, using this feature should be avoided altogether.
+    As of today, the `@extend` directive cannot be used across different media contexts.
   polyfill: |
     Use a mixin instead.
 
@@ -274,24 +273,6 @@
     Interpolations (`#{..}`) can be nested.
   polyfill: |
     Not only nested interpolations are quite uncommon, but it also turns out to be easy to refactor the code so it doesn't happen.
-
-
-
-
-
-- label: "`not` operator"
-  name: not_operator
-  description: |
-    The `not` operator is meant to indicate the opposite of something.
-    Think of it as `!` in JavaScript or other languages.
-    For instance, `not true` is `false`.
-  polyfill: |
-    Depending on the context, you might be able to use `== false` or `== null` instead.
-
-    <pre class="language-scss"><code>// Instead of:
-    // @if not index($list, $value) { .. }
-
-    @if index($list, $value) == null { .. }</code></pre>
 
 
 

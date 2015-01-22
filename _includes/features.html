@@ -42,8 +42,10 @@
             {% for test in site.data.tests[feature.name] %}
             <tr class="detail">
                 <th scope="row">
-                    {% assign base_url = "https://github.com/sass/sass-compatibility/tree/master/" %}
-                    {% if test | split: "/" | first == "spec" %}
+                    {% assign base_url = "https://github.com/sass-compatibility/sass-compatibility/tree/master/" %}
+                    {% assign start_path = (test | split: "/" | first) %}
+
+                    {% if start_path == "spec" %}
                         {% assign base_url = "https://github.com/sass/sass-spec/tree/master/" %}
                     {% endif %}
 

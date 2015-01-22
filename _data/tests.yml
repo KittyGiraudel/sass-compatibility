@@ -6,19 +6,22 @@ angle_conversion:
   - spec/libsass-closed-issues/issue_666/angle
 
 at_root_directive:
-  - tests/at_root_directive/ampersand
-  - tests/at_root_directive/basic
-  - tests/at_root_directive/nested
-  - tests/at_root_directive/extend
-  - tests/at_root_directive/keyframes
-  - tests/at_root_directive/media
-# Switch to those tests once they are merged in sass-spec
-# - tests/libsass/at-root/ampersand
-# - tests/libsass/at-root/basic
-# - tests/libsass/at-root/nested
-# - tests/libsass/at-root/extend
-# - tests/libsass/at-root/keyframes
-# - tests/libsass/at-root/media
+  - spec/libsass/at-root/ampersand
+  - spec/libsass/at-root/basic
+  - spec/libsass/at-root/extend
+  - spec/libsass/at-root/keyframes
+  - spec/libsass/at-root/media
+  - spec/libsass/at-root/nested
+  - spec/libsass/at-root/with_without
+  - spec/libsass/at-root/135_test_simple_at_root
+  - spec/libsass/at-root/136_test_at_root_with_selector
+  - spec/libsass/at-root/137_test_at_root_in_mixin
+  - spec/libsass/at-root/138_test_at_root_in_media
+  - spec/libsass/at-root/139_test_at_root_in_bubbled_media
+  - spec/libsass/at-root/140_test_at_root_in_unknown_directive
+  - spec/libsass/at-root/141_test_at_root_with_parent_ref
+  - spec/libsass/at-root/142_test_multi_level_at_root_with_parent_ref
+  - spec/libsass/at-root/143_test_multi_level_at_root_with_inner_parent_ref
 
 call_function:
   - spec/basic/60_call
@@ -62,7 +65,12 @@ map_data_type:
   - spec/maps/map-values
 
 media_merge:
-  - spec/libsass-todo-issues/issue_185
+  - spec/libsass-closed-issues/issue_185/hoisting
+  - spec/libsass-closed-issues/issue_185/media_level_4
+  - spec/libsass-closed-issues/issue_185/media_wrapper_selector
+  - spec/libsass-closed-issues/issue_185/merge_no_repeat
+  - spec/libsass-closed-issues/issue_185/mixin
+  - spec/libsass-closed-issues/issue_185/selector_wrapper_media
 
 multi_assign_each:
   - spec/libsass-closed-issues/issue_492
@@ -75,11 +83,6 @@ negative_indexes:
 
 nested_interpolations:
   - spec/libsass-todo-issues/issue_615
-
-not_operator:
-  - spec/libsass-todo-tests/basic/44_not_number_expression
-# Add this test once it is merged in sass-spec
-#  - spec/libsass-todo-issues/issue_680
 
 random_function:
   - spec/libsass-closed-issues/issue_657/limit
@@ -105,15 +108,17 @@ set_nth_function:
   - spec/libsass-closed-issues/issue_578
 
 spaces_minus:
-  - tests/spaces_minus
-# - spec/libsass/spaces-minus
+  - spec/libsass-closed-issues/issue_733
 
 string_manipulation_functions:
   - spec/basic/43_str_length
   - spec/basic/45_str_insert
   - spec/basic/46_str_index
-  - spec/basic/47_str_slice
   - spec/basic/48_case_conversion
+  - spec/libsass-todo-tests/47_str_slice
+  - spec/libsass-closed-issues/issue_760
+  - spec/libsass-closed-issues/issue_763
+  - spec/libsass-closed-issues/issue_815
 
 transparent_color:
   - spec/libsass-closed-issues/issue_700

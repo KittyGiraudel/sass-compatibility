@@ -30,47 +30,87 @@ angle_conversion:
     tests:
       spec/libsass-closed-issues/issue_666/angle: true
   libsass:
-    support: false
+    support: true
     tests:
-      spec/libsass-closed-issues/issue_666/angle: false
+      spec/libsass-closed-issues/issue_666/angle: true
 
 at_root_directive:
   ruby_sass_3_2:
     support: false
     tests:
-      tests/at_root_directive/ampersand: false
-      tests/at_root_directive/basic: false
-      tests/at_root_directive/nested: false
-      tests/at_root_directive/extend: false
-      tests/at_root_directive/keyframes: false
-      tests/at_root_directive/media: false
+      spec/libsass/at-root/ampersand: false
+      spec/libsass/at-root/basic: false
+      spec/libsass/at-root/extend: false
+      spec/libsass/at-root/keyframes: false
+      spec/libsass/at-root/media: false
+      spec/libsass/at-root/nested: false
+      spec/libsass/at-root/with_without: false
+      spec/libsass/at-root/135_test_simple_at_root: false
+      spec/libsass/at-root/136_test_at_root_with_selector: false
+      spec/libsass/at-root/137_test_at_root_in_mixin: false
+      spec/libsass/at-root/138_test_at_root_in_media: false
+      spec/libsass/at-root/139_test_at_root_in_bubbled_media: false
+      spec/libsass/at-root/140_test_at_root_in_unknown_directive: false
+      spec/libsass/at-root/141_test_at_root_with_parent_ref: false
+      spec/libsass/at-root/142_test_multi_level_at_root_with_parent_ref: false
+      spec/libsass/at-root/143_test_multi_level_at_root_with_inner_parent_ref: false
   ruby_sass_3_3:
-    support: true
+    support: 
     tests:
-      tests/at_root_directive/ampersand: true
-      tests/at_root_directive/basic: true
-      tests/at_root_directive/nested: true
-      tests/at_root_directive/extend: true
-      tests/at_root_directive/keyframes: true
-      tests/at_root_directive/media: true
+      spec/libsass/at-root/ampersand: true
+      spec/libsass/at-root/basic: true
+      spec/libsass/at-root/extend: true
+      spec/libsass/at-root/keyframes: true
+      spec/libsass/at-root/media: true
+      spec/libsass/at-root/nested: true
+      spec/libsass/at-root/with_without: false
+      spec/libsass/at-root/135_test_simple_at_root: true
+      spec/libsass/at-root/136_test_at_root_with_selector: true
+      spec/libsass/at-root/137_test_at_root_in_mixin: true
+      spec/libsass/at-root/138_test_at_root_in_media: true
+      spec/libsass/at-root/139_test_at_root_in_bubbled_media: true
+      spec/libsass/at-root/140_test_at_root_in_unknown_directive: true
+      spec/libsass/at-root/141_test_at_root_with_parent_ref: true
+      spec/libsass/at-root/142_test_multi_level_at_root_with_parent_ref: true
+      spec/libsass/at-root/143_test_multi_level_at_root_with_inner_parent_ref: true
   ruby_sass_3_4:
     support: true
     tests:
-      tests/at_root_directive/ampersand: true
-      tests/at_root_directive/basic: true
-      tests/at_root_directive/nested: true
-      tests/at_root_directive/extend: true
-      tests/at_root_directive/keyframes: true
-      tests/at_root_directive/media: true
+      spec/libsass/at-root/ampersand: true
+      spec/libsass/at-root/basic: true
+      spec/libsass/at-root/extend: true
+      spec/libsass/at-root/keyframes: true
+      spec/libsass/at-root/media: true
+      spec/libsass/at-root/nested: true
+      spec/libsass/at-root/with_without: true
+      spec/libsass/at-root/135_test_simple_at_root: true
+      spec/libsass/at-root/136_test_at_root_with_selector: true
+      spec/libsass/at-root/137_test_at_root_in_mixin: true
+      spec/libsass/at-root/138_test_at_root_in_media: true
+      spec/libsass/at-root/139_test_at_root_in_bubbled_media: true
+      spec/libsass/at-root/140_test_at_root_in_unknown_directive: true
+      spec/libsass/at-root/141_test_at_root_with_parent_ref: true
+      spec/libsass/at-root/142_test_multi_level_at_root_with_parent_ref: true
+      spec/libsass/at-root/143_test_multi_level_at_root_with_inner_parent_ref: true
   libsass:
     support: false
     tests:
-      tests/at_root_directive/ampersand: false
-      tests/at_root_directive/basic: false
-      tests/at_root_directive/nested: false
-      tests/at_root_directive/extend: false
-      tests/at_root_directive/keyframes: false
-      tests/at_root_directive/media: false
+      spec/libsass/at-root/ampersand: false
+      spec/libsass/at-root/basic: false
+      spec/libsass/at-root/extend: false
+      spec/libsass/at-root/keyframes: false
+      spec/libsass/at-root/media: false
+      spec/libsass/at-root/nested: false
+      spec/libsass/at-root/with_without: false
+      spec/libsass/at-root/135_test_simple_at_root: false
+      spec/libsass/at-root/136_test_at_root_with_selector: false
+      spec/libsass/at-root/137_test_at_root_in_mixin: false
+      spec/libsass/at-root/138_test_at_root_in_media: false
+      spec/libsass/at-root/139_test_at_root_in_bubbled_media: false
+      spec/libsass/at-root/140_test_at_root_in_unknown_directive: false
+      spec/libsass/at-root/141_test_at_root_with_parent_ref: false
+      spec/libsass/at-root/142_test_multi_level_at_root_with_parent_ref: false
+      spec/libsass/at-root/143_test_multi_level_at_root_with_inner_parent_ref: false
 
 call_function:
   ruby_sass_3_2:
@@ -96,17 +136,17 @@ cross_media_extend:
     tests:
       tests/cross_media_extend: false
   ruby_sass_3_3:
-    support: false
-    tests:
-      tests/cross_media_extend: false
-  ruby_sass_3_4:
-    support: false
-    tests:
-      tests/cross_media_extend: false
-  libsass:
     support: true
     tests:
       tests/cross_media_extend: true
+  ruby_sass_3_4:
+    support: true
+    tests:
+      tests/cross_media_extend: true
+  libsass:
+    support: false
+    tests:
+      tests/cross_media_extend: false
 
 deep_extend:
   ruby_sass_3_2:
@@ -140,9 +180,9 @@ downward_for:
     tests:
       spec/libsass-closed-issues/issue_703: true
   libsass:
-    support: false
+    support: true
     tests:
-      spec/libsass-closed-issues/issue_703: false
+      spec/libsass-closed-issues/issue_703: true
 
 error_directive:
   ruby_sass_3_2:
@@ -188,9 +228,9 @@ feature_detection_functions:
       spec/basic/57_function_exists: true
       spec/basic/58_mixin_exists: true
   libsass:
-    support: 
+    support: true
     tests:
-      spec/libsass-closed-issues/issue_702: false
+      spec/libsass-closed-issues/issue_702: true
       spec/basic/55_variable_exists: true
       spec/basic/56_global_variable_exists: true
       spec/basic/57_function_exists: true
@@ -228,9 +268,9 @@ inspect_function:
     tests:
       spec/libsass-closed-issues/issue_701: true
   libsass:
-    support: false
+    support: true
     tests:
-      spec/libsass-closed-issues/issue_701: false
+      spec/libsass-closed-issues/issue_701: true
 
 list_separator_function:
   ruby_sass_3_2:
@@ -290,21 +330,41 @@ map_data_type:
 
 media_merge:
   ruby_sass_3_2:
-    support: true
+    support: 
     tests:
-      spec/libsass-todo-issues/issue_185: true
+      spec/libsass-closed-issues/issue_185/hoisting: true
+      spec/libsass-closed-issues/issue_185/media_level_4: true
+      spec/libsass-closed-issues/issue_185/media_wrapper_selector: true
+      spec/libsass-closed-issues/issue_185/merge_no_repeat: true
+      spec/libsass-closed-issues/issue_185/mixin: false
+      spec/libsass-closed-issues/issue_185/selector_wrapper_media: true
   ruby_sass_3_3:
     support: true
     tests:
-      spec/libsass-todo-issues/issue_185: true
+      spec/libsass-closed-issues/issue_185/hoisting: true
+      spec/libsass-closed-issues/issue_185/media_level_4: true
+      spec/libsass-closed-issues/issue_185/media_wrapper_selector: true
+      spec/libsass-closed-issues/issue_185/merge_no_repeat: true
+      spec/libsass-closed-issues/issue_185/mixin: true
+      spec/libsass-closed-issues/issue_185/selector_wrapper_media: true
   ruby_sass_3_4:
     support: true
     tests:
-      spec/libsass-todo-issues/issue_185: true
+      spec/libsass-closed-issues/issue_185/hoisting: true
+      spec/libsass-closed-issues/issue_185/media_level_4: true
+      spec/libsass-closed-issues/issue_185/media_wrapper_selector: true
+      spec/libsass-closed-issues/issue_185/merge_no_repeat: true
+      spec/libsass-closed-issues/issue_185/mixin: true
+      spec/libsass-closed-issues/issue_185/selector_wrapper_media: true
   libsass:
     support: false
     tests:
-      spec/libsass-todo-issues/issue_185: false
+      spec/libsass-closed-issues/issue_185/hoisting: false
+      spec/libsass-closed-issues/issue_185/media_level_4: false
+      spec/libsass-closed-issues/issue_185/media_wrapper_selector: false
+      spec/libsass-closed-issues/issue_185/merge_no_repeat: false
+      spec/libsass-closed-issues/issue_185/mixin: false
+      spec/libsass-closed-issues/issue_185/selector_wrapper_media: false
 
 multi_assign_each:
   ruby_sass_3_2:
@@ -378,24 +438,6 @@ nested_interpolations:
     tests:
       spec/libsass-todo-issues/issue_615: false
 
-not_operator:
-  ruby_sass_3_2:
-    support: true
-    tests:
-      spec/libsass-todo-tests/basic/44_not_number_expression: true
-  ruby_sass_3_3:
-    support: true
-    tests:
-      spec/libsass-todo-tests/basic/44_not_number_expression: true
-  ruby_sass_3_4:
-    support: true
-    tests:
-      spec/libsass-todo-tests/basic/44_not_number_expression: true
-  libsass:
-    support: false
-    tests:
-      spec/libsass-todo-tests/basic/44_not_number_expression: false
-
 random_function:
   ruby_sass_3_2:
     support: false
@@ -413,10 +455,10 @@ random_function:
       spec/libsass-closed-issues/issue_657/limit: true
       spec/libsass-closed-issues/issue_657/default: true
   libsass:
-    support: false
+    support: true
     tests:
-      spec/libsass-closed-issues/issue_657/limit: false
-      spec/libsass-closed-issues/issue_657/default: false
+      spec/libsass-closed-issues/issue_657/limit: true
+      spec/libsass-closed-issues/issue_657/default: true
 
 rebeccapurple_color:
   ruby_sass_3_2:
@@ -432,9 +474,9 @@ rebeccapurple_color:
     tests:
       spec/libsass-closed-issues/issue_699: true
   libsass:
-    support: false
+    support: true
     tests:
-      spec/libsass-closed-issues/issue_699: false
+      spec/libsass-closed-issues/issue_699: true
 
 reserved_function_names:
   ruby_sass_3_2:
@@ -456,11 +498,11 @@ reserved_function_names:
       tests/reserved_function_names/and: true
       tests/reserved_function_names/or: true
   libsass:
-    support: false
+    support: true
     tests:
-      tests/reserved_function_names/not: false
-      tests/reserved_function_names/and: false
-      tests/reserved_function_names/or: false
+      tests/reserved_function_names/not: true
+      tests/reserved_function_names/and: true
+      tests/reserved_function_names/or: true
 
 selector_manipulation_functions:
   ruby_sass_3_2:
@@ -502,19 +544,19 @@ spaces_minus:
   ruby_sass_3_2:
     support: false
     tests:
-      tests/spaces_minus: false
+      spec/libsass-closed-issues/issue_733: false
   ruby_sass_3_3:
     support: true
     tests:
-      tests/spaces_minus: true
+      spec/libsass-closed-issues/issue_733: true
   ruby_sass_3_4:
     support: true
     tests:
-      tests/spaces_minus: true
+      spec/libsass-closed-issues/issue_733: true
   libsass:
     support: false
     tests:
-      tests/spaces_minus: false
+      spec/libsass-closed-issues/issue_733: false
 
 string_manipulation_functions:
   ruby_sass_3_2:
@@ -523,32 +565,44 @@ string_manipulation_functions:
       spec/basic/43_str_length: false
       spec/basic/45_str_insert: false
       spec/basic/46_str_index: false
-      spec/basic/47_str_slice: false
       spec/basic/48_case_conversion: false
+      spec/libsass-todo-tests/47_str_slice: false
+      spec/libsass-closed-issues/issue_760: false
+      spec/libsass-closed-issues/issue_763: false
+      spec/libsass-closed-issues/issue_815: false
   ruby_sass_3_3:
     support: true
     tests:
       spec/basic/43_str_length: true
       spec/basic/45_str_insert: true
       spec/basic/46_str_index: true
-      spec/basic/47_str_slice: true
       spec/basic/48_case_conversion: true
+      spec/libsass-todo-tests/47_str_slice: true
+      spec/libsass-closed-issues/issue_760: true
+      spec/libsass-closed-issues/issue_763: true
+      spec/libsass-closed-issues/issue_815: true
   ruby_sass_3_4:
     support: true
     tests:
       spec/basic/43_str_length: true
       spec/basic/45_str_insert: true
       spec/basic/46_str_index: true
-      spec/basic/47_str_slice: true
       spec/basic/48_case_conversion: true
+      spec/libsass-todo-tests/47_str_slice: true
+      spec/libsass-closed-issues/issue_760: true
+      spec/libsass-closed-issues/issue_763: true
+      spec/libsass-closed-issues/issue_815: true
   libsass:
     support: 
     tests:
       spec/basic/43_str_length: true
       spec/basic/45_str_insert: true
       spec/basic/46_str_index: true
-      spec/basic/47_str_slice: false
       spec/basic/48_case_conversion: true
+      spec/libsass-todo-tests/47_str_slice: false
+      spec/libsass-closed-issues/issue_760: false
+      spec/libsass-closed-issues/issue_763: false
+      spec/libsass-closed-issues/issue_815: true
 
 transparent_color:
   ruby_sass_3_2:
@@ -564,9 +618,9 @@ transparent_color:
     tests:
       spec/libsass-closed-issues/issue_700: true
   libsass:
-    support: false
+    support: true
     tests:
-      spec/libsass-closed-issues/issue_700: false
+      spec/libsass-closed-issues/issue_700: true
 
 unique_id_function:
   ruby_sass_3_2:
@@ -582,9 +636,9 @@ unique_id_function:
     tests:
       spec/libsass-closed-issues/issue_636: true
   libsass:
-    support: false
+    support: true
     tests:
-      spec/libsass-closed-issues/issue_636: false
+      spec/libsass-closed-issues/issue_636: true
 
 variable_scoping:
   ruby_sass_3_2:

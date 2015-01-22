@@ -61,9 +61,6 @@ negative_indexes:
 nested_interpolations:
     libsass: https://github.com/sass/libsass/issues/615
 
-not_operator:
-    libsass: https://github.com/sass/libsass/issues/368
-
 random_function:
     ruby_sass_3_2: https://github.com/sass/sass/pull/968
     libsass: https://github.com/sass/libsass/issues/657
