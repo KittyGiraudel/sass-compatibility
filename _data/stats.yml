@@ -1,16 +1,16 @@
 ruby_sass_3_2:
-  passed: 7
+  passed: 8
   failed: 60
-  percentage: 10.45
+  percentage: 11.76
 ruby_sass_3_3:
-  passed: 59
+  passed: 60
   failed: 8
-  percentage: 88.06
+  percentage: 88.24
 ruby_sass_3_4:
-  passed: 67
+  passed: 68
   failed: 0
   percentage: 100.0
 libsass:
   passed: 34
-  failed: 33
-  percentage: 50.75
+  failed: 34
+  percentage: 50.0

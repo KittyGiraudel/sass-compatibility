@@ -343,6 +343,16 @@
 
 
 
+- label: "Shadow DOM styling"
+  name: shadow_dom_styling
+  description: |
+    Shadow DOM selectors for Web Components allow a slightly different syntax than usual CSS selectors.
+  polyfill: false
+
+
+
+
+
 - label: "Spaces around minus symbol"
   name: spaces_minus
   description: |

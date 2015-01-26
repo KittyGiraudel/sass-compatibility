@@ -540,6 +540,24 @@ set_nth_function:
     tests:
       spec/libsass-closed-issues/issue_578: true
 
+shadow_dom_styling:
+  ruby_sass_3_2:
+    support: true
+    tests:
+      tests/shadow_dom_styling: true
+  ruby_sass_3_3:
+    support: true
+    tests:
+      tests/shadow_dom_styling: true
+  ruby_sass_3_4:
+    support: true
+    tests:
+      tests/shadow_dom_styling: true
+  libsass:
+    support: false
+    tests:
+      tests/shadow_dom_styling: false
+
 spaces_minus:
   ruby_sass_3_2:
     support: false

@@ -76,6 +76,9 @@ reserved_function_names:
 set_nth_function:
     ruby_sass_3_2: https://github.com/sass/sass/issues/852
 
+shadow_dom_styling:
+    libsass: https://github.com/sass/libsass/issues/452
+
 spaces_minus:
     libsass: https://github.com/sass/libsass/issues/733
 

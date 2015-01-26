@@ -107,6 +107,9 @@ selector_manipulation_functions:
 set_nth_function:
   - spec/libsass-closed-issues/issue_578
 
+shadow_dom_styling:
+  - tests/shadow_dom_styling
+
 spaces_minus:
   - spec/libsass-closed-issues/issue_733
 
