@@ -42,7 +42,13 @@ class SM
       raise Error.new "Unexpected #{type} response from SassMeister", response
     end
 
-    JSON.parse(response.body)['css']
+    data = JSON.parse(response.body)
+
+    if not data.has_key?('css')
+      raise Error.new "SassMeister returned an error: #{data['message']}", response
+    end
+
+    data['css']
   end
 
   #
