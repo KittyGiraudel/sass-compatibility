@@ -99,6 +99,7 @@ ENGINES = {
   :ruby_sass_3_3 => '3_3',
   :ruby_sass_3_4 => '3_4',
   :libsass_3_1 => 'libsass_3_1',
+  :libsass_3_2 => 'libsass_3_2',
 }
 
 #
@@ -120,6 +121,7 @@ ENGINE_EXEC = {
   :ruby_sass_3_3 => nil,
   :ruby_sass_3_4 => nil,
   :libsass_3_1 => nil,
+  :libsass_3_2 => nil,
 }
 
 #

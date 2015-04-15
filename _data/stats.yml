@@ -14,3 +14,7 @@ libsass_3_1:
   passed: 32
   failed: 36
   percentage: 47.06
+libsass_3_2:
+  passed: 60
+  failed: 8
+  percentage: 88.24
