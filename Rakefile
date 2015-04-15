@@ -195,11 +195,6 @@ STATS_SCSS = '_sass/utils/_stats.scss'
 #
 SUPPORT = '_data/support.yml'
 
-#
-# Mutex to synchronize before printing during parallel tasks.
-#
-MUTEX = Mutex.new
-
 task :default => [STATS_SCSS]
 
 #
@@ -259,7 +254,7 @@ end
 # From each individual test support file, build the aggregated YAML
 # file.
 #
-multitask SUPPORT => TESTS.map { |t| "#{t}/support.yml" } do |t|
+task SUPPORT => TESTS.map { |t| "#{t}/support.yml" } do |t|
   File.open(t.name, 'w') do |file|
     SPEC.each do |name, tests|
       feature = {}
@@ -334,16 +329,12 @@ TESTS.each do |test|
         .find { |f| File.exist? f }
 
 
-      MUTEX.synchronize do
-        puts "#{Progress.inc_s} Compiling #{input} for #{engine}"
-      end
+      puts "#{Progress.inc_s} Compiling #{input} for #{engine}"
 
       begin
         File.write t.name, SM[endpoint].compile(input).clean
       rescue SM::Error => e
-        MUTEX.synchronize do
-          STDERR.puts "  #{e} with #{input} for #{engine}"
-        end
+        STDERR.puts "  #{e} with #{input} for #{engine}"
 
         File.write t.name, e.response.body
       end
