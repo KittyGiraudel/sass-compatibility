@@ -7,6 +7,6 @@ ruby_sass_3_3:
 ruby_sass_3_4:
   label: Ruby Sass 3.4
   link: https://github.com/sass/sass/releases/tag/3.4.0
-libsass:
-  label: LibSass
-  link: https://github.com/sass/libsass
+libsass_3_1:
+  label: LibSass 3.1
+  link: https://github.com/sass/libsass/releases/tag/3.1.0
