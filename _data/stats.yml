@@ -7,14 +7,14 @@ ruby_sass_3_3:
   failed: 14
   percentage: 79.41
 ruby_sass_3_4:
+  passed: 68
+  failed: 0
+  percentage: 100.0
+libsass_3_1:
+  passed: 33
+  failed: 35
+  percentage: 48.53
+libsass_3_2:
   passed: 63
   failed: 5
   percentage: 92.65
-libsass_3_1:
-  passed: 32
-  failed: 36
-  percentage: 47.06
-libsass_3_2:
-  passed: 60
-  failed: 8
-  percentage: 88.24

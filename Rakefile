@@ -54,6 +54,7 @@ end
 # Syntaxic sugar {{{
 # ==================
 
+
 class String
   def endpoint
     match(/\.(.+)\.css$/).captures.first
@@ -67,11 +68,28 @@ class String
     gsub(/^/, ' ' * n)
   end
 
+  def normalize_css
+    self[/^@charset/]
+  end
+
+  def normalize_libsass_error_messages
+    self[/^>> /] || strip[/-\^$/]
+  end
+
+  def normalize_errors_messages
+    strip[/input\.scss$/] || strip == 'Use --trace for backtrace.'
+  end
+
   #
   # Normalize CSS.
   #
   def clean
-    lines.reject { |l| l[/^@charset/] }.join
+    lines
+      .reject(&:normalize_css)
+      .reject(&:normalize_libsass_error_messages)
+      .reject(&:normalize_errors_messages)
+      .join
+      .gsub(/^Error: /, '')
       .gsub(/\s+/, ' ')
       .gsub(/ *\{/, " {\n")
       .gsub(/([;,]) */, "\\1\n")
@@ -300,13 +318,7 @@ TESTS.each do |test|
       puts "#{Progress.inc_s} Compiling #{input} for #{engine}"
 
       result = `#{ENGINE_EXEC[engine]} #{input}`
-      unless $?.exitstatus > 0
-        File.write t.name, result.clean
-      else
-        STDERR.puts "  error occured with #{input} for #{engine}"
-
-        File.write t.name, result.clean
-      end
+      File.write t.name, result.clean
     end
   end
 
