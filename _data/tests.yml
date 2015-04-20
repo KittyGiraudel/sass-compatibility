@@ -31,7 +31,7 @@ cross_media_extend:
 # Switch to sass-spec's test once it exists
 
 deep_extend:
-  - spec/libsass-todo-issues/issue_592
+  - spec/libsass-closed-issues/issue_592
 
 downward_for:
   - spec/libsass-closed-issues/issue_703
@@ -82,7 +82,7 @@ negative_indexes:
   - spec/libsass-closed-issues/issue_224
 
 nested_interpolations:
-  - spec/libsass-todo-issues/issue_615
+  - spec/libsass-closed-issues/issue_615
 
 random_function:
   - spec/libsass-closed-issues/issue_657/limit
@@ -130,4 +130,4 @@ unique_id_function:
   - spec/libsass-closed-issues/issue_636
 
 variable_scoping:
-  - spec/libsass-todo-issues/issue_613
+  - spec/libsass-closed-issues/issue_613

@@ -113,8 +113,7 @@
   name: feature_detection_functions
   description: |
     Feature detection functions include `feature-exists`, `variable-exists`, `global-variable-exists`, `function-exists` and `mixin-exists`.
-  polyfill: |
-    Note that LibSass supports all functions but `feature-exists`.
+  polyfill: false
 
 
 

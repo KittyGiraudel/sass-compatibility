@@ -6,65 +6,6 @@ require 'yaml'
 # ===========
 
 #
-# SassMeister API wrapper.
-#
-# Access an endpoint singleton with `SM[endpoint]`, for example
-# `SM['lib']` for libsass.
-#
-# Example:
-#
-#     SM['lib'].compile('path/to/example.scss')
-#
-class SM
-  @@instances = {}
-
-  def initialize(endpoint)
-    @@client ||= Faraday.new(:url => 'http://sassmeister.com/app')
-    @endpoint = endpoint
-  end
-
-  def self.[](endpoint)
-    @@instances[endpoint] ||= self.new(endpoint)
-  end
-
-  #
-  # Compile given file and get the output CSS.
-  #
-  def compile(file)
-    response = @@client.post "#{@endpoint}/compile", {
-      :syntax => 'SCSS',
-      :input => File.read(file),
-    }
-
-    type = response.headers['content-type']
-
-    if type !~ /\/json(;|$)/
-      raise Error.new "Unexpected #{type} response from SassMeister", response
-    end
-
-    data = JSON.parse(response.body)
-
-    if not data.has_key?('css')
-      raise Error.new "SassMeister returned an error: #{data['message']}", response
-    end
-
-    data['css']
-  end
-
-  #
-  # SassMeister API error, with full response for debug.
-  #
-  class Error < StandardError
-    attr_reader :response
-
-    def initialize(msg, response)
-      super(msg)
-      @response = response
-    end
-  end
-end
-
-#
 # Global progress indicator.
 #
 class Progress
@@ -113,6 +54,7 @@ end
 # Syntaxic sugar {{{
 # ==================
 
+
 class String
   def endpoint
     match(/\.(.+)\.css$/).captures.first
@@ -126,11 +68,33 @@ class String
     gsub(/^/, ' ' * n)
   end
 
+  def normalize_encoding
+    self.encode('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '')
+  end
+
+  def normalize_css
+    self[/^@charset/]
+  end
+
+  def normalize_libsass_error_messages
+    self[/^>> /] || strip[/-\^$/]
+  end
+
+  def normalize_errors_messages
+    strip[/input\.scss$/] || strip == 'Use --trace for backtrace.'
+  end
+
   #
   # Normalize CSS.
   #
   def clean
-    lines.reject { |l| l[/^@charset/] }.join
+    lines
+      .map(&:normalize_encoding)
+      .reject(&:normalize_css)
+      .reject(&:normalize_libsass_error_messages)
+      .reject(&:normalize_errors_messages)
+      .join
+      .gsub(/^Error: /, '')
       .gsub(/\s+/, ' ')
       .gsub(/ *\{/, " {\n")
       .gsub(/([;,]) */, "\\1\n")
@@ -157,18 +121,45 @@ ENGINES = {
   :ruby_sass_3_2 => '3_2',
   :ruby_sass_3_3 => '3_3',
   :ruby_sass_3_4 => '3_4',
-  :libsass => 'lib',
+  :libsass_3_1 => 'libsass_3_1',
+  :libsass_3_2 => 'libsass_3_2',
 }
 
 #
-# Mapping with SassMeister endpoints.
+# Supported engines.
 #
-SM_ENGINES = {
-  '3_2' => '3.2',
-  '3_3' => '3.3',
-  '3_4' => '3.4',
-  'lib' => 'lib',
+DOCKER_ENGINES = {
+  :ruby_sass_3_2 => 'xzyfer/docker-ruby-sass:3.2',
+  :ruby_sass_3_3 => 'xzyfer/docker-ruby-sass:3.3',
+  :ruby_sass_3_4 => 'xzyfer/docker-ruby-sass:3.4',
+  :libsass_3_1 => 'xzyfer/docker-libsass:3.1.0',
+  :libsass_3_2 => 'xzyfer/docker-libsass:3.2.0-beta.5',
 }
+
+#
+# Engine executable.
+#
+ENGINE_EXEC = {
+  :ruby_sass_3_2 => nil,
+  :ruby_sass_3_3 => nil,
+  :ruby_sass_3_4 => nil,
+  :libsass_3_1 => nil,
+  :libsass_3_2 => nil,
+}
+
+#
+# Init each engine.
+#
+DOCKER_ENGINES.each do |engine, release|
+  prefix = if RUBY_PLATFORM[/darwin/]
+    # Get Boot2Docker environment variables.
+    `boot2docker shellinit`.split(' ').values_at(1, 3, 5).join(' ')
+  else
+    ''
+  end
+
+  ENGINE_EXEC[engine] = "#{prefix} docker run --interactive --tty --rm --volume #{ENV['PWD']}:#{ENV['PWD']} --workdir #{ENV['PWD']} #{release}"
+end
 
 #
 # Specification file.
@@ -194,11 +185,6 @@ STATS_SCSS = '_sass/utils/_stats.scss'
 # Support file (containing support results).
 #
 SUPPORT = '_data/support.yml'
-
-#
-# Mutex to synchronize before printing during parallel tasks.
-#
-MUTEX = Mutex.new
 
 task :default => [STATS_SCSS]
 
@@ -259,7 +245,7 @@ end
 # From each individual test support file, build the aggregated YAML
 # file.
 #
-multitask SUPPORT => TESTS.map { |t| "#{t}/support.yml" } do |t|
+task SUPPORT => TESTS.map { |t| "#{t}/support.yml" } do |t|
   File.open(t.name, 'w') do |file|
     SPEC.each do |name, tests|
       feature = {}
@@ -323,8 +309,8 @@ TESTS.each do |test|
   #
   # Compile output for different engines, from an input CSS file.
   #
-  SM_ENGINES.each do |engine, endpoint|
-    file "#{test}/output.#{engine}.css" do |t|
+  DOCKER_ENGINES.each do |engine, endpoint|
+    file "#{test}/output.#{ENGINES[engine]}.css" do |t|
 
       #
       # Find the input file.
@@ -334,19 +320,10 @@ TESTS.each do |test|
         .find { |f| File.exist? f }
 
 
-      MUTEX.synchronize do
-        puts "#{Progress.inc_s} Compiling #{input} for #{engine}"
-      end
+      puts "#{Progress.inc_s} Compiling #{input} for #{engine}"
 
-      begin
-        File.write t.name, SM[endpoint].compile(input).clean
-      rescue SM::Error => e
-        MUTEX.synchronize do
-          STDERR.puts "  #{e} with #{input} for #{engine}"
-        end
-
-        File.write t.name, e.response.body
-      end
+      result = `#{ENGINE_EXEC[engine]} #{input}`
+      File.write t.name, result.clean
     end
   end
 

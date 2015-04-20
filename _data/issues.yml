@@ -1,12 +1,11 @@
 angle_conversion:
     ruby_sass_3_2: https://github.com/sass/sass/issues/1338
     ruby_sass_3_3: https://github.com/sass/sass/issues/1338
-    libsass: https://github.com/sass/libsass/issues/666
 
 at_root_directive:
     ruby_sass_3_2: https://github.com/sass/sass/issues/774
     ruby_sass_3_3: https://github.com/sass/sass-spec/pull/59#issuecomment-66930658
-    libsass: https://github.com/sass/libsass/issues/353
+    libsass_3_1: https://github.com/sass/libsass/issues/353
 
 call_function:
     ruby_sass_3_2: https://github.com/sass/sass/issues/626
@@ -14,30 +13,27 @@ call_function:
 cross_media_extend:
     ruby_sass_3_2: https://github.com/sass/sass/issues/640
     ruby_sass_3_3: https://github.com/sass/sass/issues/640
-    ruby_sass_3_4: https://github.com/sass/sass/issues/640
-    libsass: https://github.com/sass/libsass/issues/712
+    libsass_3_1: https://github.com/sass/libsass/issues/712
+    libsass_3_2: https://github.com/sass/libsass/issues/712
 
 deep_extend:
-    libsass: https://github.com/sass/libsass/issues/592
+    libsass_3_1: https://github.com/sass/libsass/issues/592
 
 downward_for:
     ruby_sass_3_2: https://github.com/sass/sass/issues/691
-    libsass: https://github.com/sass/libsass/issues/703
 
 error_directive:
     ruby_sass_3_2: https://github.com/sass/sass/issues/747
     ruby_sass_3_3: https://github.com/sass/sass/issues/747
-    libsass: https://github.com/sass/libsass/issues/704
 
 feature_detection_functions:
-    libsass: https://github.com/sass/libsass/issues/702
+    ruby_sass_3_2: https://github.com/sass/sass/issues/766
 
 fixed_if_function:
     ruby_sass_3_2: https://github.com/sass/sass/pull/836
 
 inspect_function:
     ruby_sass_3_2: https://github.com/sass/sass/issues/953
-    libsass: https://github.com/sass/libsass/issues/701
 
 list_separator_function:
     ruby_sass_3_2: https://github.com/sass/sass/pull/689
@@ -46,7 +42,7 @@ map_data_type:
     ruby_sass_3_2: https://github.com/sass/sass/issues/642
 
 media_merge:
-    libsass: https://github.com/sass/libsass/issues/185
+    libsass_3_1: https://github.com/sass/libsass/issues/185
 
 multi_assign_each:
     ruby_sass_3_2: https://github.com/sass/sass/issues/1262
@@ -59,40 +55,46 @@ negative_indexes:
     ruby_sass_3_2: https://github.com/sass/sass/pull/808
 
 nested_interpolations:
-    libsass: https://github.com/sass/libsass/issues/615
+    libsass_3_1: https://github.com/sass/libsass/issues/615
 
 random_function:
     ruby_sass_3_2: https://github.com/sass/sass/pull/968
-    libsass: https://github.com/sass/libsass/issues/657
+    ruby_sass_3_3: https://github.com/sass/sass/pull/968
+    libsass_3_1: https://github.com/sass/libsass/issues/1104
+    libsass_3_2: https://github.com/sass/libsass/issues/1104
 
 rebeccapurple_color:
     ruby_sass_3_2: https://github.com/sass/sass/issues/1293
     ruby_sass_3_3: https://github.com/sass/sass/issues/1293
-    libsass: https://github.com/sass/libsass/issues/699
 
 reserved_function_names:
-    libsass: https://github.com/sass/libsass/issues/713
+    ruby_sass_3_2: https://github.com/sass/sass/issues/1265
+    ruby_sass_3_3: https://github.com/sass/sass/issues/1265
+    libsass_3_1: https://github.com/sass/libsass/issues/713
 
 set_nth_function:
     ruby_sass_3_2: https://github.com/sass/sass/issues/852
 
+selector_manipulation_function:
+    libsass_3_1: https://github.com/sass/libsass/issues/963
+    libsass_3_2: https://github.com/sass/libsass/issues/963
+
 shadow_dom_styling:
-    libsass: https://github.com/sass/libsass/issues/452
+    libsass_3_1: https://github.com/sass/libsass/issues/452
 
 spaces_minus:
-    libsass: https://github.com/sass/libsass/issues/733
+    libsass_3_1: https://github.com/sass/libsass/issues/733
 
 string_manipulation_functions:
     ruby_sass_3_2: https://github.com/sass/sass/pull/401
-    libsass: https://github.com/sass/libsass/issues/381#issuecomment-66935725
+    libsass_3_1: https://github.com/sass/libsass/issues/381#issuecomment-66935725
+    libsass_3_2: https://github.com/sass/libsass/issues/381#issuecomment-66935725
 
 transparent_color:
     ruby_sass_3_2: https://github.com/sass/sass/issues/754
-    libsass: https://github.com/sass/libsass/issues/700
 
 unique_id_function:
     ruby_sass_3_2: https://github.com/sass/sass/issues/771
-    libsass: https://github.com/sass/libsass/issues/636
 
 variable_scoping:
-    libsass: https://github.com/sass/libsass/issues/613
+    libsass_3_1: https://github.com/sass/libsass/issues/613
