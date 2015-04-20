@@ -108,7 +108,7 @@ set_nth_function:
   - spec/libsass-closed-issues/issue_578
 
 shadow_dom_styling:
-  - tests/shadow_dom_styling
+  - spec/libsass-closed-issues/issue_452
 
 spaces_minus:
   - spec/libsass-closed-issues/issue_733
