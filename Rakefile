@@ -68,6 +68,10 @@ class String
     gsub(/^/, ' ' * n)
   end
 
+  def normalize_encoding
+    self.encode('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '')
+  end
+
   def normalize_css
     self[/^@charset/]
   end
@@ -85,6 +89,7 @@ class String
   #
   def clean
     lines
+      .map(&:normalize_encoding)
       .reject(&:normalize_css)
       .reject(&:normalize_libsass_error_messages)
       .reject(&:normalize_errors_messages)
