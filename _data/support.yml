@@ -668,23 +668,23 @@ shadow_dom_styling:
   ruby_sass_3_2:
     support: true
     tests:
-      tests/shadow_dom_styling: true
+      spec/libsass-closed-issues/issue_452: true
   ruby_sass_3_3:
     support: true
     tests:
-      tests/shadow_dom_styling: true
+      spec/libsass-closed-issues/issue_452: true
   ruby_sass_3_4:
     support: true
     tests:
-      tests/shadow_dom_styling: true
+      spec/libsass-closed-issues/issue_452: true
   libsass_3_1:
     support: false
     tests:
-      tests/shadow_dom_styling: false
+      spec/libsass-closed-issues/issue_452: false
   libsass_3_2:
     support: true
     tests:
-      tests/shadow_dom_styling: true
+      spec/libsass-closed-issues/issue_452: true
 
 spaces_minus:
   ruby_sass_3_2:
