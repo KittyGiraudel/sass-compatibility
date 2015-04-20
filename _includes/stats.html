@@ -20,19 +20,22 @@
         <tr>
             <th scope="row">Passed</th>
             {% for engine in site.data.stats %}
-                <td class="feature-status--supported">{{ engine[1].passed }}</td>
+                {% assign engine_name = engine[0] %}
+                <td data-label="{{ site.data.engines[engine_name].label }}" class="feature-status--supported">{{ engine[1].passed }}</td>
             {% endfor %}
         </tr>
         <tr>
             <th scope="row">Failed</th>
             {% for engine in site.data.stats %}
-                <td class="feature-status--unsupported">{{ engine[1].failed }}</td>
+                {% assign engine_name = engine[0] %}
+                <td data-label="{{ site.data.engines[engine_name].label }}" class="feature-status--unsupported">{{ engine[1].failed }}</td>
             {% endfor %}
         </tr>
         <tr>
             <th scope="row">Percentage</th>
             {% for engine in site.data.stats %}
-                <td class="support-value  support-value--{{ engine[0] }}"><strong>{{ engine[1].percentage }}%</strong></td>
+                {% assign engine_name = engine[0] %}
+                <td data-label="{{ site.data.engines[engine_name].label }}" class="support-value  support-value--{{ engine[0] }}">{{ engine[1].percentage }}%</td>
             {% endfor %}
         </tr>
     </tbody>

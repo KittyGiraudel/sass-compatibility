@@ -1,14 +1,9 @@
 .support-value {
-  padding: 0 !important;
-
-  strong {
-    padding: .5em;
-    display: block;
-  }
+  font-weight: bold;
 }
 
 @each $engine, $support in $stats {
-  .support-value--#{$engine} strong {
+  .support-value--#{$engine} {
     $color: mix($wafer, white, 50%);
     $support: percentage($support / 100);
 
