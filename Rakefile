@@ -81,7 +81,7 @@ class String
   end
 
   def normalize_errors_messages
-    strip[/input\.scss$/] || strip == 'Use --trace for backtrace.'
+    (strip[/^on line/] && strip[/input\.scss$/]) || strip == 'Use --trace for backtrace.'
   end
 
   #
@@ -100,6 +100,7 @@ class String
       .gsub(/([;,]) */, "\\1\n")
       .gsub(/ *\} */, " }\n")
       .strip
+      .chomp('.')
   end
 end
 
