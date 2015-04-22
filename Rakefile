@@ -77,7 +77,7 @@ class String
   end
 
   def normalize_libsass_error_messages
-    self[/^>> /] || strip[/-\^$/]
+    self[/^>> /] || strip[/-?\^$/]
   end
 
   def normalize_errors_messages
