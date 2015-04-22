@@ -5,10 +5,35 @@ Sass compatibility issues between different engines.
 
 ## Building
 
-Be sure to have Ruby and Bundler installed.
+You'll need a couple things to get started.
+
+### Docker
+
+If you don't already have a Docker environment you can download and install boot2docker ([OS X](https://github.com/boot2docker/osx-installer/releases/latest), [Windows](https://github.com/boot2docker/windows-installer/releases/latest)).
 
 ```sh
+boot2docker init
+boot2docker up
+```
+
+### Ruby
+
+If you don't already have Ruby setup you can download the installer from the [Ruby website](https://www.ruby-lang.org/en/documentation/installation/#installers) or use brew on OS X.
+
+### Bundler
+
+Once you have Ruby installed you need to install the `Bundler` gem, and use it to install the required gem dependencies.
+
+```sh
+gem install bundler
 bundle install
+```
+
+## Running
+
+Execute the test suit via bundler.
+
+```sh
 bundle exec rake
 ```
 
@@ -17,6 +42,7 @@ The Rakefile will:
 * Clone [sass-spec](https://github.com/sass/sass-spec) and symlink
   `sass-spec/spec` to `spec` if needed.
 * Load tests from `_data/tests.yml`.
+* Download docker images of the Ruby Sass and Libsass executables.
 * Compile each test input with all supported engines, and normalize the
   output CSS (creating `output.#{engine}.css` files in the test
   directory).
