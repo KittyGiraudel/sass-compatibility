@@ -134,7 +134,7 @@ DOCKER_ENGINES = {
   :ruby_sass_3_3 => 'xzyfer/docker-ruby-sass:3.3',
   :ruby_sass_3_4 => 'xzyfer/docker-ruby-sass:3.4',
   :libsass_3_1 => 'xzyfer/docker-libsass:3.1.0',
-  :libsass_3_2 => 'xzyfer/docker-libsass:3.2.0-beta.5',
+  :libsass_3_2 => 'xzyfer/docker-libsass:3.2.0-beta.6',
 }
 
 #
