@@ -179,9 +179,9 @@ cross_media_extend:
     tests:
       tests/cross_media_extend: false
   libsass_3_2:
-    support: false
+    support: true
     tests:
-      tests/cross_media_extend: false
+      tests/cross_media_extend: true
 
 deep_extend:
   ruby_sass_3_2:
@@ -245,9 +245,9 @@ error_directive:
     tests:
       tests/error_directive: true
   libsass_3_2:
-    support: false
+    support: true
     tests:
-      tests/error_directive: false
+      tests/error_directive: true
 
 feature_detection_functions:
   ruby_sass_3_2:
@@ -561,10 +561,10 @@ random_function:
       spec/libsass-closed-issues/issue_657/limit: true
       spec/libsass-closed-issues/issue_657/default: false
   libsass_3_2:
-    support: 
+    support: true
     tests:
       spec/libsass-closed-issues/issue_657/limit: true
-      spec/libsass-closed-issues/issue_657/default: false
+      spec/libsass-closed-issues/issue_657/default: true
 
 rebeccapurple_color:
   ruby_sass_3_2:
