@@ -54,7 +54,6 @@ end
 # Syntaxic sugar {{{
 # ==================
 
-
 class String
   def endpoint
     match(/\.(.+)\.css$/).captures.first
@@ -319,7 +318,6 @@ TESTS.each do |test|
       input = ['', '.disabled']
         .map { |s| "#{test}/input#{s}.scss" }
         .find { |f| File.exist? f }
-
 
       puts "#{Progress.inc_s} Compiling #{input} for #{engine}"
 
