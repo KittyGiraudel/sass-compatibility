@@ -35,7 +35,8 @@ package manager (like Brew on OS X), or download the installer from the
 
 ### Bundler
 
-Once you have Ruby installed you need to install the `Bundler` gem, and use it to install the required gem dependencies.
+Once you have Ruby installed you need to install the `bundler` gem, and
+use it to install the required gem dependencies.
 
 ```sh
 gem install bundler
@@ -55,7 +56,7 @@ The Rakefile will:
 * Clone [sass-spec](https://github.com/sass/sass-spec) and symlink
   `sass-spec/spec` to `spec` if needed.
 * Load tests from `_data/tests.yml`.
-* Download docker images of the Ruby Sass and Libsass executables.
+* Download Docker images of the Ruby Sass and LibSass executables.
 * Compile each test input with all supported engines, and normalize the
   output CSS (creating `output.#{engine}.css` files in the test
   directory).
