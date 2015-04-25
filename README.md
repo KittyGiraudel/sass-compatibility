@@ -9,7 +9,16 @@ You'll need a couple things to get started.
 
 ### Docker
 
-If you don't already have a Docker environment you can download and install boot2docker ([OS X](https://github.com/boot2docker/osx-installer/releases/latest), [Windows](https://github.com/boot2docker/windows-installer/releases/latest)).
+See [Docker installation instructions][docker-install] for all supported
+platforms.
+
+[docker-install]: https://docs.docker.com/installation/#installation
+
+On OS X and Windows, you can download and install boot2docker
+([OS X][b2d-osx], [Windows][b2d-win]).
+
+[b2d-osx]: https://github.com/boot2docker/osx-installer/releases/latest
+[b2d-win]: https://github.com/boot2docker/windows-installer/releases/latest
 
 ```sh
 boot2docker init
@@ -18,7 +27,11 @@ boot2docker up
 
 ### Ruby
 
-If you don't already have Ruby setup you can download the installer from the [Ruby website](https://www.ruby-lang.org/en/documentation/installation/#installers) or use brew on OS X.
+If you don't already have Ruby setup you can get it with your favorite
+package manager (like Brew on OS X), or download the installer from the
+[Ruby website][ruby-install].
+
+[ruby-install]: https://www.ruby-lang.org/en/documentation/installation/#installers
 
 ### Bundler
 
