@@ -1,4 +1,3 @@
-require 'faraday'
 require 'json'
 require 'yaml'
 
