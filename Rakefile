@@ -68,7 +68,7 @@ class String
   end
 
   def normalize_encoding
-    self.encode('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '')
+    encode('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '')
   end
 
   def normalize_css
