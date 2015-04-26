@@ -16,9 +16,11 @@ class String
       .map(&:normalize_encoding)
       .reject { |s| s[/^@charset/] }
       .reject { |s| s[/^>> /] || s.strip[/-?\^$/] }
-      .reject { |s| s.strip[/^on line/] && s.strip[/input\.scss$/] }
+      .reject { |s| s.strip[/^on line/] && (s.strip[/stdin$/] || s.strip[/standard input$/]) }
       .reject { |s| s.strip == 'Use --trace for backtrace.' }
+      .reject { |s| s.strip == 'Segmentation fault (core dumped)' }
       .join
+      .gsub(' of stdin', '')
       .gsub(/^Error: /, '')
       .gsub(/\s+/, ' ')
       .gsub(/ *\{/, " {\n")

@@ -1,0 +1,5 @@
+FROM <%= from %>
+RUN mkdir -p /var/cache/apk && \
+    apk add --update socat && \
+    rm -r /var/cache/apk
+ENTRYPOINT socat -t 1000 TCP-LISTEN:1337,reuseaddr,fork SYSTEM:'<%= command %> 2>&1'

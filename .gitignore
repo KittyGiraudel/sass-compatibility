@@ -9,3 +9,4 @@ _site
 /vendor
 npm-debug.log
 .DS_Store
+/docker/*/Dockerfile

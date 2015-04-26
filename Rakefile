@@ -16,6 +16,7 @@ SPEC = YAML.load_file('_data/tests.yml')
 TESTS = SPEC.flat_map { |name, tests| tests }
 
 require './rakelib/helpers'
+require './rakelib/docker'
 require './rakelib/progress'
 require './rakelib/sass'
 require './rakelib/spec'
@@ -27,4 +28,4 @@ task :default => [STATS_SCSS]
 #
 # Delete intermediate files.
 #
-task :clean => ['support:clean']
+task :clean => ['docker:clean', 'support:clean']

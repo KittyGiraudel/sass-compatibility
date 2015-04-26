@@ -6,6 +6,11 @@ require 'yaml'
 SUPPORT = '_data/support.yml'
 
 #
+# Mutex to synchronize before printing during parallel tasks.
+#
+MUTEX = Mutex.new
+
+#
 # Get output suffix from engine and version.
 #
 def output_suffix(engine, version, strip = true)
@@ -40,7 +45,7 @@ end
 # From each individual test support file, build the aggregated YAML
 # file.
 #
-task SUPPORT => TESTS.map { |t| "#{t}/support.yml" } do |t|
+multitask SUPPORT => TESTS.map { |t| "#{t}/support.yml" } do |t|
   File.open(t.name, 'w') do |file|
     SPEC.each do |name, tests|
       feature = {}
@@ -119,7 +124,10 @@ TESTS.each do |test|
           .map { |s| "#{test}/input#{s}.scss" }
           .find { |f| File.exist? f }
 
-        puts "#{Progress.inc_s} Compiling #{input} for #{engine} #{version}"
+
+        MUTEX.synchronize do
+          puts "#{Progress.inc_s} Compiling #{input} for #{engine} #{version}"
+        end
 
         result = sass engine, version, input
 
