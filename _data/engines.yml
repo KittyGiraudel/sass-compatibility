@@ -11,5 +11,5 @@ libsass_3_1:
   label: LibSass 3.1
   link: https://github.com/sass/libsass/releases/tag/3.1.0
 libsass_3_2:
-  label: LibSass 3.2 (beta)
-  link: https://github.com/sass/libsass/releases/tag/3.2.0-beta.6
+  label: LibSass 3.2
+  link: https://github.com/sass/libsass/releases/tag/3.2.0
