@@ -754,13 +754,13 @@ string_manipulation_functions:
       spec/libsass-closed-issues/issue_763: true
       spec/libsass-closed-issues/issue_815: false
   libsass_3_2:
-    support: 
+    support: true
     tests:
       spec/basic/43_str_length: true
       spec/basic/45_str_insert: true
       spec/basic/46_str_index: true
       spec/basic/48_case_conversion: true
-      spec/libsass-todo-tests/47_str_slice: false
+      spec/libsass-todo-tests/47_str_slice: true
       spec/libsass-closed-issues/issue_760: true
       spec/libsass-closed-issues/issue_763: true
       spec/libsass-closed-issues/issue_815: true
