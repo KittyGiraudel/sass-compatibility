@@ -124,7 +124,7 @@ ENGINES = {
   :ruby_sass_3_4 => '3_4',
   :libsass_3_1 => 'libsass_3_1',
   :libsass_3_2 => 'libsass_3_2',
-  :libsass_3_2 => 'libsass_3_3',
+  :libsass_3_3 => 'libsass_3_3',
 }
 
 #
