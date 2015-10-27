@@ -124,6 +124,7 @@ ENGINES = {
   :ruby_sass_3_4 => '3_4',
   :libsass_3_1 => 'libsass_3_1',
   :libsass_3_2 => 'libsass_3_2',
+  :libsass_3_2 => 'libsass_3_3',
 }
 
 #
@@ -134,7 +135,8 @@ DOCKER_ENGINES = {
   :ruby_sass_3_3 => 'xzyfer/docker-ruby-sass:3.3',
   :ruby_sass_3_4 => 'xzyfer/docker-ruby-sass:3.4',
   :libsass_3_1 => 'xzyfer/docker-libsass:3.1.0',
-  :libsass_3_2 => 'xzyfer/docker-libsass:3.2.4',
+  :libsass_3_2 => 'xzyfer/docker-libsass:3.2.5',
+  :libsass_3_3 => 'xzyfer/docker-libsass:3.3',
 }
 
 #
@@ -146,6 +148,7 @@ ENGINE_EXEC = {
   :ruby_sass_3_4 => nil,
   :libsass_3_1 => nil,
   :libsass_3_2 => nil,
+  :libsass_3_3 => nil,
 }
 
 #
