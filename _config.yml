@@ -4,7 +4,7 @@ email: ''
 description: > # this means to ignore newlines until "baseurl:"
   Reporting incompatibilities between different Sass engines.
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://sass-compatibility.github.io" # the base hostname & protocol for your site
+url: "https://hugogiraudel.github.io/sass-compatibility/" # the base hostname & protocol for your site
 twitter_username: HugoGiraudel
 github_username:  HugoGiraudel
 
